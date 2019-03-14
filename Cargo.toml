@@ -1,0 +1,16 @@
+[package]
+name = "lazy-queue"
+version = "0.1.0"
+authors = ["mexus <gilaldpellaeon@gmail.com>"]
+edition = "2018"
+description = "Futures-driven lazy queue processing"
+readme = "README.md"
+license = "MIT/Apache-2.0"
+keywords = ["futures", "queue"]
+
+[dependencies]
+futures = "0.1.25"
+tokio-sync = "0.1.4"
+
+[dev-dependencies]
+tokio = "0.1.17"
