@@ -1,6 +1,6 @@
 //! [![travis](https://img.shields.io/travis/mexus/lazy-queue.svg)](https://travis-ci.org/mexus/lazy-queue)
 //! [![crates.io](https://img.shields.io/crates/v/lazy-queue.svg)](https://crates.io/crates/lazy-queue)
-//! [![docs.rs](https://docs.rs/futures-retry/badge.svg)](https://docs.rs/lazy-queue)
+//! [![docs.rs](https://docs.rs/lazy-queue/badge.svg)](https://docs.rs/lazy-queue)
 //!
 //! [Master docs](https://mexus.github.io/lazy-queue/lazy_queue/index.html)
 //!
