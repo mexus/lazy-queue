@@ -1,4 +1,15 @@
+//! [![travis](https://img.shields.io/travis/mexus/lazy-queue.svg)](https://travis-ci.org/mexus/lazy-queue)
+//! [![crates.io](https://img.shields.io/crates/v/lazy-queue.svg)](https://crates.io/crates/lazy-queue)
+//! [![docs.rs](https://docs.rs/futures-retry/badge.svg)](https://docs.rs/lazy-queue)
+//!
 //! Lazy future-driven queue processing.
+//!
+//! Some typical use cases would be:
+//!
+//! * Offloading work from multiple threads into a single-threaded processor.
+//! * Posponing computation.
+//! * Processing multiple tasks in a batch.
+//! * ...
 //!
 //! ## License
 //!
