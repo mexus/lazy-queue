@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["ProcessingError","An error that might happen during processing of a queue."]],"mod":[["sync","Thread safe queue implementation."],["unsync","Single-threaded queue implementation."]]});
