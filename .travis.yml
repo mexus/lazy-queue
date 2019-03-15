@@ -29,3 +29,4 @@ deploy:
   local-dir: target/doc
   on:
     branch: master
+    rust: nightly
