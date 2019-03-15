@@ -1,75 +1,117 @@
 //! Lazy future-driven queue processing.
+//!
+//! ## License
+//!
+//! Licensed under either of
+//!
+//!  * Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
+//!  * MIT license ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
+//!
+//! at your option.
+//!
+//! ### Contribution
+//!
+//! Unless you explicitly state otherwise, any contribution intentionally submitted
+//! for inclusion in the work by you, as defined in the Apache-2.0 license, shall be dual licensed as above, without any
+//! additional terms or conditions.
 
 #![deny(missing_docs)]
 
-use futures::{try_ready, Async, Future, IntoFuture, Poll, Sink, StartSend, Stream};
-use std::{fmt, mem};
-use tokio_sync::mpsc;
+use std::fmt;
 
-/// A sink-like queue.
-pub struct LazyQueue<Item> {
-    sender: mpsc::Sender<Item>,
+/// This macro creates `LazyQueue<Item>` and `QueueProcessor<Item, P, I>` (where `I: IntoFuture`)
+/// and implementations for them.
+macro_rules! implement {
+    (
+        $doc:literal,
+        $sender:ty,
+        $receiver:ty,
+        ($($new_args:ident: $new_args_ty:ty),*),
+        $make_chan:expr,
+        $send_error:ty,
+        $rcv_error:ty $(,)?
+    ) => {
+        #[doc = $doc]
+        pub struct LazyQueue<Item> {
+            sender: $sender,
+        }
+
+        impl<Item> Clone for LazyQueue<Item> {
+            fn clone(&self) -> Self {
+                LazyQueue {
+                    sender: self.sender.clone(),
+                }
+            }
+        }
+
+        /// Lazy queue processor.
+        #[must_use = "futures do nothing unless polled"]
+        pub struct QueueProcessor<Item, P, I>
+        where
+            I: ::futures::IntoFuture,
+        {
+            inner: crate::inner::StreamProcessor<$receiver, P, I>,
+        }
+
+        impl<Item> ::futures::Sink for LazyQueue<Item> {
+            type SinkItem = Item;
+            type SinkError = $send_error;
+
+            fn start_send(&mut self, item: Item) -> ::futures::StartSend<Item, $send_error> {
+                self.sender.start_send(item)
+            }
+
+            fn poll_complete(&mut self) -> ::futures::Poll<(), $send_error> {
+                self.sender.poll_complete()
+            }
+        }
+
+        impl<Item> LazyQueue<Item> {
+            /// Creates a new lazy queue using given processor.
+            pub fn new<F, I>(processor: F, $($new_args: $new_args_ty),*) -> (Self, QueueProcessor<Item, F, I>)
+            where
+                F: FnMut(Item) -> I,
+                I: ::futures::IntoFuture,
+            {
+                let (sender, receiver) = $make_chan;
+                (
+                    LazyQueue { sender },
+                    QueueProcessor {
+                        inner: StreamProcessor::new(receiver, processor),
+                    },
+                )
+            }
+        }
+
+        impl<Item, P, I> ::futures::Future for QueueProcessor<Item, P, I>
+        where
+            P: FnMut(Item) -> I,
+            I: ::futures::IntoFuture,
+        {
+            type Item = ();
+            type Error = ProcessingError<$rcv_error, I::Error>;
+
+            fn poll(&mut self) -> ::futures::Poll<Self::Item, Self::Error> {
+                self.inner.poll()
+            }
+        }
+    };
 }
 
-impl<Item> Sink for LazyQueue<Item> {
-    type SinkItem = Item;
-    type SinkError = mpsc::error::SendError;
-
-    fn start_send(&mut self, item: Item) -> StartSend<Item, Self::SinkError> {
-        self.sender.start_send(item)
-    }
-
-    fn poll_complete(&mut self) -> Poll<(), Self::SinkError> {
-        self.sender.poll_complete()
-    }
-}
-
-impl<Item> LazyQueue<Item> {
-    /// Creates a new lazy queue using given processor and maximum queue length.
-    pub fn new<F, R>(processor: F, max_len: usize) -> (Self, QueueProcessor<Item, F, R>)
-    where
-        F: FnMut(Item) -> R,
-        R: IntoFuture,
-    {
-        let (sender, receiver) = mpsc::channel(max_len);
-        (
-            LazyQueue { sender },
-            QueueProcessor {
-                receiver,
-                processor,
-                state: State::WaitingForItem,
-            },
-        )
-    }
-}
-
-/// Lazy queue processor.
-#[must_use = "futures do nothing unless polled"]
-pub struct QueueProcessor<Item, F, R>
-where
-    F: FnMut(Item) -> R,
-    R: IntoFuture,
-{
-    receiver: mpsc::Receiver<Item>,
-    processor: F,
-    state: State<R>,
-}
-
-enum State<R: IntoFuture> {
-    WaitingForItem,
-    RunningProcessor(R::Future),
-}
+mod inner;
+pub mod sync;
+pub mod unsync;
 
 /// An error that might happen during processing of a queue.
 #[derive(Debug)]
-pub enum ProcessingError<E> {
+pub enum ProcessingError<R, E> {
     /// Channel has closed.
-    ReceiverError(mpsc::error::RecvError),
+    ReceiverError(R),
     /// Error returned by a processor.
     FutureError(E),
 }
 
-impl<E: fmt::Display> fmt::Display for ProcessingError<E> {
+impl<R: fmt::Display, E: fmt::Display> fmt::Display for ProcessingError<R, E> {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         match self {
             ProcessingError::ReceiverError(e) => write!(fmt, "{}", e),
@@ -78,7 +120,7 @@ impl<E: fmt::Display> fmt::Display for ProcessingError<E> {
     }
 }
 
-impl<E: std::error::Error> std::error::Error for ProcessingError<E> {
+impl<R: std::error::Error, E: std::error::Error> std::error::Error for ProcessingError<R, E> {
     fn description(&self) -> &str {
         match self {
             ProcessingError::ReceiverError(e) => e.description(),
@@ -94,98 +136,18 @@ impl<E: std::error::Error> std::error::Error for ProcessingError<E> {
     }
 }
 
-impl<Item, F, R> Future for QueueProcessor<Item, F, R>
-where
-    F: FnMut(Item) -> R,
-    R: IntoFuture,
-{
-    type Item = ();
-    type Error = ProcessingError<R::Error>;
-
-    fn poll(&mut self) -> Poll<Self::Item, Self::Error> {
-        loop {
-            let next = match &mut self.state {
-                State::WaitingForItem => {
-                    if let Some(item) =
-                        try_ready!(self.receiver.poll().map_err(ProcessingError::ReceiverError))
-                    {
-                        let fut = (self.processor)(item);
-                        State::RunningProcessor(fut.into_future())
-                    } else {
-                        return Ok(Async::Ready(()));
-                    }
-                }
-                State::RunningProcessor(fut) => {
-                    try_ready!(fut.poll().map_err(ProcessingError::FutureError));
-                    State::WaitingForItem
-                }
-            };
-            mem::replace(&mut self.state, next);
-        }
-    }
-}
-
 #[cfg(test)]
-mod tests {
-    use super::*;
-    use futures::lazy;
-    use std::{cell::RefCell, rc::Rc};
-    use tokio::runtime::Runtime;
+mod test {
+    use futures::{future::poll_fn, Async, Future};
 
-    fn try_send<Item>(queue: &mut LazyQueue<Item>, item: Item) -> Result<(), &'static str> {
-        if !queue
-            .start_send(item)
-            .map(|ok| ok.is_ready())
-            .unwrap_or(false)
-        {
-            return Err("Not ready");
-        }
-        if !queue.poll_complete().unwrap().is_ready() {
-            Err("Not ready")
-        } else {
-            Ok(())
-        }
-    }
-
-    #[test]
-    fn test_queue_length() {
-        let mut rt = Runtime::new().unwrap();
-        rt.block_on(lazy(move || {
-            const QUEUE_LEN: usize = 4;
-            let (mut queue, mut driver) = LazyQueue::new(|_: u8| Ok::<_, ()>(()), QUEUE_LEN);
-            assert!(driver.poll().unwrap().is_not_ready());
-            for _ in 0..QUEUE_LEN {
-                try_send(&mut queue, 0).unwrap();
+    /// Tries to resolve the future on the first try.
+    pub fn try_once<F: Future>(mut f: F) -> impl Future<Item = Option<F::Item>, Error = F::Error> {
+        poll_fn(move || {
+            if let Async::Ready(item) = f.poll()? {
+                Ok(Async::Ready(Some(item)))
+            } else {
+                Ok(Async::Ready(None))
             }
-            if try_send(&mut queue, 0).is_ok() {
-                panic!("Ready but shouldn't be");
-            }
-            drop(queue);
-            assert!(driver.poll().unwrap().is_ready());
-            Ok::<_, ()>(())
-        }))
-        .unwrap();
-    }
-
-    #[test]
-    fn test_running() {
-        let mut rt = Runtime::new().unwrap();
-        rt.block_on(lazy(move || {
-            let received = Rc::new(RefCell::new(vec![]));
-            let received_clone = Rc::clone(&received);
-            let processor = move |item: u8| {
-                received_clone.borrow_mut().push(item);
-                Ok::<_, ()>(())
-            };
-            let (mut queue, mut driver) = LazyQueue::new(processor, 10);
-            try_send(&mut queue, 0).unwrap();
-            try_send(&mut queue, 2).unwrap();
-            try_send(&mut queue, 1).unwrap();
-            drop(queue);
-            assert!(driver.poll().unwrap().is_ready());
-            assert_eq!(&[0, 2, 1], received.borrow().as_slice());
-            Ok::<_, ()>(())
-        }))
-        .unwrap();
+        })
     }
 }
