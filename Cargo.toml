@@ -1,6 +1,6 @@
 [package]
 name = "lazy-queue"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["mexus <gilaldpellaeon@gmail.com>"]
 edition = "2018"
 description = "Futures-driven lazy queue processing"
@@ -8,8 +8,8 @@ readme = "README.md"
 license = "MIT/Apache-2.0"
 keywords = ["futures", "queue"]
 documentation = "https://docs.rs/lazy-queue/"
-repository = "https://gitlab.com/mexus/lazy-queue"
-homepage = "https://gitlab.com/mexus/lazy-queue"
+repository = "https://github.com/mexus/lazy-queue"
+homepage = "https://github.com/mexus/lazy-queue"
 
 [dependencies]
 futures = "0.1.25"
