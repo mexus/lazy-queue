@@ -7,6 +7,9 @@ description = "Futures-driven lazy queue processing"
 readme = "README.md"
 license = "MIT/Apache-2.0"
 keywords = ["futures", "queue"]
+documentation = "https://docs.rs/lazy-queue/"
+repository = "https://gitlab.com/mexus/lazy-queue"
+homepage = "https://gitlab.com/mexus/lazy-queue"
 
 [dependencies]
 futures = "0.1.25"
