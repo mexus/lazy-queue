@@ -5,7 +5,7 @@ rust:
 matrix:
   fast_finish: true
 before_script:
-  - rustup component add clippy
+  - rustup component add clippy || true
   - |
     if [ "$TRAVIS_RUST_VERSION" = "stable" ]; then
       rustup component add rustfmt;
@@ -17,7 +17,7 @@ script:
     fi
   - cargo --version && rustc --version
   - cargo build --verbose --all
-  - cargo clippy --all
+  - rustup component list | grep clippy && cargo clippy --all || echo 'no clippy'
   - cargo test --all
   - cargo doc
 cache: cargo
