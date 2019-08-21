@@ -194,7 +194,7 @@ standard library.</p>
 <span class="kw">use</span> <span class="ident">futures</span>::<span class="ident">sync</span>::<span class="ident">mpsc</span>;
 
 <span class="kw">let</span> (<span class="ident">_tx</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">mpsc</span>::<span class="ident">channel</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>(<span class="number">1</span>);
-<span class="kw">let</span> <span class="ident">evens</span> <span class="op">=</span> <span class="ident">rx</span>.<span class="ident">filter</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">%</span> <span class="number">2</span> <span class="op">==</span> <span class="number">0</span>);</pre></div>
+<span class="kw">let</span> <span class="ident">evens</span> <span class="op">=</span> <span class="ident">rx</span>.<span class="ident">filter</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">%</span> <span class="number">2</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span>);</pre></div>
 </div><h3 id='method.filter_map' class='method'><code id='filter_map.v'>fn <a href='#method.filter_map' class='fnname'>filter_map</a>&lt;F, B&gt;(self, f: F) -&gt; <a class="struct" href="../../futures/stream/struct.FilterMap.html" title="struct futures::stream::FilterMap">FilterMap</a>&lt;Self, F&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/function/trait.FnMut.html" title="trait core::ops::function::FnMut">FnMut</a>(Self::<a class="type" href="../../futures/stream/trait.Stream.html#associatedtype.Item" title="type futures::stream::Stream::Item">Item</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;B&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;Self: <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></code></h3><div class='docblock'><p>Filters the values produced by this stream while simultaneously mapping
 them to a different type.</p>
 <p>As values of this stream are made available, the provided function will
@@ -212,7 +212,7 @@ standard library.</p>
 
 <span class="kw">let</span> (<span class="ident">_tx</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">mpsc</span>::<span class="ident">channel</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>(<span class="number">1</span>);
 <span class="kw">let</span> <span class="ident">evens_plus_one</span> <span class="op">=</span> <span class="ident">rx</span>.<span class="ident">filter_map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> {
-    <span class="kw">if</span> <span class="ident">x</span> <span class="op">%</span> <span class="number">0</span> <span class="op">==</span> <span class="number">2</span> {
+    <span class="kw">if</span> <span class="ident">x</span> <span class="op">%</span> <span class="number">0</span> <span class="op">=</span><span class="op">=</span> <span class="number">2</span> {
         <span class="prelude-val">Some</span>(<span class="ident">x</span> <span class="op">+</span> <span class="number">1</span>)
     } <span class="kw">else</span> {
         <span class="prelude-val">None</span>
@@ -240,8 +240,8 @@ wrapped version of it.</p>
 
 <span class="kw">let</span> <span class="ident">rx</span> <span class="op">=</span> <span class="ident">rx</span>.<span class="ident">then</span>(<span class="op">|</span><span class="ident">result</span><span class="op">|</span> {
     <span class="kw">match</span> <span class="ident">result</span> {
-        <span class="prelude-val">Ok</span>(<span class="ident">e</span>) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">e</span> <span class="op">+</span> <span class="number">3</span>),
-        <span class="prelude-val">Err</span>(()) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="number">4</span>),
+        <span class="prelude-val">Ok</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">e</span> <span class="op">+</span> <span class="number">3</span>),
+        <span class="prelude-val">Err</span>(()) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="number">4</span>),
     }
 });</pre></div>
 </div><h3 id='method.and_then' class='method'><code id='and_then.v'>fn <a href='#method.and_then' class='fnname'>and_then</a>&lt;F, U&gt;(self, f: F) -&gt; <a class="struct" href="../../futures/stream/struct.AndThen.html" title="struct futures::stream::AndThen">AndThen</a>&lt;Self, F, U&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/function/trait.FnMut.html" title="trait core::ops::function::FnMut">FnMut</a>(Self::<a class="type" href="../../futures/stream/trait.Stream.html#associatedtype.Item" title="type futures::stream::Stream::Item">Item</a>) -&gt; U,<br>&nbsp;&nbsp;&nbsp;&nbsp;U: <a class="trait" href="../../futures/future/trait.IntoFuture.html" title="trait futures::future::IntoFuture">IntoFuture</a>&lt;Error = Self::<a class="type" href="../../futures/stream/trait.Stream.html#associatedtype.Error" title="type futures::stream::Stream::Error">Error</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;Self: <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></code></h3><div class='docblock'><p>Chain on a computation for when a value is ready, passing the successful
@@ -269,7 +269,7 @@ success or error, use <code>for_each</code> instead.</p>
 <span class="kw">let</span> (<span class="ident">_tx</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">mpsc</span>::<span class="ident">channel</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>(<span class="number">1</span>);
 
 <span class="kw">let</span> <span class="ident">rx</span> <span class="op">=</span> <span class="ident">rx</span>.<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">result</span><span class="op">|</span> {
-    <span class="kw">if</span> <span class="ident">result</span> <span class="op">%</span> <span class="number">2</span> <span class="op">==</span> <span class="number">0</span> {
+    <span class="kw">if</span> <span class="ident">result</span> <span class="op">%</span> <span class="number">2</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">result</span>)
     } <span class="kw">else</span> {
         <span class="prelude-val">Err</span>(())
@@ -308,7 +308,7 @@ library is activated, and it is activated by default.</p>
 
 <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">tx</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">mpsc</span>::<span class="ident">channel</span>(<span class="number">1</span>);
 
-<span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="op">||</span> {
+<span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="op">|</span><span class="op">|</span> {
     <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> (<span class="number">0</span>..<span class="number">5</span>).<span class="ident">rev</span>() {
         <span class="ident">tx</span> <span class="op">=</span> <span class="ident">tx</span>.<span class="ident">send</span>(<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>).<span class="ident">wait</span>().<span class="ident">unwrap</span>();
     }
@@ -333,7 +333,7 @@ futures 0.2, at which point it will be renamed back to <code>concat</code>.</p>
 
 <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">tx</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">mpsc</span>::<span class="ident">channel</span>(<span class="number">1</span>);
 
-<span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="kw">move</span> <span class="op">||</span> {
+<span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
     <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> (<span class="number">0</span>..<span class="number">3</span>).<span class="ident">rev</span>() {
         <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="ident">i</span> <span class="op">*</span> <span class="number">3</span>;
         <span class="ident">tx</span> <span class="op">=</span> <span class="ident">tx</span>.<span class="ident">send</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="ident">n</span> <span class="op">+</span> <span class="number">1</span>, <span class="ident">n</span> <span class="op">+</span> <span class="number">2</span>, <span class="ident">n</span> <span class="op">+</span> <span class="number">3</span>]).<span class="ident">wait</span>().<span class="ident">unwrap</span>();
@@ -356,7 +356,7 @@ all the results will be dropped and the error will be returned.</p>
 
 <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">tx</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">mpsc</span>::<span class="ident">channel</span>(<span class="number">1</span>);
 
-<span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="kw">move</span> <span class="op">||</span> {
+<span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
     <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> (<span class="number">0</span>..<span class="number">3</span>).<span class="ident">rev</span>() {
         <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="ident">i</span> <span class="op">*</span> <span class="number">3</span>;
         <span class="ident">tx</span> <span class="op">=</span> <span class="ident">tx</span>.<span class="ident">send</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="ident">n</span> <span class="op">+</span> <span class="number">1</span>, <span class="ident">n</span> <span class="op">+</span> <span class="number">2</span>, <span class="ident">n</span> <span class="op">+</span> <span class="number">3</span>]).<span class="ident">wait</span>().<span class="ident">unwrap</span>();
@@ -401,15 +401,15 @@ individual stream will get exhausted before moving on to the next.</p>
 <span class="kw">let</span> (<span class="ident">tx2</span>, <span class="ident">rx2</span>) <span class="op">=</span> <span class="ident">mpsc</span>::<span class="ident">channel</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>(<span class="number">1</span>);
 <span class="kw">let</span> (<span class="ident">tx3</span>, <span class="ident">rx3</span>) <span class="op">=</span> <span class="ident">mpsc</span>::<span class="ident">channel</span>(<span class="number">1</span>);
 
-<span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="op">||</span> {
+<span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="op">|</span><span class="op">|</span> {
     <span class="ident">tx1</span>.<span class="ident">send</span>(<span class="number">1</span>).<span class="ident">wait</span>().<span class="ident">unwrap</span>()
        .<span class="ident">send</span>(<span class="number">2</span>).<span class="ident">wait</span>().<span class="ident">unwrap</span>();
 });
-<span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="op">||</span> {
+<span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="op">|</span><span class="op">|</span> {
     <span class="ident">tx2</span>.<span class="ident">send</span>(<span class="number">3</span>).<span class="ident">wait</span>().<span class="ident">unwrap</span>()
        .<span class="ident">send</span>(<span class="number">4</span>).<span class="ident">wait</span>().<span class="ident">unwrap</span>();
 });
-<span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="op">||</span> {
+<span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="op">|</span><span class="op">|</span> {
     <span class="ident">tx3</span>.<span class="ident">send</span>(<span class="ident">rx1</span>).<span class="ident">wait</span>().<span class="ident">unwrap</span>()
        .<span class="ident">send</span>(<span class="ident">rx2</span>).<span class="ident">wait</span>().<span class="ident">unwrap</span>();
 });
