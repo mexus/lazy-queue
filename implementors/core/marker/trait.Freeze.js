@@ -9,5 +9,4 @@ implementors["tokio_sync"] = [{text:"impl&lt;T&gt; Freeze for <a class=\"struct\
             } else {
                 window.pending_implementors = implementors;
             }
-        
-})()
+        })()

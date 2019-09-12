@@ -9,5 +9,4 @@ implementors["tokio_sync"] = [{text:"impl&lt;T&gt; <a class=\"trait\" href=\"htt
             } else {
                 window.pending_implementors = implementors;
             }
-        
-})()
+        })()
