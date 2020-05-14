@@ -27,7 +27,7 @@ be called at least once subsequently (unless the future has terminated).
 If the task is currently polling its future when <code>notify</code> is called, it
 must poll the future <em>again</em> afterwards, ensuring that all relevant
 events are eventually observed by the future.</p>
-</div><h4 id='method.is_current' class="method"><code id='is_current.v'>pub fn <a href='#method.is_current' class='fnname'>is_current</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code><a class='srclink' href='../../src/futures/task_impl/mod.rs.html#193-195' title='goto source code'>[src]</a></h4><div class='stability'><div class='stab deprecated'>Deprecated: <p>intended to be removed, see docs for details</p>
+</div><h4 id='method.is_current' class="method"><code id='is_current.v'>pub fn <a href='#method.is_current' class='fnname'>is_current</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code><a class='srclink' href='../../src/futures/task_impl/mod.rs.html#193-195' title='goto source code'>[src]</a></h4><div class='stability'><div class='stab deprecated'><span class='emoji'>👎</span> Deprecated: <p>intended to be removed, see docs for details</p>
 </div></div><div class='docblock'><p>Returns <code>true</code> when called from within the context of the task.</p>
 <p>In other words, the task is currently running on the thread calling the
 function. Note that this is currently, and has historically, been
