@@ -41,8 +41,7 @@ invalidating the <code>self</code> pointer, so extreme care needs to be taken.</
 <p>In general it's recommended to review the trait documentation as well as
 the implementation for <code>Arc</code> in this crate. When in doubt ping the
 <code>futures</code> authors to clarify an unsafety question here.</p>
-</div>
-            <h2 id='required-methods' class='small-section-header'>Required methods<a href='#required-methods' class='anchor'></a></h2><div class='methods'><h3 id='tymethod.clone_raw' class='method'><code>unsafe fn <a href='#tymethod.clone_raw' class='fnname'>clone_raw</a>(&amp;self) -&gt; <a class="struct" href="../../futures/executor/struct.NotifyHandle.html" title="struct futures::executor::NotifyHandle">NotifyHandle</a></code></h3><div class='docblock'><p>Creates a new <code>NotifyHandle</code> from this instance of <code>UnsafeNotify</code>.</p>
+</div><h2 id='required-methods' class='small-section-header'>Required methods<a href='#required-methods' class='anchor'></a></h2><div class='methods'><h3 id='tymethod.clone_raw' class='method'><code>unsafe fn <a href='#tymethod.clone_raw' class='fnname'>clone_raw</a>(&amp;self) -&gt; <a class="struct" href="../../futures/executor/struct.NotifyHandle.html" title="struct futures::executor::NotifyHandle">NotifyHandle</a></code></h3><div class='docblock'><p>Creates a new <code>NotifyHandle</code> from this instance of <code>UnsafeNotify</code>.</p>
 <p>This function will create a new uniquely owned handle that under the
 hood references the same notification instance. In other words calls
 to <code>notify</code> on the returned handle should be equivalent to calls to
@@ -72,5 +71,4 @@ value is in a consistent state. In general it's recommended to
 review the trait documentation as well as the implementation for <code>Arc</code>
 in this crate. When in doubt ping the <code>futures</code> authors to clarify
 an unsafety question here.</p>
-</div></div><span class='loading-content'>Loading content...</span>
-            <h2 id='implementors' class='small-section-header'>Implementors<a href='#implementors' class='anchor'></a></h2><div class='item-list' id='implementors-list'></div><span class='loading-content'>Loading content...</span><script type="text/javascript" src="../../implementors/futures/executor/trait.UnsafeNotify.js" async></script></section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../";window.currentCrate = "futures";</script><script src="../../main.js"></script><script defer src="../../search-index.js"></script></body></html>
+</div></div><span class='loading-content'>Loading content...</span><h2 id='implementors' class='small-section-header'>Implementors<a href='#implementors' class='anchor'></a></h2><div class='item-list' id='implementors-list'></div><span class='loading-content'>Loading content...</span><script type="text/javascript" src="../../implementors/futures/executor/trait.UnsafeNotify.js" async></script></section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../";window.currentCrate = "futures";</script><script src="../../main.js"></script><script defer src="../../search-index.js"></script></body></html>

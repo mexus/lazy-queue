@@ -16,8 +16,7 @@ to reuse an instance of <code>Notify</code> across many futures.</p>
 <p>Instances of <code>Notify</code> must be safe to share across threads, and the methods
 be invoked concurrently. They must also live for the <code>'static</code> lifetime,
 not containing any stack references.</p>
-</div>
-            <h2 id='required-methods' class='small-section-header'>Required methods<a href='#required-methods' class='anchor'></a></h2><div class='methods'><h3 id='tymethod.notify' class='method'><code>fn <a href='#tymethod.notify' class='fnname'>notify</a>(&amp;self, id: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>)</code></h3><div class='docblock'><p>Indicates that an associated future and/or task are ready to make
+</div><h2 id='required-methods' class='small-section-header'>Required methods<a href='#required-methods' class='anchor'></a></h2><div class='methods'><h3 id='tymethod.notify' class='method'><code>fn <a href='#tymethod.notify' class='fnname'>notify</a>(&amp;self, id: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>)</code></h3><div class='docblock'><p>Indicates that an associated future and/or task are ready to make
 progress.</p>
 <p>Typically this means that the receiver of the notification should
 arrange for the future to get poll'd in a prompt fashion.</p>
@@ -30,8 +29,7 @@ endeavor not to panic and to do as little work as possible. However, it
 is not guaranteed not to panic, and callers should be wary. If a panic
 occurs, that panic may or may not be propagated to the end-user of the
 future that you'd otherwise wake up.</p>
-</div></div><span class='loading-content'>Loading content...</span>
-            <h2 id='provided-methods' class='small-section-header'>Provided methods<a href='#provided-methods' class='anchor'></a></h2><div class='methods'><h3 id='method.clone_id' class='method'><code>fn <a href='#method.clone_id' class='fnname'>clone_id</a>(&amp;self, id: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a></code></h3><div class='docblock'><p>This function is called whenever a new copy of <code>id</code> is needed.</p>
+</div></div><span class='loading-content'>Loading content...</span><h2 id='provided-methods' class='small-section-header'>Provided methods<a href='#provided-methods' class='anchor'></a></h2><div class='methods'><h3 id='method.clone_id' class='method'><code>fn <a href='#method.clone_id' class='fnname'>clone_id</a>(&amp;self, id: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a></code></h3><div class='docblock'><p>This function is called whenever a new copy of <code>id</code> is needed.</p>
 <p>This is called in one of two situations:</p>
 <ul>
 <li>A <code>Task</code> is being created through <code>task::current</code> while a future is
@@ -55,5 +53,4 @@ notify with, and this function is called when the <code>Task</code> is dropped.<
 <code>id</code> argument to deallocate resources associated with the pointer. It's
 guaranteed that after this function is called the <code>Task</code> containing this
 <code>id</code> will no longer use the <code>id</code>.</p>
-</div></div><span class='loading-content'>Loading content...</span>
-            <h2 id='implementors' class='small-section-header'>Implementors<a href='#implementors' class='anchor'></a></h2><div class='item-list' id='implementors-list'></div><span class='loading-content'>Loading content...</span><script type="text/javascript" src="../../implementors/futures/executor/trait.Notify.js" async></script></section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../";window.currentCrate = "futures";</script><script src="../../main.js"></script><script defer src="../../search-index.js"></script></body></html>
+</div></div><span class='loading-content'>Loading content...</span><h2 id='implementors' class='small-section-header'>Implementors<a href='#implementors' class='anchor'></a></h2><div class='item-list' id='implementors-list'></div><span class='loading-content'>Loading content...</span><script type="text/javascript" src="../../implementors/futures/executor/trait.Notify.js" async></script></section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../";window.currentCrate = "futures";</script><script src="../../main.js"></script><script defer src="../../search-index.js"></script></body></html>
