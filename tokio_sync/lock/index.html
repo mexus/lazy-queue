@@ -24,8 +24,8 @@ release it at some later point in time.</p>
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">lock</span>.<span class="ident">poll_lock</span>() {
             <span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="kw-2">mut</span> <span class="ident">guard</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="ident">tokio</span>::<span class="ident">spawn</span>(<span class="ident">future</span>::<span class="ident">poll_fn</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-                    <span class="kw">let</span> <span class="ident">item</span> <span class="op">=</span> <span class="macro">try_ready</span><span class="macro">!</span>(<span class="ident">guard</span>.<span class="ident">poll</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> ()));
-                    <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;item = {:?}&quot;</span>, <span class="ident">item</span>);
+                    <span class="kw">let</span> <span class="ident">item</span> <span class="op">=</span> <span class="macro">try_ready!</span>(<span class="ident">guard</span>.<span class="ident">poll</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> ()));
+                    <span class="macro">println!</span>(<span class="string">&quot;item = {:?}&quot;</span>, <span class="ident">item</span>);
                     <span class="prelude-val">Ok</span>(().<span class="ident">into</span>())
                 }));
                 <span class="prelude-val">Ok</span>(().<span class="ident">into</span>())

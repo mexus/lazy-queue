@@ -357,7 +357,7 @@
     <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnOnce</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">R</span>
 {
     <span class="kw">let</span> <span class="ident">set</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">SET</span>.<span class="ident">load</span>(<span class="ident">Relaxed</span>) {
-        <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;not initialized&quot;</span>),
+        <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;not initialized&quot;</span>),
         <span class="ident">n</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> { <span class="ident">mem</span>::<span class="ident">transmute</span>::<span class="op">&lt;</span><span class="ident">usize</span>, <span class="kw">fn</span>(<span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>)<span class="op">&gt;</span>(<span class="ident">n</span>) },
     };
 

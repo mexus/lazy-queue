@@ -516,7 +516,7 @@
     <span class="kw">where</span>
         <span class="ident">R</span>: <span class="ident">Register</span>,
     {
-        <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + register_task&quot;</span>);
+        <span class="macro">debug!</span>(<span class="string">&quot; + register_task&quot;</span>);
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">compare_and_swap</span>(<span class="ident">WAITING</span>, <span class="ident">REGISTERING</span>, <span class="ident">Acquire</span>) {
             <span class="ident">WAITING</span> <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">unsafe</span> {
@@ -541,7 +541,7 @@
                             <span class="comment">// concurrent thread called `notify`. In this</span>
                             <span class="comment">// case, `actual` **must** be `REGISTERING |</span>
                             <span class="comment">// `NOTIFYING`.</span>
-                            <span class="macro">debug_assert_eq</span><span class="macro">!</span>(<span class="ident">actual</span>, <span class="ident">REGISTERING</span> <span class="op">|</span> <span class="ident">NOTIFYING</span>);
+                            <span class="macro">debug_assert_eq!</span>(<span class="ident">actual</span>, <span class="ident">REGISTERING</span> <span class="op">|</span> <span class="ident">NOTIFYING</span>);
 
                             <span class="comment">// Take the task to notify once the atomic operation has</span>
                             <span class="comment">// completed.</span>
@@ -572,7 +572,7 @@
                 <span class="comment">//</span>
                 <span class="comment">// We just want to maintain memory safety. It is ok to drop the</span>
                 <span class="comment">// call to `register`.</span>
-                <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">state</span> <span class="op">=</span><span class="op">=</span> <span class="ident">REGISTERING</span> <span class="op">|</span><span class="op">|</span> <span class="ident">state</span> <span class="op">=</span><span class="op">=</span> <span class="ident">REGISTERING</span> <span class="op">|</span> <span class="ident">NOTIFYING</span>);
+                <span class="macro">debug_assert!</span>(<span class="ident">state</span> <span class="op">=</span><span class="op">=</span> <span class="ident">REGISTERING</span> <span class="op">|</span><span class="op">|</span> <span class="ident">state</span> <span class="op">=</span><span class="op">=</span> <span class="ident">REGISTERING</span> <span class="op">|</span> <span class="ident">NOTIFYING</span>);
             }
         }
     }
@@ -581,7 +581,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// If `register` has not been called yet, then this does nothing.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">notify</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-        <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + notify&quot;</span>);
+        <span class="macro">debug!</span>(<span class="string">&quot; + notify&quot;</span>);
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">task</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">take_task</span>() {
             <span class="ident">task</span>.<span class="ident">notify</span>();
         }
@@ -590,24 +590,24 @@
     <span class="doccomment">/// Attempts to take the `Task` value out of the `AtomicTask` with the</span>
     <span class="doccomment">/// intention that the caller will notify the task later.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">take_task</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Task</span><span class="op">&gt;</span> {
-        <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + take_task&quot;</span>);
+        <span class="macro">debug!</span>(<span class="string">&quot; + take_task&quot;</span>);
         <span class="comment">// AcqRel ordering is used in order to acquire the value of the `task`</span>
         <span class="comment">// cell as well as to establish a `release` ordering with whatever</span>
         <span class="comment">// memory the `AtomicTask` is associated with.</span>
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">fetch_or</span>(<span class="ident">NOTIFYING</span>, <span class="ident">AcqRel</span>) {
             <span class="ident">WAITING</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + WAITING&quot;</span>);
+                <span class="macro">debug!</span>(<span class="string">&quot; + WAITING&quot;</span>);
                 <span class="comment">// The notifying lock has been acquired.</span>
                 <span class="kw">let</span> <span class="ident">task</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">task</span>.<span class="ident">with_mut</span>(<span class="op">|</span><span class="ident">t</span><span class="op">|</span> (<span class="kw-2">*</span><span class="ident">t</span>).<span class="ident">take</span>()) };
 
                 <span class="comment">// Release the lock</span>
                 <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">fetch_and</span>(<span class="op">!</span><span class="ident">NOTIFYING</span>, <span class="ident">Release</span>);
-                <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + Done taking&quot;</span>);
+                <span class="macro">debug!</span>(<span class="string">&quot; + Done taking&quot;</span>);
 
                 <span class="ident">task</span>
             }
             <span class="ident">state</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + state = {:?}&quot;</span>, <span class="ident">state</span>);
+                <span class="macro">debug!</span>(<span class="string">&quot; + state = {:?}&quot;</span>, <span class="ident">state</span>);
                 <span class="comment">// There is a concurrent thread currently updating the</span>
                 <span class="comment">// associated task.</span>
                 <span class="comment">//</span>
@@ -615,7 +615,7 @@
                 <span class="comment">// doesn&#39;t matter if there are concurrent registering threads or</span>
                 <span class="comment">// not.</span>
                 <span class="comment">//</span>
-                <span class="macro">debug_assert</span><span class="macro">!</span>(
+                <span class="macro">debug_assert!</span>(
                     <span class="ident">state</span> <span class="op">=</span><span class="op">=</span> <span class="ident">REGISTERING</span> <span class="op">|</span><span class="op">|</span> <span class="ident">state</span> <span class="op">=</span><span class="op">=</span> <span class="ident">REGISTERING</span> <span class="op">|</span> <span class="ident">NOTIFYING</span> <span class="op">|</span><span class="op">|</span> <span class="ident">state</span> <span class="op">=</span><span class="op">=</span> <span class="ident">NOTIFYING</span>
                 );
                 <span class="prelude-val">None</span>
@@ -632,7 +632,7 @@
 
 <span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">AtomicTask</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
-        <span class="macro">write</span><span class="macro">!</span>(<span class="ident">fmt</span>, <span class="string">&quot;AtomicTask&quot;</span>)
+        <span class="macro">write!</span>(<span class="ident">fmt</span>, <span class="string">&quot;AtomicTask&quot;</span>)
     }
 }
 

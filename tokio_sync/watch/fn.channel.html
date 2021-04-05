@@ -15,7 +15,7 @@ intermediate values are dropped.</p>
 <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">tx</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">watch</span>::<span class="ident">channel</span>(<span class="string">&quot;hello&quot;</span>);
 
 <span class="ident">tokio</span>::<span class="ident">spawn</span>(<span class="ident">rx</span>.<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">value</span><span class="op">|</span> {
-    <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;received = {:?}&quot;</span>, <span class="ident">value</span>);
+    <span class="macro">println!</span>(<span class="string">&quot;received = {:?}&quot;</span>, <span class="ident">value</span>);
     <span class="prelude-val">Ok</span>(())
 }).<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> ()));
 

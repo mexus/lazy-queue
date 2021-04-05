@@ -138,13 +138,13 @@
 
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">stream1</span>.<span class="ident">poll</span>()<span class="question-mark">?</span> {
             <span class="ident">Async</span>::<span class="ident">NotReady</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="kw">match</span> <span class="macro">try_ready</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">stream2</span>.<span class="ident">poll</span>()) {
+                <span class="kw">match</span> <span class="macro">try_ready!</span>(<span class="self">self</span>.<span class="ident">stream2</span>.<span class="ident">poll</span>()) {
                     <span class="prelude-val">Some</span>(<span class="ident">item2</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="prelude-val">Some</span>(<span class="ident">MergedItem</span>::<span class="ident">Second</span>(<span class="ident">item2</span>)))),
                     <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">NotReady</span>),
                 }
             }
             <span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="prelude-val">None</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="kw">match</span> <span class="macro">try_ready</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">stream2</span>.<span class="ident">poll</span>()) {
+                <span class="kw">match</span> <span class="macro">try_ready!</span>(<span class="self">self</span>.<span class="ident">stream2</span>.<span class="ident">poll</span>()) {
                     <span class="prelude-val">Some</span>(<span class="ident">item2</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="prelude-val">Some</span>(<span class="ident">MergedItem</span>::<span class="ident">Second</span>(<span class="ident">item2</span>)))),
                     <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="prelude-val">None</span>)),
                 }

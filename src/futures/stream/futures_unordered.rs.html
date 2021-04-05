@@ -1027,7 +1027,7 @@
                 <span class="ident">Dequeue</span>::<span class="ident">Data</span>(<span class="ident">node</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">node</span>,
             };
 
-            <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">node</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">stub</span>());
+            <span class="macro">debug_assert!</span>(<span class="ident">node</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">stub</span>());
 
             <span class="kw">unsafe</span> {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">future</span> <span class="op">=</span> <span class="kw">match</span> (<span class="kw-2">*</span>(<span class="kw-2">*</span><span class="ident">node</span>).<span class="ident">future</span>.<span class="ident">get</span>()).<span class="ident">take</span>() {
@@ -1039,8 +1039,8 @@
                     <span class="comment">// just taking ownership of our reference count here.</span>
                     <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> {
                         <span class="kw">let</span> <span class="ident">node</span> <span class="op">=</span> <span class="ident">ptr2arc</span>(<span class="ident">node</span>);
-                        <span class="macro">assert</span><span class="macro">!</span>((<span class="kw-2">*</span><span class="ident">node</span>.<span class="ident">next_all</span>.<span class="ident">get</span>()).<span class="ident">is_null</span>());
-                        <span class="macro">assert</span><span class="macro">!</span>((<span class="kw-2">*</span><span class="ident">node</span>.<span class="ident">prev_all</span>.<span class="ident">get</span>()).<span class="ident">is_null</span>());
+                        <span class="macro">assert!</span>((<span class="kw-2">*</span><span class="ident">node</span>.<span class="ident">next_all</span>.<span class="ident">get</span>()).<span class="ident">is_null</span>());
+                        <span class="macro">assert!</span>((<span class="kw-2">*</span><span class="ident">node</span>.<span class="ident">prev_all</span>.<span class="ident">get</span>()).<span class="ident">is_null</span>());
                         <span class="kw">continue</span>
                     }
                 };
@@ -1050,7 +1050,7 @@
                 <span class="comment">// rescheduled if it is notified **during** a call</span>
                 <span class="comment">// to `poll`.</span>
                 <span class="kw">let</span> <span class="ident">prev</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">node</span>).<span class="ident">queued</span>.<span class="ident">swap</span>(<span class="bool-val">false</span>, <span class="ident">SeqCst</span>);
-                <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">prev</span>);
+                <span class="macro">assert!</span>(<span class="ident">prev</span>);
 
                 <span class="comment">// We&#39;re going to need to be very careful if the `poll`</span>
                 <span class="comment">// function below panics. We need to (a) not leak memory and</span>
@@ -1128,7 +1128,7 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Debug</span><span class="op">&gt;</span> <span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">FuturesUnordered</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
-        <span class="macro">write</span><span class="macro">!</span>(<span class="ident">fmt</span>, <span class="string">&quot;FuturesUnordered {{ ... }}&quot;</span>)
+        <span class="macro">write!</span>(<span class="ident">fmt</span>, <span class="string">&quot;FuturesUnordered {{ ... }}&quot;</span>)
     }
 }
 
@@ -1209,7 +1209,7 @@
     <span class="doccomment">/// The enqueue function from the 1024cores intrusive MPSC queue algorithm.</span>
     <span class="kw">fn</span> <span class="ident">enqueue</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">node</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">Node</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) {
         <span class="kw">unsafe</span> {
-            <span class="macro">debug_assert</span><span class="macro">!</span>((<span class="kw-2">*</span><span class="ident">node</span>).<span class="ident">queued</span>.<span class="ident">load</span>(<span class="ident">Relaxed</span>));
+            <span class="macro">debug_assert!</span>((<span class="kw-2">*</span><span class="ident">node</span>).<span class="ident">queued</span>.<span class="ident">load</span>(<span class="ident">Relaxed</span>));
 
             <span class="comment">// This action does not require any coordination</span>
             (<span class="kw-2">*</span><span class="ident">node</span>).<span class="ident">next_readiness</span>.<span class="ident">store</span>(<span class="ident">ptr</span>::<span class="ident">null_mut</span>(), <span class="ident">Relaxed</span>);
@@ -1241,7 +1241,7 @@
 
         <span class="kw">if</span> <span class="op">!</span><span class="ident">next</span>.<span class="ident">is_null</span>() {
             <span class="kw-2">*</span><span class="self">self</span>.<span class="ident">tail_readiness</span>.<span class="ident">get</span>() <span class="op">=</span> <span class="ident">next</span>;
-            <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">tail</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">stub</span>());
+            <span class="macro">debug_assert!</span>(<span class="ident">tail</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">stub</span>());
             <span class="kw">return</span> <span class="ident">Dequeue</span>::<span class="ident">Data</span>(<span class="ident">tail</span>);
         }
 
@@ -1409,12 +1409,12 @@
 
     <span class="kw">impl</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">DoublePanic</span> {
         <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;panicking twice to abort the program&quot;</span>);
+            <span class="macro">panic!</span>(<span class="string">&quot;panicking twice to abort the program&quot;</span>);
         }
     }
 
     <span class="kw">let</span> <span class="ident">_bomb</span> <span class="op">=</span> <span class="ident">DoublePanic</span>;
-    <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">s</span>);
+    <span class="macro">panic!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">s</span>);
 }
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="futures" data-search-js="../../../search-index.js"></div>

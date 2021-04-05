@@ -163,7 +163,7 @@
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>(<span class="ident">s</span>: <span class="ident">S</span>, <span class="ident">capacity</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Chunks</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>
     <span class="kw">where</span> <span class="ident">S</span>: <span class="ident">Stream</span>
 {
-    <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">capacity</span> <span class="op">&gt;</span> <span class="number">0</span>);
+    <span class="macro">assert!</span>(<span class="ident">capacity</span> <span class="op">&gt;</span> <span class="number">0</span>);
 
     <span class="ident">Chunks</span> {
         <span class="ident">items</span>: <span class="ident">Vec</span>::<span class="ident">with_capacity</span>(<span class="ident">capacity</span>),

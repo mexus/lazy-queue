@@ -434,7 +434,7 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;use_std&quot;</span>)]</span>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">std</span>;
 
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">if_std</span> {
+<span class="macro">macro_rules!</span> <span class="ident">if_std</span> {
     ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">i</span>:<span class="ident">item</span>)<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> ($(
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;use_std&quot;</span>)]</span>
         <span class="macro-nonterminal">$</span><span class="macro-nonterminal">i</span>
@@ -482,7 +482,7 @@
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">unsync</span>;
 
 
-<span class="macro">if_std</span><span class="macro">!</span> {
+<span class="macro">if_std!</span> {
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
     <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;0.1.4&quot;</span>, <span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;use sync::oneshot::channel instead&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;with-deprecated&quot;</span>)]</span>

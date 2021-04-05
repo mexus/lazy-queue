@@ -272,7 +272,7 @@
             <span class="comment">// guaranteed to be in REPOLL state; just clobber the</span>
             <span class="comment">// state and run again.</span>
             <span class="prelude-val">Err</span>(<span class="ident">status</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">status</span>, <span class="ident">REPOLL</span>);
+                <span class="macro">assert_eq!</span>(<span class="ident">status</span>, <span class="ident">REPOLL</span>);
                 <span class="self">self</span>.<span class="ident">status</span>.<span class="ident">store</span>(<span class="ident">POLLING</span>, <span class="ident">SeqCst</span>);
                 <span class="prelude-val">Err</span>((<span class="kw-2">*</span><span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">get</span>()).<span class="ident">take</span>().<span class="ident">unwrap</span>())
             }

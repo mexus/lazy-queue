@@ -1304,7 +1304,7 @@
         <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="ident">NonNull</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">stub</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>).<span class="ident">unwrap</span>();
 
         <span class="comment">// Allocations are aligned</span>
-        <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">ptr</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="ident">usize</span> <span class="op">&amp;</span> <span class="ident">NUM_FLAG</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span>);
+        <span class="macro">debug_assert!</span>(<span class="ident">ptr</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="ident">usize</span> <span class="op">&amp;</span> <span class="ident">NUM_FLAG</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span>);
 
         <span class="kw">let</span> <span class="ident">state</span> <span class="op">=</span> <span class="ident">SemState</span>::<span class="ident">new</span>(<span class="ident">permits</span>, <span class="kw-2">&amp;</span><span class="ident">stub</span>);
 
@@ -1329,14 +1329,14 @@
         <span class="comment">// Load the current state</span>
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">curr</span> <span class="op">=</span> <span class="ident">SemState</span>::<span class="ident">load</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>, <span class="ident">Acquire</span>);
 
-        <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + poll_permit; sem-state = {:?}&quot;</span>, <span class="ident">curr</span>);
+        <span class="macro">debug!</span>(<span class="string">&quot; + poll_permit; sem-state = {:?}&quot;</span>, <span class="ident">curr</span>);
 
         <span class="comment">// Tracks a *mut WaiterNode representing an Arc clone.</span>
         <span class="comment">//</span>
         <span class="comment">// This avoids having to bump the ref count unless required.</span>
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">maybe_strong</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">WaiterNode</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span> <span class="prelude-val">None</span>;
 
-        <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">undo_strong</span> {
+        <span class="macro">macro_rules!</span> <span class="ident">undo_strong</span> {
             () <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">waiter</span>) <span class="op">=</span> <span class="ident">maybe_strong</span> {
                     <span class="comment">// The waiter was cloned, but never got queued.</span>
@@ -1353,14 +1353,14 @@
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">next</span> <span class="op">=</span> <span class="ident">curr</span>;
 
             <span class="kw">if</span> <span class="ident">curr</span>.<span class="ident">is_closed</span>() {
-                <span class="macro">undo_strong</span><span class="macro">!</span>();
+                <span class="macro">undo_strong!</span>();
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">AcquireError</span>::<span class="ident">closed</span>());
             }
 
             <span class="kw">if</span> <span class="op">!</span><span class="ident">next</span>.<span class="ident">acquire_permit</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">stub</span>) {
-                <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + poll_permit -- no permits&quot;</span>);
+                <span class="macro">debug!</span>(<span class="string">&quot; + poll_permit -- no permits&quot;</span>);
 
-                <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">curr</span>.<span class="ident">waiter</span>().<span class="ident">is_some</span>());
+                <span class="macro">debug_assert!</span>(<span class="ident">curr</span>.<span class="ident">waiter</span>().<span class="ident">is_some</span>());
 
                 <span class="kw">if</span> <span class="ident">maybe_strong</span>.<span class="ident">is_none</span>() {
                     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">permit</span>) <span class="op">=</span> <span class="ident">permit</span> {
@@ -1371,10 +1371,10 @@
 
                         <span class="ident">waiter</span>.<span class="ident">register</span>();
 
-                        <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + poll_permit -- to_queued_waiting&quot;</span>);
+                        <span class="macro">debug!</span>(<span class="string">&quot; + poll_permit -- to_queued_waiting&quot;</span>);
 
                         <span class="kw">if</span> <span class="op">!</span><span class="ident">waiter</span>.<span class="ident">to_queued_waiting</span>() {
-                            <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + poll_permit; waiter already queued&quot;</span>);
+                            <span class="macro">debug!</span>(<span class="string">&quot; + poll_permit; waiter already queued&quot;</span>);
                             <span class="comment">// The node is alrady queued, there is no further work</span>
                             <span class="comment">// to do.</span>
                             <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">NotReady</span>);
@@ -1391,14 +1391,14 @@
                 <span class="ident">next</span>.<span class="ident">set_waiter</span>(<span class="ident">maybe_strong</span>.<span class="ident">unwrap</span>());
             }
 
-            <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + poll_permit -- pre-CAS; next = {:?}&quot;</span>, <span class="ident">next</span>);
+            <span class="macro">debug!</span>(<span class="string">&quot; + poll_permit -- pre-CAS; next = {:?}&quot;</span>, <span class="ident">next</span>);
 
-            <span class="macro">debug_assert_ne</span><span class="macro">!</span>(<span class="ident">curr</span>.<span class="number">0</span>, <span class="number">0</span>);
-            <span class="macro">debug_assert_ne</span><span class="macro">!</span>(<span class="ident">next</span>.<span class="number">0</span>, <span class="number">0</span>);
+            <span class="macro">debug_assert_ne!</span>(<span class="ident">curr</span>.<span class="number">0</span>, <span class="number">0</span>);
+            <span class="macro">debug_assert_ne!</span>(<span class="ident">next</span>.<span class="number">0</span>, <span class="number">0</span>);
 
             <span class="kw">match</span> <span class="ident">next</span>.<span class="ident">compare_exchange</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>, <span class="ident">curr</span>, <span class="ident">AcqRel</span>, <span class="ident">Acquire</span>) {
                 <span class="prelude-val">Ok</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + poll_permit -- CAS ok&quot;</span>);
+                    <span class="macro">debug!</span>(<span class="string">&quot; + poll_permit -- CAS ok&quot;</span>);
                     <span class="kw">match</span> <span class="ident">curr</span>.<span class="ident">waiter</span>() {
                         <span class="prelude-val">Some</span>(<span class="ident">prev_waiter</span>) <span class="op">=</span><span class="op">&gt;</span> {
                             <span class="kw">let</span> <span class="ident">waiter</span> <span class="op">=</span> <span class="ident">maybe_strong</span>.<span class="ident">unwrap</span>();
@@ -1408,14 +1408,14 @@
                                 <span class="ident">prev_waiter</span>.<span class="ident">as_ref</span>().<span class="ident">next</span>.<span class="ident">store</span>(<span class="ident">waiter</span>.<span class="ident">as_ptr</span>(), <span class="ident">Release</span>);
                             }
 
-                            <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + poll_permit -- waiter pushed&quot;</span>);
+                            <span class="macro">debug!</span>(<span class="string">&quot; + poll_permit -- waiter pushed&quot;</span>);
 
                             <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">NotReady</span>);
                         }
                         <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> {
-                            <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + poll_permit -- permit acquired&quot;</span>);
+                            <span class="macro">debug!</span>(<span class="string">&quot; + poll_permit -- permit acquired&quot;</span>);
 
-                            <span class="macro">undo_strong</span><span class="macro">!</span>();
+                            <span class="macro">undo_strong!</span>();
 
                             <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">Ready</span>(()));
                         }
@@ -1431,14 +1431,14 @@
     <span class="doccomment">/// Close the semaphore. This prevents the semaphore from issuing new</span>
     <span class="doccomment">/// permits and notifies all pending waiters.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">close</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-        <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot;+ Semaphore::close&quot;</span>);
+        <span class="macro">debug!</span>(<span class="string">&quot;+ Semaphore::close&quot;</span>);
 
         <span class="comment">// Acquire the `rx_lock`, setting the &quot;closed&quot; flag on the lock.</span>
         <span class="kw">let</span> <span class="ident">prev</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rx_lock</span>.<span class="ident">fetch_or</span>(<span class="number">1</span>, <span class="ident">AcqRel</span>);
-        <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + close -- rx_lock.fetch_add(1)&quot;</span>);
+        <span class="macro">debug!</span>(<span class="string">&quot; + close -- rx_lock.fetch_add(1)&quot;</span>);
 
         <span class="kw">if</span> <span class="ident">prev</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot;+ close -- locked; prev = {}&quot;</span>, <span class="ident">prev</span>);
+            <span class="macro">debug!</span>(<span class="string">&quot;+ close -- locked; prev = {}&quot;</span>, <span class="ident">prev</span>);
             <span class="comment">// Another thread has the lock and will be responsible for notifying</span>
             <span class="comment">// pending waiters.</span>
             <span class="kw">return</span>;
@@ -1449,7 +1449,7 @@
 
     <span class="doccomment">/// Add `n` new permits to the semaphore.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_permits</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) {
-        <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + add_permits; n = {}&quot;</span>, <span class="ident">n</span>);
+        <span class="macro">debug!</span>(<span class="string">&quot; + add_permits; n = {}&quot;</span>, <span class="ident">n</span>);
 
         <span class="kw">if</span> <span class="ident">n</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
             <span class="kw">return</span>;
@@ -1458,10 +1458,10 @@
         <span class="comment">// TODO: Handle overflow. A panic is not sufficient, the process must</span>
         <span class="comment">// abort.</span>
         <span class="kw">let</span> <span class="ident">prev</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rx_lock</span>.<span class="ident">fetch_add</span>(<span class="ident">n</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">1</span>, <span class="ident">AcqRel</span>);
-        <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + add_permits; rx_lock.fetch_add(n &lt;&lt; 1); n = {}&quot;</span>, <span class="ident">n</span>);
+        <span class="macro">debug!</span>(<span class="string">&quot; + add_permits; rx_lock.fetch_add(n &lt;&lt; 1); n = {}&quot;</span>, <span class="ident">n</span>);
 
         <span class="kw">if</span> <span class="ident">prev</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + add_permits -- locked; prev = {}&quot;</span>, <span class="ident">prev</span>);
+            <span class="macro">debug!</span>(<span class="string">&quot; + add_permits -- locked; prev = {}&quot;</span>, <span class="ident">prev</span>);
             <span class="comment">// Another thread has the lock and will be responsible for notifying</span>
             <span class="comment">// pending waiters.</span>
             <span class="kw">return</span>;
@@ -1472,7 +1472,7 @@
 
     <span class="kw">fn</span> <span class="ident">add_permits_locked</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">rem</span>: <span class="ident">usize</span>, <span class="kw-2">mut</span> <span class="ident">closed</span>: <span class="ident">bool</span>) {
         <span class="kw">while</span> <span class="ident">rem</span> <span class="op">&gt;</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">closed</span> {
-            <span class="macro">debug</span><span class="macro">!</span>(
+            <span class="macro">debug!</span>(
                 <span class="string">&quot; + add_permits_locked -- iter; rem = {}; closed = {:?}&quot;</span>,
                 <span class="ident">rem</span>, <span class="ident">closed</span>
             );
@@ -1488,7 +1488,7 @@
 
             <span class="kw">let</span> <span class="ident">actual</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">closed</span> {
                 <span class="kw">let</span> <span class="ident">actual</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rx_lock</span>.<span class="ident">fetch_sub</span>(<span class="ident">n</span> <span class="op">|</span> <span class="number">1</span>, <span class="ident">AcqRel</span>);
-                <span class="macro">debug</span><span class="macro">!</span>(
+                <span class="macro">debug!</span>(
                     <span class="string">&quot; + add_permits_locked; rx_lock.fetch_sub(n | 1); n = {}; actual={}&quot;</span>,
                     <span class="ident">n</span>, <span class="ident">actual</span>
                 );
@@ -1497,7 +1497,7 @@
                 <span class="ident">actual</span>
             } <span class="kw">else</span> {
                 <span class="kw">let</span> <span class="ident">actual</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rx_lock</span>.<span class="ident">fetch_sub</span>(<span class="ident">n</span>, <span class="ident">AcqRel</span>);
-                <span class="macro">debug</span><span class="macro">!</span>(
+                <span class="macro">debug!</span>(
                     <span class="string">&quot; + add_permits_locked; rx_lock.fetch_sub(n); n = {}; actual={}&quot;</span>,
                     <span class="ident">n</span>, <span class="ident">actual</span>
                 );
@@ -1509,7 +1509,7 @@
             <span class="ident">rem</span> <span class="op">=</span> (<span class="ident">actual</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">1</span>) <span class="op">-</span> <span class="ident">rem</span>;
         }
 
-        <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + add_permits; done&quot;</span>);
+        <span class="macro">debug!</span>(<span class="string">&quot; + add_permits; done&quot;</span>);
     }
 
     <span class="doccomment">/// Release a specific amount of permits to the semaphore</span>
@@ -1525,11 +1525,11 @@
                 }
             };
 
-            <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + release_n -- notify&quot;</span>);
+            <span class="macro">debug!</span>(<span class="string">&quot; + release_n -- notify&quot;</span>);
 
             <span class="kw">if</span> <span class="ident">waiter</span>.<span class="ident">notify</span>(<span class="ident">closed</span>) {
                 <span class="ident">n</span> <span class="op">=</span> <span class="ident">n</span>.<span class="ident">saturating_sub</span>(<span class="number">1</span>);
-                <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + release_n -- dec&quot;</span>);
+                <span class="macro">debug!</span>(<span class="string">&quot; + release_n -- dec&quot;</span>);
             }
         }
     }
@@ -1540,7 +1540,7 @@
     <span class="doccomment">/// there are no more waiters to pop, `rem` is used to set the available</span>
     <span class="doccomment">/// permits.</span>
     <span class="kw">fn</span> <span class="ident">pop</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">rem</span>: <span class="ident">usize</span>, <span class="ident">closed</span>: <span class="ident">bool</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">WaiterNode</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + pop; rem = {}&quot;</span>, <span class="ident">rem</span>);
+        <span class="macro">debug!</span>(<span class="string">&quot; + pop; rem = {}&quot;</span>, <span class="ident">rem</span>);
 
         <span class="lifetime">&#39;outer</span>: <span class="kw">loop</span> {
             <span class="kw">unsafe</span> {
@@ -1550,7 +1550,7 @@
                 <span class="kw">let</span> <span class="ident">stub</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">stub</span>();
 
                 <span class="kw">if</span> <span class="ident">head</span> <span class="op">=</span><span class="op">=</span> <span class="ident">stub</span> {
-                    <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + pop; head == stub&quot;</span>);
+                    <span class="macro">debug!</span>(<span class="string">&quot; + pop; head == stub&quot;</span>);
 
                     <span class="kw">let</span> <span class="ident">next</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">NonNull</span>::<span class="ident">new</span>(<span class="ident">next_ptr</span>) {
                         <span class="prelude-val">Some</span>(<span class="ident">next</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">next</span>,
@@ -1577,7 +1577,7 @@
                             <span class="kw">loop</span> {
                                 <span class="kw">if</span> <span class="ident">curr</span>.<span class="ident">has_waiter</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">stub</span>) {
                                     <span class="comment">// Inconsistent</span>
-                                    <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + pop; inconsistent 1&quot;</span>);
+                                    <span class="macro">debug!</span>(<span class="string">&quot; + pop; inconsistent 1&quot;</span>);
                                     <span class="ident">yield_now</span>();
                                     <span class="kw">continue</span> <span class="lifetime">&#39;outer</span>;
                                 }
@@ -1587,7 +1587,7 @@
                                 <span class="comment">// adding permits, but notifying waiters of the</span>
                                 <span class="comment">// semaphore&#39;s closed state.</span>
                                 <span class="kw">if</span> <span class="ident">rem</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
-                                    <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">curr</span>.<span class="ident">is_closed</span>(), <span class="string">&quot;state = {:?}&quot;</span>, <span class="ident">curr</span>);
+                                    <span class="macro">debug_assert!</span>(<span class="ident">curr</span>.<span class="ident">is_closed</span>(), <span class="string">&quot;state = {:?}&quot;</span>, <span class="ident">curr</span>);
                                     <span class="kw">return</span> <span class="prelude-val">None</span>;
                                 }
 
@@ -1604,7 +1604,7 @@
                         }
                     };
 
-                    <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + pop; got next waiter&quot;</span>);
+                    <span class="macro">debug!</span>(<span class="string">&quot; + pop; got next waiter&quot;</span>);
 
                     <span class="self">self</span>.<span class="ident">head</span>.<span class="ident">with_mut</span>(<span class="op">|</span><span class="ident">head</span><span class="op">|</span> <span class="kw-2">*</span><span class="ident">head</span> <span class="op">=</span> <span class="ident">next</span>);
                     <span class="ident">head</span> <span class="op">=</span> <span class="ident">next</span>;
@@ -1624,7 +1624,7 @@
 
                 <span class="kw">if</span> <span class="ident">tail</span> <span class="op">!</span><span class="op">=</span> <span class="ident">head</span> {
                     <span class="comment">// Inconsistent</span>
-                    <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + pop; inconsistent 2&quot;</span>);
+                    <span class="macro">debug!</span>(<span class="string">&quot; + pop; inconsistent 2&quot;</span>);
                     <span class="ident">yield_now</span>();
                     <span class="kw">continue</span> <span class="lifetime">&#39;outer</span>;
                 }
@@ -1640,7 +1640,7 @@
                 }
 
                 <span class="comment">// Inconsistent state, loop</span>
-                <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + pop; inconsistent 3&quot;</span>);
+                <span class="macro">debug!</span>(<span class="string">&quot; + pop; inconsistent 3&quot;</span>);
                 <span class="ident">yield_now</span>();
             }
         }
@@ -1659,14 +1659,14 @@
         <span class="comment">// to any other threads calling `push`.</span>
         <span class="kw">let</span> <span class="ident">prev</span> <span class="op">=</span> <span class="ident">SemState</span>::<span class="ident">new_ptr</span>(<span class="ident">stub</span>, <span class="ident">closed</span>).<span class="ident">swap</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>, <span class="ident">AcqRel</span>);
 
-        <span class="macro">debug_assert_eq</span><span class="macro">!</span>(<span class="ident">closed</span>, <span class="ident">prev</span>.<span class="ident">is_closed</span>());
+        <span class="macro">debug_assert_eq!</span>(<span class="ident">closed</span>, <span class="ident">prev</span>.<span class="ident">is_closed</span>());
 
         <span class="comment">// The stub is only pushed when there are pending tasks. Because of</span>
         <span class="comment">// this, the state must *always* be in pointer mode.</span>
         <span class="kw">let</span> <span class="ident">prev</span> <span class="op">=</span> <span class="ident">prev</span>.<span class="ident">waiter</span>().<span class="ident">unwrap</span>();
 
         <span class="comment">// We don&#39;t want the *existing* pointer to be a stub.</span>
-        <span class="macro">debug_assert_ne</span><span class="macro">!</span>(<span class="ident">prev</span>, <span class="ident">stub</span>);
+        <span class="macro">debug_assert_ne!</span>(<span class="ident">prev</span>, <span class="ident">stub</span>);
 
         <span class="comment">// Release `task` to the consume end.</span>
         <span class="ident">prev</span>.<span class="ident">as_ref</span>().<span class="ident">next</span>.<span class="ident">store</span>(<span class="ident">stub</span>.<span class="ident">as_ptr</span>(), <span class="ident">Release</span>);
@@ -1832,7 +1832,7 @@
 <span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Display</span> <span class="kw">for</span> <span class="ident">AcquireError</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">error</span>::<span class="ident">Error</span>;
-        <span class="macro">write</span><span class="macro">!</span>(<span class="ident">fmt</span>, <span class="string">&quot;{}&quot;</span>, <span class="self">self</span>.<span class="ident">description</span>())
+        <span class="macro">write!</span>(<span class="ident">fmt</span>, <span class="string">&quot;{}&quot;</span>, <span class="self">self</span>.<span class="ident">description</span>())
     }
 }
 
@@ -1878,7 +1878,7 @@
 <span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Display</span> <span class="kw">for</span> <span class="ident">TryAcquireError</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">error</span>::<span class="ident">Error</span>;
-        <span class="macro">write</span><span class="macro">!</span>(<span class="ident">fmt</span>, <span class="string">&quot;{}&quot;</span>, <span class="self">self</span>.<span class="ident">description</span>())
+        <span class="macro">write!</span>(<span class="ident">fmt</span>, <span class="string">&quot;{}&quot;</span>, <span class="self">self</span>.<span class="ident">description</span>())
     }
 }
 
@@ -1943,12 +1943,12 @@
                 <span class="kw">match</span> <span class="self">self</span>.<span class="ident">acquire2</span>() {
                     <span class="prelude-val">Ok</span>(<span class="bool-val">true</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
                     <span class="comment">// Not a reachable state</span>
-                    <span class="prelude-val">Ok</span>(<span class="bool-val">false</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(),
+                    <span class="prelude-val">Ok</span>(<span class="bool-val">false</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(),
                     <span class="comment">// The semaphore has been closed, no further action to take.</span>
                     <span class="prelude-val">Err</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
                 }
             }
-            <span class="prelude-val">Err</span>(<span class="ident">state</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;unexpected state = {:?}&quot;</span>, <span class="ident">state</span>),
+            <span class="prelude-val">Err</span>(<span class="ident">state</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;unexpected state = {:?}&quot;</span>, <span class="ident">state</span>),
         }
     }
 
@@ -1963,7 +1963,7 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">curr</span> <span class="op">=</span> <span class="ident">NodeState</span>::<span class="ident">load</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>, <span class="ident">Acquire</span>);
 
         <span class="kw">loop</span> {
-            <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">curr</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Idle</span> <span class="op">|</span><span class="op">|</span> <span class="ident">curr</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Queued</span>, <span class="string">&quot;actual = {:?}&quot;</span>, <span class="ident">curr</span>);
+            <span class="macro">debug_assert!</span>(<span class="ident">curr</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Idle</span> <span class="op">|</span><span class="op">|</span> <span class="ident">curr</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Queued</span>, <span class="string">&quot;actual = {:?}&quot;</span>, <span class="ident">curr</span>);
             <span class="kw">let</span> <span class="ident">next</span> <span class="op">=</span> <span class="ident">QueuedWaiting</span>;
 
             <span class="kw">match</span> <span class="ident">next</span>.<span class="ident">compare_exchange</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>, <span class="ident">curr</span>, <span class="ident">AcqRel</span>, <span class="ident">Acquire</span>) {
@@ -2002,18 +2002,18 @@
                         <span class="ident">Assigned</span>
                     }
                 }
-                <span class="ident">actual</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;actual = {:?}&quot;</span>, <span class="ident">actual</span>),
+                <span class="ident">actual</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;actual = {:?}&quot;</span>, <span class="ident">actual</span>),
             };
 
             <span class="kw">match</span> <span class="ident">next</span>.<span class="ident">compare_exchange</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>, <span class="ident">curr</span>, <span class="ident">AcqRel</span>, <span class="ident">Acquire</span>) {
                 <span class="prelude-val">Ok</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="ident">curr</span> {
                     <span class="ident">QueuedWaiting</span> <span class="op">=</span><span class="op">&gt;</span> {
-                        <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + notify -- task notified&quot;</span>);
+                        <span class="macro">debug!</span>(<span class="string">&quot; + notify -- task notified&quot;</span>);
                         <span class="self">self</span>.<span class="ident">task</span>.<span class="ident">notify</span>();
                         <span class="kw">return</span> <span class="bool-val">true</span>;
                     }
                     <span class="ident">other</span> <span class="op">=</span><span class="op">&gt;</span> {
-                        <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + notify -- not notified; state = {:?}&quot;</span>, <span class="ident">other</span>);
+                        <span class="macro">debug!</span>(<span class="string">&quot; + notify -- not notified; state = {:?}&quot;</span>, <span class="ident">other</span>);
                         <span class="kw">return</span> <span class="bool-val">false</span>;
                     }
                 },
@@ -2055,7 +2055,7 @@
 <span class="kw">impl</span> <span class="ident">SemState</span> {
     <span class="doccomment">/// Returns a new default `State` value.</span>
     <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">permits</span>: <span class="ident">usize</span>, <span class="ident">stub</span>: <span class="kw-2">&amp;</span><span class="ident">WaiterNode</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">SemState</span> {
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">permits</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">MAX_PERMITS</span>);
+        <span class="macro">assert!</span>(<span class="ident">permits</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">MAX_PERMITS</span>);
 
         <span class="kw">if</span> <span class="ident">permits</span> <span class="op">&gt;</span> <span class="number">0</span> {
             <span class="ident">SemState</span>((<span class="ident">permits</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">NUM_SHIFT</span>) <span class="op">|</span> <span class="ident">NUM_FLAG</span>)
@@ -2105,7 +2105,7 @@
             <span class="kw">return</span> <span class="bool-val">false</span>;
         }
 
-        <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">waiter</span>().<span class="ident">is_none</span>());
+        <span class="macro">debug_assert!</span>(<span class="self">self</span>.<span class="ident">waiter</span>().<span class="ident">is_none</span>());
 
         <span class="self">self</span>.<span class="number">0</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">NUM_SHIFT</span>;
 
@@ -2121,14 +2121,14 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Returns `true` if the permits were accepted.</span>
     <span class="kw">fn</span> <span class="ident">release_permits</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">permits</span>: <span class="ident">usize</span>, <span class="ident">stub</span>: <span class="kw-2">&amp;</span><span class="ident">WaiterNode</span>) {
-        <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">permits</span> <span class="op">&gt;</span> <span class="number">0</span>);
+        <span class="macro">debug_assert!</span>(<span class="ident">permits</span> <span class="op">&gt;</span> <span class="number">0</span>);
 
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">is_stub</span>(<span class="ident">stub</span>) {
             <span class="self">self</span>.<span class="number">0</span> <span class="op">=</span> (<span class="ident">permits</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">NUM_SHIFT</span>) <span class="op">|</span> <span class="ident">NUM_FLAG</span> <span class="op">|</span> (<span class="self">self</span>.<span class="number">0</span> <span class="op">&amp;</span> <span class="ident">CLOSED_FLAG</span>);
             <span class="kw">return</span>;
         }
 
-        <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">has_available_permits</span>());
+        <span class="macro">debug_assert!</span>(<span class="self">self</span>.<span class="ident">has_available_permits</span>());
 
         <span class="self">self</span>.<span class="number">0</span> <span class="op">+</span><span class="op">=</span> <span class="ident">permits</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">NUM_SHIFT</span>;
     }
@@ -2158,8 +2158,8 @@
     <span class="doccomment">/// This can only be done from the full state.</span>
     <span class="kw">fn</span> <span class="ident">set_waiter</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">waiter</span>: <span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">WaiterNode</span><span class="op">&gt;</span>) {
         <span class="kw">let</span> <span class="ident">waiter</span> <span class="op">=</span> <span class="ident">waiter</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">waiter</span> <span class="op">&amp;</span> <span class="ident">NUM_FLAG</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span>);
-        <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="op">!</span><span class="self">self</span>.<span class="ident">is_closed</span>());
+        <span class="macro">debug_assert!</span>(<span class="ident">waiter</span> <span class="op">&amp;</span> <span class="ident">NUM_FLAG</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span>);
+        <span class="macro">debug_assert!</span>(<span class="op">!</span><span class="self">self</span>.<span class="ident">is_closed</span>());
 
         <span class="self">self</span>.<span class="number">0</span> <span class="op">=</span> <span class="ident">waiter</span>;
     }
@@ -2171,14 +2171,14 @@
     <span class="doccomment">/// Load the state from an AtomicUsize.</span>
     <span class="kw">fn</span> <span class="ident">load</span>(<span class="ident">cell</span>: <span class="kw-2">&amp;</span><span class="ident">AtomicUsize</span>, <span class="ident">ordering</span>: <span class="ident">Ordering</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">SemState</span> {
         <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">cell</span>.<span class="ident">load</span>(<span class="ident">ordering</span>);
-        <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot; + SemState::load; value = {}&quot;</span>, <span class="ident">value</span>);
+        <span class="macro">debug!</span>(<span class="string">&quot; + SemState::load; value = {}&quot;</span>, <span class="ident">value</span>);
         <span class="ident">SemState</span>(<span class="ident">value</span>)
     }
 
     <span class="doccomment">/// Swap the values</span>
     <span class="kw">fn</span> <span class="ident">swap</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">cell</span>: <span class="kw-2">&amp;</span><span class="ident">AtomicUsize</span>, <span class="ident">ordering</span>: <span class="ident">Ordering</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">SemState</span> {
         <span class="kw">let</span> <span class="ident">prev</span> <span class="op">=</span> <span class="ident">SemState</span>(<span class="ident">cell</span>.<span class="ident">swap</span>(<span class="self">self</span>.<span class="ident">to_usize</span>(), <span class="ident">ordering</span>));
-        <span class="macro">debug_assert_eq</span><span class="macro">!</span>(<span class="ident">prev</span>.<span class="ident">is_closed</span>(), <span class="self">self</span>.<span class="ident">is_closed</span>());
+        <span class="macro">debug_assert_eq!</span>(<span class="ident">prev</span>.<span class="ident">is_closed</span>(), <span class="self">self</span>.<span class="ident">is_closed</span>());
         <span class="ident">prev</span>
     }
 
@@ -2190,11 +2190,11 @@
         <span class="ident">success</span>: <span class="ident">Ordering</span>,
         <span class="ident">failure</span>: <span class="ident">Ordering</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">SemState</span>, <span class="ident">SemState</span><span class="op">&gt;</span> {
-        <span class="macro">debug_assert_eq</span><span class="macro">!</span>(<span class="ident">prev</span>.<span class="ident">is_closed</span>(), <span class="self">self</span>.<span class="ident">is_closed</span>());
+        <span class="macro">debug_assert_eq!</span>(<span class="ident">prev</span>.<span class="ident">is_closed</span>(), <span class="self">self</span>.<span class="ident">is_closed</span>());
 
         <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">cell</span>.<span class="ident">compare_exchange</span>(<span class="ident">prev</span>.<span class="ident">to_usize</span>(), <span class="self">self</span>.<span class="ident">to_usize</span>(), <span class="ident">success</span>, <span class="ident">failure</span>);
 
-        <span class="macro">debug</span><span class="macro">!</span>(
+        <span class="macro">debug!</span>(
             <span class="string">&quot; + SemState::compare_exchange; prev = {}; next = {}; result = {:?}&quot;</span>,
             <span class="ident">prev</span>.<span class="ident">to_usize</span>(),
             <span class="self">self</span>.<span class="ident">to_usize</span>(),
@@ -2249,7 +2249,7 @@
             <span class="number">2</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">QueuedWaiting</span>,
             <span class="number">3</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Assigned</span>,
             <span class="number">4</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Closed</span>,
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(),
+            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(),
         }
     }
 

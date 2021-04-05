@@ -398,7 +398,7 @@
             <span class="ident">COMPLETE</span> <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="prelude-val">Some</span>(<span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">clone_result</span>() })
             }
-            <span class="ident">POISONED</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;inner future panicked during poll&quot;</span>),
+            <span class="ident">POISONED</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;inner future panicked during poll&quot;</span>),
             <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
         }
     }
@@ -412,7 +412,7 @@
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">result</span>.<span class="ident">get</span>() {
             <span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(<span class="kw-2">ref</span> <span class="ident">item</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">SharedItem</span> { <span class="ident">item</span>: <span class="ident">item</span>.<span class="ident">item</span>.<span class="ident">clone</span>() }),
             <span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(<span class="kw-2">ref</span> <span class="ident">e</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">SharedError</span> { <span class="ident">error</span>: <span class="ident">e</span>.<span class="ident">error</span>.<span class="ident">clone</span>() }),
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
+            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(),
         }
     }
 
@@ -445,8 +445,8 @@
             <span class="ident">COMPLETE</span> <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">return</span> <span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">clone_result</span>().<span class="ident">map</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>) };
             }
-            <span class="ident">POISONED</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;inner future panicked during poll&quot;</span>),
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
+            <span class="ident">POISONED</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;inner future panicked during poll&quot;</span>),
+            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(),
         }
 
         <span class="kw">struct</span> <span class="ident">Reset</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">AtomicUsize</span>);
@@ -476,7 +476,7 @@
                         <span class="comment">// Success</span>
                         <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">NotReady</span>);
                     }
-                    <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
+                    <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(),
                 }
 
             }

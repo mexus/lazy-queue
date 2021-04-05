@@ -113,7 +113,7 @@
                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">a</span><span class="op">|</span> <span class="ident">a</span>.<span class="ident">into_future</span>())
                    .<span class="ident">collect</span>(),
     };
-    <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">ret</span>.<span class="ident">inner</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="number">0</span>);
+    <span class="macro">assert!</span>(<span class="ident">ret</span>.<span class="ident">inner</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="number">0</span>);
     <span class="ident">ret</span>
 }
 

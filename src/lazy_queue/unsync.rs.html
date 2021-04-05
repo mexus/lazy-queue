@@ -92,7 +92,7 @@
     <span class="doccomment">//! Bounded queue.</span>
     <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
 
-    <span class="macro">implement</span><span class="macro">!</span>(
+    <span class="macro">implement!</span>(
         <span class="string">&quot;A clonable single-threaded sink-like queue.&quot;</span>,
         <span class="ident">mpsc</span>::<span class="ident">Sender</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">&gt;</span>,
         <span class="ident">mpsc</span>::<span class="ident">Receiver</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">&gt;</span>,
@@ -107,7 +107,7 @@
     <span class="doccomment">//! Unbounded queue.</span>
     <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
 
-    <span class="macro">implement</span><span class="macro">!</span>(
+    <span class="macro">implement!</span>(
         <span class="string">&quot;A clonable single-threaded sink-like queue.&quot;</span>,
         <span class="ident">mpsc</span>::<span class="ident">UnboundedSender</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">&gt;</span>,
         <span class="ident">mpsc</span>::<span class="ident">UnboundedReceiver</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">&gt;</span>,
@@ -137,11 +137,11 @@
         <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">queue</span>, <span class="ident">driver</span>) <span class="op">=</span> <span class="ident">LazyQueue</span>::<span class="ident">new</span>(<span class="ident">processor</span>, <span class="ident">CAPACITY</span>);
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rt</span> <span class="op">=</span> <span class="ident">Runtime</span>::<span class="ident">new</span>().<span class="ident">unwrap</span>();
-        <span class="ident">rt</span>.<span class="ident">spawn</span>(<span class="ident">driver</span>.<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Error while processing a queue: {:?}&quot;</span>, <span class="ident">e</span>)));
+        <span class="ident">rt</span>.<span class="ident">spawn</span>(<span class="ident">driver</span>.<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">panic!</span>(<span class="string">&quot;Error while processing a queue: {:?}&quot;</span>, <span class="ident">e</span>)));
 
         <span class="comment">// Fill up the queue by sending into it a CAPACITY number of items.</span>
-        <span class="kw">let</span> <span class="ident">items</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>];
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">CAPACITY</span>, <span class="ident">items</span>.<span class="ident">len</span>()); <span class="comment">// just a sanity check.</span>
+        <span class="kw">let</span> <span class="ident">items</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>];
+        <span class="macro">assert_eq!</span>(<span class="ident">CAPACITY</span>, <span class="ident">items</span>.<span class="ident">len</span>()); <span class="comment">// just a sanity check.</span>
         <span class="ident">queue</span> <span class="op">=</span> <span class="ident">rt</span>
             .<span class="ident">block_on</span>(
                 <span class="ident">queue</span>
@@ -154,14 +154,14 @@
         <span class="comment">// filled up. We are sending 2 elements since the real queue&#39;s capacity might be</span>
         <span class="comment">// CAPACITY + 1.</span>
         <span class="kw">let</span> <span class="ident">maybe_queue</span> <span class="op">=</span> <span class="ident">rt</span>
-            .<span class="ident">block_on</span>(<span class="ident">try_once</span>(<span class="ident">queue</span>.<span class="ident">send_all</span>(<span class="ident">iter_ok</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="number">9</span>, <span class="number">10</span>]))))
+            .<span class="ident">block_on</span>(<span class="ident">try_once</span>(<span class="ident">queue</span>.<span class="ident">send_all</span>(<span class="ident">iter_ok</span>(<span class="macro">vec!</span>[<span class="number">9</span>, <span class="number">10</span>]))))
             .<span class="ident">unwrap</span>();
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">maybe_queue</span>.<span class="ident">is_none</span>());
+        <span class="macro">assert!</span>(<span class="ident">maybe_queue</span>.<span class="ident">is_none</span>());
 
         <span class="ident">rt</span>.<span class="ident">run</span>().<span class="ident">unwrap</span>();
 
         <span class="comment">// Check that the processor has received the same items we have sent to it.</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">items</span>, <span class="ident">events_receiver</span>.<span class="ident">iter</span>().<span class="ident">take</span>(<span class="number">3</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>());
+        <span class="macro">assert_eq!</span>(<span class="ident">items</span>, <span class="ident">events_receiver</span>.<span class="ident">iter</span>().<span class="ident">take</span>(<span class="number">3</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>());
     }
 }
 </pre></div>

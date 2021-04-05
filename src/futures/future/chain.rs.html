@@ -82,11 +82,11 @@
                 }
             }
             <span class="ident">Chain</span>::<span class="ident">Second</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="ident">b</span>.<span class="ident">poll</span>(),
-            <span class="ident">Chain</span>::<span class="ident">Done</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;cannot poll a chained future twice&quot;</span>),
+            <span class="ident">Chain</span>::<span class="ident">Done</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;cannot poll a chained future twice&quot;</span>),
         };
         <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">mem</span>::<span class="ident">replace</span>(<span class="self">self</span>, <span class="ident">Chain</span>::<span class="ident">Done</span>) {
             <span class="ident">Chain</span>::<span class="ident">First</span>(<span class="kw">_</span>, <span class="ident">c</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">c</span>,
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(),
+            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(),
         };
         <span class="kw">match</span> <span class="ident">f</span>(<span class="ident">a_result</span>, <span class="ident">data</span>)<span class="question-mark">?</span> {
             <span class="prelude-val">Ok</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="ident">e</span>)),

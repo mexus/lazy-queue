@@ -1252,7 +1252,7 @@
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">either</span>::<span class="ident">Either</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">inspect</span>::<span class="ident">Inspect</span>;
 
-<span class="macro">if_std</span><span class="macro">!</span> {
+<span class="macro">if_std!</span> {
     <span class="kw">mod</span> <span class="ident">catch_unwind</span>;
     <span class="kw">mod</span> <span class="ident">join_all</span>;
     <span class="kw">mod</span> <span class="ident">select_all</span>;
@@ -2340,7 +2340,7 @@
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">kind</span> {
             <span class="ident">ExecuteErrorKind</span>::<span class="ident">Shutdown</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;executor has shut down&quot;</span>.<span class="ident">fmt</span>(<span class="ident">f</span>),
             <span class="ident">ExecuteErrorKind</span>::<span class="ident">NoCapacity</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;executor has no more capacity&quot;</span>.<span class="ident">fmt</span>(<span class="ident">f</span>),
-            <span class="ident">ExecuteErrorKind</span>::<span class="ident">__Nonexhaustive</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(),
+            <span class="ident">ExecuteErrorKind</span>::<span class="ident">__Nonexhaustive</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(),
         }
     }
 }

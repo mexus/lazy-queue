@@ -18,7 +18,7 @@ was given to the <code>Sender</code> handle.</p>
 
 <span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="op">|</span><span class="op">|</span> {
     <span class="ident">c</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">i</span><span class="op">|</span> {
-        <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;got: {}&quot;</span>, <span class="ident">i</span>);
+        <span class="macro">println!</span>(<span class="string">&quot;got: {}&quot;</span>, <span class="ident">i</span>);
     }).<span class="ident">wait</span>();
 });
 

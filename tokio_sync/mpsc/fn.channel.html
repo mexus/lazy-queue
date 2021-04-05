@@ -34,7 +34,7 @@ trying to <code>recv</code>, the <code>recv</code> method will return a <code>Re
     });
 
     <span class="ident">rx</span>.<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">value</span><span class="op">|</span> {
-        <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;got value = {:?}&quot;</span>, <span class="ident">value</span>);
+        <span class="macro">println!</span>(<span class="string">&quot;got value = {:?}&quot;</span>, <span class="ident">value</span>);
         <span class="prelude-val">Ok</span>(())
     })
     .<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> ())

@@ -112,7 +112,7 @@
 <span class="doccomment">/// This macro bakes propagation of both errors and `NotReady` signals by</span>
 <span class="doccomment">/// returning early.</span>
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">try_ready</span> {
+<span class="macro">macro_rules!</span> <span class="ident">try_ready</span> {
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">e</span>:<span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> (<span class="kw">match</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">e</span> {
         <span class="prelude-val">Ok</span>(<span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">Async</span>::<span class="ident">Ready</span>(<span class="ident">t</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">t</span>,
         <span class="prelude-val">Ok</span>(<span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">Async</span>::<span class="ident">NotReady</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">Async</span>::<span class="ident">NotReady</span>),

@@ -114,7 +114,7 @@
 
         <span class="comment">// we&#39;re done sending the item, but want to block on flushing the</span>
         <span class="comment">// sink</span>
-        <span class="macro">try_ready</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">sink_mut</span>().<span class="ident">poll_complete</span>());
+        <span class="macro">try_ready!</span>(<span class="self">self</span>.<span class="ident">sink_mut</span>().<span class="ident">poll_complete</span>());
 
         <span class="comment">// now everything&#39;s emptied, so return the sink for further use</span>
         <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="self">self</span>.<span class="ident">take_sink</span>()))
