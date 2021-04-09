@@ -285,12 +285,12 @@
 <span id="282">282</span>
 <span id="283">283</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="kw">super</span>::<span class="ident">Task</span>;
+<span class="kw">use</span> <span class="kw">super</span><span class="ident">::Task</span>;
 
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">fmt</span>;
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">cell</span>::<span class="ident">UnsafeCell</span>;
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">sync</span>::<span class="ident">atomic</span>::<span class="ident">AtomicUsize</span>;
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">sync</span>::<span class="ident">atomic</span>::<span class="ident">Ordering</span>::{<span class="ident">Acquire</span>, <span class="ident">Release</span>, <span class="ident">AcqRel</span>};
+<span class="kw">use</span> <span class="ident">core::fmt</span>;
+<span class="kw">use</span> <span class="ident">core::cell::UnsafeCell</span>;
+<span class="kw">use</span> <span class="ident">core::sync::atomic::AtomicUsize</span>;
+<span class="kw">use</span> <span class="ident">core::sync::atomic::Ordering</span>::{<span class="ident">Acquire</span>, <span class="ident">Release</span>, <span class="ident">AcqRel</span>};
 
 <span class="doccomment">/// A synchronization primitive for task notification.</span>
 <span class="doccomment">///</span>
@@ -429,8 +429,8 @@
         <span class="kw">impl</span> <span class="ident">AssertSync</span> <span class="kw">for</span> <span class="ident">Task</span> {}
 
         <span class="ident">AtomicTask</span> {
-            <span class="ident">state</span>: <span class="ident">AtomicUsize</span>::<span class="ident">new</span>(<span class="ident">WAITING</span>),
-            <span class="ident">task</span>: <span class="ident">UnsafeCell</span>::<span class="ident">new</span>(<span class="prelude-val">None</span>),
+            <span class="ident">state</span>: <span class="ident">AtomicUsize::new</span>(<span class="ident">WAITING</span>),
+            <span class="ident">task</span>: <span class="ident">UnsafeCell::new</span>(<span class="prelude-val">None</span>),
         }
     }
 
@@ -438,7 +438,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// This is the same as calling `register_task` with `task::current()`.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">register</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">register_task</span>(<span class="kw">super</span>::<span class="ident">current</span>());
+        <span class="self">self</span>.<span class="ident">register_task</span>(<span class="kw">super</span><span class="ident">::current</span>());
     }
 
     <span class="doccomment">/// Registers the provided task to be notified on calls to `notify`.</span>
@@ -556,12 +556,12 @@
 
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">AtomicTask</span> {
     <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="ident">AtomicTask</span>::<span class="ident">new</span>()
+        <span class="ident">AtomicTask::new</span>()
     }
 }
 
-<span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">AtomicTask</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+<span class="kw">impl</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">AtomicTask</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="macro">write!</span>(<span class="ident">fmt</span>, <span class="string">&quot;AtomicTask&quot;</span>)
     }
 }

@@ -110,12 +110,12 @@
 <span id="107">107</span>
 <span id="108">108</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">VecDeque</span>;
+<span class="kw">use</span> <span class="ident">std::collections::VecDeque</span>;
 
 <span class="kw">use</span> {<span class="ident">Poll</span>, <span class="ident">Async</span>};
 <span class="kw">use</span> {<span class="ident">StartSend</span>, <span class="ident">AsyncSink</span>};
-<span class="kw">use</span> <span class="ident">sink</span>::<span class="ident">Sink</span>;
-<span class="kw">use</span> <span class="ident">stream</span>::<span class="ident">Stream</span>;
+<span class="kw">use</span> <span class="ident">sink::Sink</span>;
+<span class="kw">use</span> <span class="ident">stream::Stream</span>;
 
 <span class="doccomment">/// Sink for the `Sink::buffer` combinator, which buffers up to some fixed</span>
 <span class="doccomment">/// number of values when the underlying sink is unable to accept them.</span>
@@ -123,7 +123,7 @@
 <span class="attribute">#[<span class="ident">must_use</span> <span class="op">=</span> <span class="string">&quot;sinks do nothing unless polled&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Buffer</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">Sink</span><span class="op">&gt;</span> {
     <span class="ident">sink</span>: <span class="ident">S</span>,
-    <span class="ident">buf</span>: <span class="ident">VecDeque</span><span class="op">&lt;</span><span class="ident">S</span>::<span class="ident">SinkItem</span><span class="op">&gt;</span>,
+    <span class="ident">buf</span>: <span class="ident">VecDeque</span><span class="op">&lt;</span><span class="ident">S::SinkItem</span><span class="op">&gt;</span>,
 
     <span class="comment">// Track capacity separately from the `VecDeque`, which may be rounded up</span>
     <span class="ident">cap</span>: <span class="ident">usize</span>,
@@ -132,7 +132,7 @@
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">Sink</span><span class="op">&gt;</span>(<span class="ident">sink</span>: <span class="ident">S</span>, <span class="ident">amt</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Buffer</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span> {
     <span class="ident">Buffer</span> {
         <span class="ident">sink</span>: <span class="ident">sink</span>,
-        <span class="ident">buf</span>: <span class="ident">VecDeque</span>::<span class="ident">with_capacity</span>(<span class="ident">amt</span>),
+        <span class="ident">buf</span>: <span class="ident">VecDeque::with_capacity</span>(<span class="ident">amt</span>),
         <span class="ident">cap</span>: <span class="ident">amt</span>,
     }
 }
@@ -156,47 +156,47 @@
         <span class="self">self</span>.<span class="ident">sink</span>
     }
 
-    <span class="kw">fn</span> <span class="ident">try_empty_buffer</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span>(), <span class="ident">S</span>::<span class="ident">SinkError</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">try_empty_buffer</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span>(), <span class="ident">S::SinkError</span><span class="op">&gt;</span> {
         <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">item</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">pop_front</span>() {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="ident">AsyncSink</span>::<span class="ident">NotReady</span>(<span class="ident">item</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">sink</span>.<span class="ident">start_send</span>(<span class="ident">item</span>)<span class="question-mark">?</span> {
+            <span class="kw">if</span> <span class="kw">let</span> <span class="ident">AsyncSink::NotReady</span>(<span class="ident">item</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">sink</span>.<span class="ident">start_send</span>(<span class="ident">item</span>)<span class="question-mark">?</span> {
                 <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">push_front</span>(<span class="ident">item</span>);
 
-                <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">NotReady</span>);
+                <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">Async::NotReady</span>);
             }
         }
 
-        <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(()))
+        <span class="prelude-val">Ok</span>(<span class="ident">Async::Ready</span>(()))
     }
 }
 
 <span class="comment">// Forwarding impl of Stream from the underlying sink</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span> <span class="ident">Stream</span> <span class="kw">for</span> <span class="ident">Buffer</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">S</span>: <span class="ident">Sink</span> <span class="op">+</span> <span class="ident">Stream</span> {
-    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">S</span>::<span class="ident">Item</span>;
-    <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">S</span>::<span class="ident">Error</span>;
+    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">S::Item</span>;
+    <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">S::Error</span>;
 
-    <span class="kw">fn</span> <span class="ident">poll</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">S</span>::<span class="ident">Item</span><span class="op">&gt;</span>, <span class="ident">S</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">poll</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">S::Item</span><span class="op">&gt;</span>, <span class="ident">S::Error</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">sink</span>.<span class="ident">poll</span>()
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">Sink</span><span class="op">&gt;</span> <span class="ident">Sink</span> <span class="kw">for</span> <span class="ident">Buffer</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">SinkItem</span> <span class="op">=</span> <span class="ident">S</span>::<span class="ident">SinkItem</span>;
-    <span class="kw">type</span> <span class="ident">SinkError</span> <span class="op">=</span> <span class="ident">S</span>::<span class="ident">SinkError</span>;
+    <span class="kw">type</span> <span class="ident">SinkItem</span> <span class="op">=</span> <span class="ident">S::SinkItem</span>;
+    <span class="kw">type</span> <span class="ident">SinkError</span> <span class="op">=</span> <span class="ident">S::SinkError</span>;
 
-    <span class="kw">fn</span> <span class="ident">start_send</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">item</span>: <span class="self">Self</span>::<span class="ident">SinkItem</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">StartSend</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">SinkItem</span>, <span class="self">Self</span>::<span class="ident">SinkError</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">start_send</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">item</span>: <span class="self">Self</span><span class="ident">::SinkItem</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">StartSend</span><span class="op">&lt;</span><span class="self">Self</span><span class="ident">::SinkItem</span>, <span class="self">Self</span><span class="ident">::SinkError</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cap</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
             <span class="kw">return</span> <span class="self">self</span>.<span class="ident">sink</span>.<span class="ident">start_send</span>(<span class="ident">item</span>);
         }
 
         <span class="self">self</span>.<span class="ident">try_empty_buffer</span>()<span class="question-mark">?</span>;
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">cap</span> {
-            <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">AsyncSink</span>::<span class="ident">NotReady</span>(<span class="ident">item</span>));
+            <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">AsyncSink::NotReady</span>(<span class="ident">item</span>));
         }
         <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">push_back</span>(<span class="ident">item</span>);
-        <span class="prelude-val">Ok</span>(<span class="ident">AsyncSink</span>::<span class="ident">Ready</span>)
+        <span class="prelude-val">Ok</span>(<span class="ident">AsyncSink::Ready</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">poll_complete</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span>(), <span class="self">Self</span>::<span class="ident">SinkError</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">poll_complete</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span>(), <span class="self">Self</span><span class="ident">::SinkError</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cap</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
             <span class="kw">return</span> <span class="self">self</span>.<span class="ident">sink</span>.<span class="ident">poll_complete</span>();
         }
@@ -206,7 +206,7 @@
         <span class="self">self</span>.<span class="ident">sink</span>.<span class="ident">poll_complete</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">close</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span>(), <span class="self">Self</span>::<span class="ident">SinkError</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">close</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span>(), <span class="self">Self</span><span class="ident">::SinkError</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cap</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
             <span class="kw">return</span> <span class="self">self</span>.<span class="ident">sink</span>.<span class="ident">close</span>();
         }

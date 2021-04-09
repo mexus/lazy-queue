@@ -455,31 +455,31 @@
 <span id="452">452</span>
 <span id="453">453</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="kw">super</span>::<span class="ident">list</span>;
-<span class="kw">use</span> <span class="ident">futures</span>::<span class="ident">Poll</span>;
+<span class="kw">use</span> <span class="kw">super</span><span class="ident">::list</span>;
+<span class="kw">use</span> <span class="ident">futures::Poll</span>;
 
 <span class="kw">use</span> <span class="ident">loom</span>::{
-    <span class="ident">futures</span>::<span class="ident">AtomicTask</span>,
-    <span class="ident">sync</span>::<span class="ident">atomic</span>::<span class="ident">AtomicUsize</span>,
+    <span class="ident">futures::AtomicTask</span>,
+    <span class="ident">sync::atomic::AtomicUsize</span>,
     <span class="ident">sync</span>::{<span class="ident">Arc</span>, <span class="ident">CausalCell</span>},
 };
 
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">process</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">atomic</span>::<span class="ident">Ordering</span>::{<span class="ident">AcqRel</span>, <span class="ident">Relaxed</span>};
+<span class="kw">use</span> <span class="ident">std::fmt</span>;
+<span class="kw">use</span> <span class="ident">std::process</span>;
+<span class="kw">use</span> <span class="ident">std::sync::atomic::Ordering</span>::{<span class="ident">AcqRel</span>, <span class="ident">Relaxed</span>};
 
 <span class="doccomment">/// Channel sender</span>
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">Tx</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">S</span>: <span class="ident">Semaphore</span><span class="op">&gt;</span> {
     <span class="ident">inner</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Chan</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">S</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="ident">permit</span>: <span class="ident">S</span>::<span class="ident">Permit</span>,
+    <span class="ident">permit</span>: <span class="ident">S::Permit</span>,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">S</span>: <span class="ident">Semaphore</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">Tx</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">S</span><span class="op">&gt;</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">S</span>: <span class="ident">Semaphore</span><span class="op">&gt;</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">Tx</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">S</span><span class="op">&gt;</span>
 <span class="kw">where</span>
-    <span class="ident">S</span>::<span class="ident">Permit</span>: <span class="ident">fmt</span>::<span class="ident">Debug</span>,
-    <span class="ident">S</span>: <span class="ident">fmt</span>::<span class="ident">Debug</span>,
+    <span class="ident">S::Permit</span>: <span class="ident">fmt::Debug</span>,
+    <span class="ident">S</span>: <span class="ident">fmt::Debug</span>,
 {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="ident">fmt</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;Tx&quot;</span>)
             .<span class="ident">field</span>(<span class="string">&quot;inner&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">inner</span>)
             .<span class="ident">field</span>(<span class="string">&quot;permit&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">permit</span>)
@@ -492,11 +492,11 @@
     <span class="ident">inner</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Chan</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">S</span><span class="op">&gt;</span><span class="op">&gt;</span>,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">S</span>: <span class="ident">Semaphore</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">Rx</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">S</span><span class="op">&gt;</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">S</span>: <span class="ident">Semaphore</span><span class="op">&gt;</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">Rx</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">S</span><span class="op">&gt;</span>
 <span class="kw">where</span>
-    <span class="ident">S</span>: <span class="ident">fmt</span>::<span class="ident">Debug</span>,
+    <span class="ident">S</span>: <span class="ident">fmt::Debug</span>,
 {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="ident">fmt</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;Rx&quot;</span>).<span class="ident">field</span>(<span class="string">&quot;inner&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">inner</span>).<span class="ident">finish</span>()
     }
 }
@@ -510,32 +510,32 @@
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">trait</span> <span class="ident">Semaphore</span> {
     <span class="kw">type</span> <span class="ident">Permit</span>;
 
-    <span class="kw">fn</span> <span class="ident">new_permit</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Permit</span>;
+    <span class="kw">fn</span> <span class="ident">new_permit</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span><span class="ident">::Permit</span>;
 
     <span class="doccomment">/// The permit is dropped without a value being sent. In this case, the</span>
     <span class="doccomment">/// permit must be returned to the semaphore.</span>
-    <span class="kw">fn</span> <span class="ident">drop_permit</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">permit</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Permit</span>);
+    <span class="kw">fn</span> <span class="ident">drop_permit</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">permit</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span><span class="ident">::Permit</span>);
 
     <span class="kw">fn</span> <span class="ident">is_idle</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>;
 
     <span class="kw">fn</span> <span class="ident">add_permit</span>(<span class="kw-2">&amp;</span><span class="self">self</span>);
 
-    <span class="kw">fn</span> <span class="ident">poll_acquire</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">permit</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Permit</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span>(), ()<span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">poll_acquire</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">permit</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span><span class="ident">::Permit</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span>(), ()<span class="op">&gt;</span>;
 
-    <span class="kw">fn</span> <span class="ident">try_acquire</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">permit</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Permit</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">TrySendError</span><span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">try_acquire</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">permit</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span><span class="ident">::Permit</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">TrySendError</span><span class="op">&gt;</span>;
 
     <span class="doccomment">/// A value was sent into the channel and the permit held by `tx` is</span>
     <span class="doccomment">/// dropped. In this case, the permit should not immeditely be returned to</span>
     <span class="doccomment">/// the semaphore. Instead, the permit is returnred to the semaphore once</span>
     <span class="doccomment">/// the sent value is read by the rx handle.</span>
-    <span class="kw">fn</span> <span class="ident">forget</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">permit</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Permit</span>);
+    <span class="kw">fn</span> <span class="ident">forget</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">permit</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span><span class="ident">::Permit</span>);
 
     <span class="kw">fn</span> <span class="ident">close</span>(<span class="kw-2">&amp;</span><span class="self">self</span>);
 }
 
 <span class="kw">struct</span> <span class="ident">Chan</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">S</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Handle to the push half of the lock-free list.</span>
-    <span class="ident">tx</span>: <span class="ident">list</span>::<span class="ident">Tx</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+    <span class="ident">tx</span>: <span class="ident">list::Tx</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
 
     <span class="doccomment">/// Coordinates access to channel&#39;s capacity.</span>
     <span class="ident">semaphore</span>: <span class="ident">S</span>,
@@ -552,11 +552,11 @@
     <span class="ident">rx_fields</span>: <span class="ident">CausalCell</span><span class="op">&lt;</span><span class="ident">RxFields</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">S</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">Chan</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">S</span><span class="op">&gt;</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">S</span><span class="op">&gt;</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">Chan</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">S</span><span class="op">&gt;</span>
 <span class="kw">where</span>
-    <span class="ident">S</span>: <span class="ident">fmt</span>::<span class="ident">Debug</span>,
+    <span class="ident">S</span>: <span class="ident">fmt::Debug</span>,
 {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="ident">fmt</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;Chan&quot;</span>)
             .<span class="ident">field</span>(<span class="string">&quot;tx&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">tx</span>)
             .<span class="ident">field</span>(<span class="string">&quot;semaphore&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">semaphore</span>)
@@ -570,14 +570,14 @@
 <span class="doccomment">/// Fields only accessed by `Rx` handle.</span>
 <span class="kw">struct</span> <span class="ident">RxFields</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Channel receiver. This field is only accessed by the `Receiver` type.</span>
-    <span class="ident">list</span>: <span class="ident">list</span>::<span class="ident">Rx</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+    <span class="ident">list</span>: <span class="ident">list::Rx</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
 
     <span class="doccomment">/// `true` if `Rx::close` is called.</span>
     <span class="ident">rx_closed</span>: <span class="ident">bool</span>,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">RxFields</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">RxFields</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="ident">fmt</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;RxFields&quot;</span>)
             .<span class="ident">field</span>(<span class="string">&quot;list&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">list</span>)
             .<span class="ident">field</span>(<span class="string">&quot;rx_closed&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">rx_closed</span>)
@@ -592,20 +592,20 @@
 <span class="kw">where</span>
     <span class="ident">S</span>: <span class="ident">Semaphore</span>,
 {
-    <span class="kw">let</span> (<span class="ident">tx</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">list</span>::<span class="ident">channel</span>();
+    <span class="kw">let</span> (<span class="ident">tx</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">list::channel</span>();
 
-    <span class="kw">let</span> <span class="ident">chan</span> <span class="op">=</span> <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">Chan</span> {
+    <span class="kw">let</span> <span class="ident">chan</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">Chan</span> {
         <span class="ident">tx</span>,
         <span class="ident">semaphore</span>,
-        <span class="ident">rx_task</span>: <span class="ident">AtomicTask</span>::<span class="ident">new</span>(),
-        <span class="ident">tx_count</span>: <span class="ident">AtomicUsize</span>::<span class="ident">new</span>(<span class="number">1</span>),
-        <span class="ident">rx_fields</span>: <span class="ident">CausalCell</span>::<span class="ident">new</span>(<span class="ident">RxFields</span> {
+        <span class="ident">rx_task</span>: <span class="ident">AtomicTask::new</span>(),
+        <span class="ident">tx_count</span>: <span class="ident">AtomicUsize::new</span>(<span class="number">1</span>),
+        <span class="ident">rx_fields</span>: <span class="ident">CausalCell::new</span>(<span class="ident">RxFields</span> {
             <span class="ident">list</span>: <span class="ident">rx</span>,
             <span class="ident">rx_closed</span>: <span class="bool-val">false</span>,
         }),
     });
 
-    (<span class="ident">Tx</span>::<span class="ident">new</span>(<span class="ident">chan</span>.<span class="ident">clone</span>()), <span class="ident">Rx</span>::<span class="ident">new</span>(<span class="ident">chan</span>))
+    (<span class="ident">Tx::new</span>(<span class="ident">chan</span>.<span class="ident">clone</span>()), <span class="ident">Rx::new</span>(<span class="ident">chan</span>))
 }
 
 <span class="comment">// ===== impl Tx =====</span>
@@ -617,7 +617,7 @@
     <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">chan</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Chan</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">S</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Tx</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">S</span><span class="op">&gt;</span> {
         <span class="ident">Tx</span> {
             <span class="ident">inner</span>: <span class="ident">chan</span>,
-            <span class="ident">permit</span>: <span class="ident">S</span>::<span class="ident">new_permit</span>(),
+            <span class="ident">permit</span>: <span class="ident">S::new_permit</span>(),
         }
     }
 
@@ -656,7 +656,7 @@
 
         <span class="ident">Tx</span> {
             <span class="ident">inner</span>: <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">clone</span>(),
-            <span class="ident">permit</span>: <span class="ident">S</span>::<span class="ident">new_permit</span>(),
+            <span class="ident">permit</span>: <span class="ident">S::new_permit</span>(),
         }
     }
 }
@@ -706,8 +706,8 @@
 
     <span class="doccomment">/// Receive the next value</span>
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">recv</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, ()<span class="op">&gt;</span> {
-        <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">block</span>::<span class="ident">Read</span>::<span class="kw-2">*</span>;
-        <span class="kw">use</span> <span class="ident">futures</span>::<span class="ident">Async</span>::<span class="kw-2">*</span>;
+        <span class="kw">use</span> <span class="kw">super</span><span class="ident">::block::Read</span>::<span class="kw-2">*</span>;
+        <span class="kw">use</span> <span class="ident">futures::Async</span>::<span class="kw-2">*</span>;
 
         <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">rx_fields</span>.<span class="ident">with_mut</span>(<span class="op">|</span><span class="ident">rx_fields_ptr</span><span class="op">|</span> {
             <span class="kw">let</span> <span class="ident">rx_fields</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="ident">rx_fields_ptr</span> };
@@ -763,7 +763,7 @@
     <span class="ident">S</span>: <span class="ident">Semaphore</span>,
 {
     <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
-        <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">block</span>::<span class="ident">Read</span>::<span class="ident">Value</span>;
+        <span class="kw">use</span> <span class="kw">super</span><span class="ident">::block::Read::Value</span>;
 
         <span class="self">self</span>.<span class="ident">close</span>();
 
@@ -781,7 +781,7 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">S</span><span class="op">&gt;</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">Chan</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">S</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
-        <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">block</span>::<span class="ident">Read</span>::<span class="ident">Value</span>;
+        <span class="kw">use</span> <span class="kw">super</span><span class="ident">::block::Read::Value</span>;
 
         <span class="comment">// Safety: the only owner of the rx fields is Chan, and eing</span>
         <span class="comment">// inside its own Drop means we&#39;re the last ones to touch it.</span>
@@ -794,14 +794,14 @@
     }
 }
 
-<span class="kw">use</span> <span class="ident">semaphore</span>::<span class="ident">TryAcquireError</span>;
+<span class="kw">use</span> <span class="ident">semaphore::TryAcquireError</span>;
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">TryAcquireError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">TrySendError</span> {
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">src</span>: <span class="ident">TryAcquireError</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TrySendError</span> {
         <span class="kw">if</span> <span class="ident">src</span>.<span class="ident">is_closed</span>() {
-            <span class="ident">TrySendError</span>::<span class="ident">Closed</span>
+            <span class="ident">TrySendError::Closed</span>
         } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">src</span>.<span class="ident">is_no_permits</span>() {
-            <span class="ident">TrySendError</span>::<span class="ident">NoPermits</span>
+            <span class="ident">TrySendError::NoPermits</span>
         } <span class="kw">else</span> {
             <span class="macro">unreachable!</span>();
         }
@@ -810,13 +810,13 @@
 
 <span class="comment">// ===== impl Semaphore for (::Semaphore, capacity) =====</span>
 
-<span class="kw">use</span> <span class="ident">semaphore</span>::<span class="ident">Permit</span>;
+<span class="kw">use</span> <span class="ident">semaphore::Permit</span>;
 
-<span class="kw">impl</span> <span class="ident">Semaphore</span> <span class="kw">for</span> (::<span class="ident">semaphore</span>::<span class="ident">Semaphore</span>, <span class="ident">usize</span>) {
+<span class="kw">impl</span> <span class="ident">Semaphore</span> <span class="kw">for</span> (<span class="ident">::semaphore::Semaphore</span>, <span class="ident">usize</span>) {
     <span class="kw">type</span> <span class="ident">Permit</span> <span class="op">=</span> <span class="ident">Permit</span>;
 
     <span class="kw">fn</span> <span class="ident">new_permit</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Permit</span> {
-        <span class="ident">Permit</span>::<span class="ident">new</span>()
+        <span class="ident">Permit::new</span>()
     }
 
     <span class="kw">fn</span> <span class="ident">drop_permit</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">permit</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Permit</span>) {
@@ -840,7 +840,7 @@
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="kw">fn</span> <span class="ident">forget</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">permit</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Permit</span>) {
+    <span class="kw">fn</span> <span class="ident">forget</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">permit</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span><span class="ident">::Permit</span>) {
         <span class="ident">permit</span>.<span class="ident">forget</span>()
     }
 
@@ -851,8 +851,8 @@
 
 <span class="comment">// ===== impl Semaphore for AtomicUsize =====</span>
 
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">atomic</span>::<span class="ident">Ordering</span>::{<span class="ident">Acquire</span>, <span class="ident">Release</span>};
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">usize</span>;
+<span class="kw">use</span> <span class="ident">std::sync::atomic::Ordering</span>::{<span class="ident">Acquire</span>, <span class="ident">Release</span>};
+<span class="kw">use</span> <span class="ident">std::usize</span>;
 
 <span class="kw">impl</span> <span class="ident">Semaphore</span> <span class="kw">for</span> <span class="ident">AtomicUsize</span> {
     <span class="kw">type</span> <span class="ident">Permit</span> <span class="op">=</span> ();
@@ -866,7 +866,7 @@
 
         <span class="kw">if</span> <span class="ident">prev</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">1</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
             <span class="comment">// Something went wrong</span>
-            <span class="ident">process</span>::<span class="ident">abort</span>();
+            <span class="ident">process::abort</span>();
         }
     }
 
@@ -875,7 +875,7 @@
     }
 
     <span class="kw">fn</span> <span class="ident">poll_acquire</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">permit</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ()) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span>(), ()<span class="op">&gt;</span> {
-        <span class="kw">use</span> <span class="ident">futures</span>::<span class="ident">Async</span>::<span class="ident">Ready</span>;
+        <span class="kw">use</span> <span class="ident">futures::Async::Ready</span>;
         <span class="self">self</span>.<span class="ident">try_acquire</span>(<span class="ident">permit</span>).<span class="ident">map</span>(<span class="ident">Ready</span>).<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> ())
     }
 
@@ -884,13 +884,13 @@
 
         <span class="kw">loop</span> {
             <span class="kw">if</span> <span class="ident">curr</span> <span class="op">&amp;</span> <span class="number">1</span> <span class="op">=</span><span class="op">=</span> <span class="number">1</span> {
-                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">TrySendError</span>::<span class="ident">Closed</span>);
+                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">TrySendError::Closed</span>);
             }
 
-            <span class="kw">if</span> <span class="ident">curr</span> <span class="op">=</span><span class="op">=</span> <span class="ident">usize</span>::<span class="ident">MAX</span> <span class="op">^</span> <span class="number">1</span> {
+            <span class="kw">if</span> <span class="ident">curr</span> <span class="op">=</span><span class="op">=</span> <span class="ident">usize::MAX</span> <span class="op">^</span> <span class="number">1</span> {
                 <span class="comment">// Overflowed the ref count. There is no safe way to recover, so</span>
                 <span class="comment">// abort the process. In practice, this should never happen.</span>
-                <span class="ident">process</span>::<span class="ident">abort</span>()
+                <span class="ident">process::abort</span>()
             }
 
             <span class="kw">match</span> <span class="self">self</span>.<span class="ident">compare_exchange</span>(<span class="ident">curr</span>, <span class="ident">curr</span> <span class="op">+</span> <span class="number">2</span>, <span class="ident">AcqRel</span>, <span class="ident">Acquire</span>) {

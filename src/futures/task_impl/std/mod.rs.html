@@ -721,36 +721,36 @@
 <span id="718">718</span>
 <span id="719">719</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">prelude</span>::<span class="ident">v1</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">std::prelude::v1</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cell</span>::<span class="ident">Cell</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">marker</span>::<span class="ident">PhantomData</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">mem</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ptr</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::{<span class="ident">Arc</span>, <span class="ident">Mutex</span>, <span class="ident">Condvar</span>, <span class="ident">Once</span>};
+<span class="kw">use</span> <span class="ident">std::cell::Cell</span>;
+<span class="kw">use</span> <span class="ident">std::fmt</span>;
+<span class="kw">use</span> <span class="ident">std::marker::PhantomData</span>;
+<span class="kw">use</span> <span class="ident">std::mem</span>;
+<span class="kw">use</span> <span class="ident">std::ptr</span>;
+<span class="kw">use</span> <span class="ident">std::sync</span>::{<span class="ident">Arc</span>, <span class="ident">Mutex</span>, <span class="ident">Condvar</span>, <span class="ident">Once</span>};
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">ONCE_INIT</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">atomic</span>::{<span class="ident">AtomicUsize</span>, <span class="ident">Ordering</span>};
+<span class="kw">use</span> <span class="ident">std::sync::ONCE_INIT</span>;
+<span class="kw">use</span> <span class="ident">std::sync::atomic</span>::{<span class="ident">AtomicUsize</span>, <span class="ident">Ordering</span>};
 
 <span class="kw">use</span> {<span class="ident">Future</span>, <span class="ident">Stream</span>, <span class="ident">Sink</span>, <span class="ident">Poll</span>, <span class="ident">Async</span>, <span class="ident">StartSend</span>, <span class="ident">AsyncSink</span>};
-<span class="kw">use</span> <span class="kw">super</span>::<span class="ident">core</span>;
+<span class="kw">use</span> <span class="kw">super</span><span class="ident">::core</span>;
 <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">BorrowedTask</span>, <span class="ident">NotifyHandle</span>, <span class="ident">Spawn</span>, <span class="ident">spawn</span>, <span class="ident">Notify</span>, <span class="ident">UnsafeNotify</span>};
 
 <span class="kw">mod</span> <span class="ident">unpark_mutex</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">unpark_mutex</span>::<span class="ident">UnparkMutex</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::unpark_mutex::UnparkMutex</span>;
 
 <span class="kw">mod</span> <span class="ident">data</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">data</span>::<span class="kw-2">*</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::data</span>::<span class="kw-2">*</span>;
 
 <span class="kw">mod</span> <span class="ident">task_rc</span>;
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;with-deprecated&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">task_rc</span>::<span class="ident">TaskRc</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::task_rc::TaskRc</span>;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">task_impl</span>::<span class="ident">core</span>::<span class="ident">init</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">task_impl::core::init</span>;
 
-<span class="macro">thread_local!</span>(<span class="kw">static</span> <span class="ident">CURRENT_TASK</span>: <span class="ident">Cell</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Cell</span>::<span class="ident">new</span>(<span class="ident">ptr</span>::<span class="ident">null_mut</span>()));
+<span class="macro">thread_local!</span>(<span class="kw">static</span> <span class="ident">CURRENT_TASK</span>: <span class="ident">Cell</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Cell::new</span>(<span class="ident">ptr::null_mut</span>()));
 
 <span class="doccomment">/// Return whether the caller is running in a task (and so can use task_local!).</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_in_task</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
@@ -765,10 +765,10 @@
     <span class="comment">// used (the default), the branch predictor will be able to optimize the</span>
     <span class="comment">// branching and a dynamic dispatch will be avoided, which makes the</span>
     <span class="comment">// compiler happier.</span>
-    <span class="kw">if</span> <span class="ident">core</span>::<span class="ident">is_get_ptr</span>(<span class="number">0x1</span>) {
+    <span class="kw">if</span> <span class="ident">core::is_get_ptr</span>(<span class="number">0x1</span>) {
         <span class="prelude-val">Some</span>(<span class="ident">CURRENT_TASK</span>.<span class="ident">with</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> <span class="ident">c</span>.<span class="ident">get</span>()))
     } <span class="kw">else</span> {
-        <span class="ident">core</span>::<span class="ident">get_ptr</span>()
+        <span class="ident">core::get_ptr</span>()
     }
 }
 
@@ -784,13 +784,13 @@
     <span class="comment">// Note that we won&#39;t actually use these functions ever, we&#39;ll instead be</span>
     <span class="comment">// testing the pointer&#39;s value elsewhere and calling our own functions.</span>
     <span class="ident">INIT</span>.<span class="ident">call_once</span>(<span class="op">|</span><span class="op">|</span> <span class="kw">unsafe</span> {
-        <span class="kw">let</span> <span class="ident">get</span> <span class="op">=</span> <span class="ident">mem</span>::<span class="ident">transmute</span>::<span class="op">&lt;</span><span class="ident">usize</span>, <span class="kw">_</span><span class="op">&gt;</span>(<span class="number">0x1</span>);
-        <span class="kw">let</span> <span class="ident">set</span> <span class="op">=</span> <span class="ident">mem</span>::<span class="ident">transmute</span>::<span class="op">&lt;</span><span class="ident">usize</span>, <span class="kw">_</span><span class="op">&gt;</span>(<span class="number">0x2</span>);
+        <span class="kw">let</span> <span class="ident">get</span> <span class="op">=</span> <span class="ident">mem::transmute</span>::<span class="op">&lt;</span><span class="ident">usize</span>, <span class="kw">_</span><span class="op">&gt;</span>(<span class="number">0x1</span>);
+        <span class="kw">let</span> <span class="ident">set</span> <span class="op">=</span> <span class="ident">mem::transmute</span>::<span class="op">&lt;</span><span class="ident">usize</span>, <span class="kw">_</span><span class="op">&gt;</span>(<span class="number">0x2</span>);
         <span class="ident">init</span>(<span class="ident">get</span>, <span class="ident">set</span>);
     });
 
     <span class="comment">// Same as above.</span>
-    <span class="kw">if</span> <span class="ident">core</span>::<span class="ident">is_get_ptr</span>(<span class="number">0x1</span>) {
+    <span class="kw">if</span> <span class="ident">core::is_get_ptr</span>(<span class="number">0x1</span>) {
         <span class="kw">struct</span> <span class="ident">Reset</span>(<span class="kw-2">*</span><span class="kw">const</span> <span class="ident">Cell</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span><span class="op">&gt;</span>, <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>);
 
         <span class="kw">impl</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">Reset</span> {
@@ -809,7 +809,7 @@
             <span class="ident">f</span>()
         }
     } <span class="kw">else</span> {
-        <span class="ident">core</span>::<span class="ident">set</span>(<span class="ident">task</span>, <span class="ident">f</span>)
+        <span class="ident">core::set</span>(<span class="ident">task</span>, <span class="ident">f</span>)
     }
 }
 
@@ -817,7 +817,7 @@
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">BorrowedUnpark</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="ident">Old</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Unpark</span><span class="op">&gt;</span>),
-    <span class="ident">New</span>(<span class="ident">core</span>::<span class="ident">BorrowedUnpark</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>),
+    <span class="ident">New</span>(<span class="ident">core::BorrowedUnpark</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>),
 }
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
@@ -831,7 +831,7 @@
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">TaskUnpark</span> {
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
     <span class="ident">Old</span>(<span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Unpark</span><span class="op">&gt;</span>),
-    <span class="ident">New</span>(<span class="ident">core</span>::<span class="ident">TaskUnpark</span>),
+    <span class="ident">New</span>(<span class="ident">core::TaskUnpark</span>),
 }
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
@@ -845,14 +845,14 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">BorrowedUnpark</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Fn</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">NotifyHandle</span>, <span class="ident">id</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">BorrowedUnpark</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-        <span class="ident">BorrowedUnpark</span>::<span class="ident">New</span>(<span class="ident">core</span>::<span class="ident">BorrowedUnpark</span>::<span class="ident">new</span>(<span class="ident">f</span>, <span class="ident">id</span>))
+        <span class="ident">BorrowedUnpark::New</span>(<span class="ident">core::BorrowedUnpark::new</span>(<span class="ident">f</span>, <span class="ident">id</span>))
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_owned</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TaskUnpark</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident">BorrowedUnpark</span>::<span class="ident">Old</span>(<span class="ident">old</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">TaskUnpark</span>::<span class="ident">Old</span>(<span class="ident">old</span>.<span class="ident">clone</span>()),
-            <span class="ident">BorrowedUnpark</span>::<span class="ident">New</span>(<span class="ident">new</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">TaskUnpark</span>::<span class="ident">New</span>(<span class="ident">new</span>.<span class="ident">to_owned</span>()),
+            <span class="ident">BorrowedUnpark::Old</span>(<span class="ident">old</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">TaskUnpark::Old</span>(<span class="ident">old</span>.<span class="ident">clone</span>()),
+            <span class="ident">BorrowedUnpark::New</span>(<span class="ident">new</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">TaskUnpark::New</span>(<span class="ident">new</span>.<span class="ident">to_owned</span>()),
         }
     }
 }
@@ -860,15 +860,15 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">BorrowedEvents</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">BorrowedEvents</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-        <span class="ident">BorrowedEvents</span>::<span class="prelude-val">None</span>
+        <span class="ident">BorrowedEvents::None</span>
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_owned</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">UnparkEvents</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">one_event</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">list</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">list</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cur</span> <span class="op">=</span> <span class="self">self</span>;
-        <span class="kw">while</span> <span class="kw">let</span> <span class="ident">BorrowedEvents</span>::<span class="ident">One</span>(<span class="ident">event</span>, <span class="ident">next</span>) <span class="op">=</span> <span class="kw-2">*</span><span class="ident">cur</span> {
+        <span class="kw">while</span> <span class="kw">let</span> <span class="ident">BorrowedEvents::One</span>(<span class="ident">event</span>, <span class="ident">next</span>) <span class="op">=</span> <span class="kw-2">*</span><span class="ident">cur</span> {
             <span class="kw">let</span> <span class="ident">event</span> <span class="op">=</span> <span class="ident">event</span>.<span class="ident">clone</span>();
             <span class="kw">match</span> <span class="ident">one_event</span>.<span class="ident">take</span>() {
                 <span class="prelude-val">None</span> <span class="kw">if</span> <span class="ident">list</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">one_event</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">event</span>),
@@ -882,9 +882,9 @@
         }
 
         <span class="kw">match</span> <span class="ident">one_event</span> {
-            <span class="prelude-val">None</span> <span class="kw">if</span> <span class="ident">list</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">UnparkEvents</span>::<span class="prelude-val">None</span>,
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">UnparkEvents</span>::<span class="ident">Many</span>(<span class="ident">list</span>.<span class="ident">into_boxed_slice</span>()),
-            <span class="prelude-val">Some</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">UnparkEvents</span>::<span class="ident">One</span>(<span class="ident">e</span>),
+            <span class="prelude-val">None</span> <span class="kw">if</span> <span class="ident">list</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">UnparkEvents::None</span>,
+            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">UnparkEvents::Many</span>(<span class="ident">list</span>.<span class="ident">into_boxed_slice</span>()),
+            <span class="prelude-val">Some</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">UnparkEvents::One</span>(<span class="ident">e</span>),
         }
     }
 }
@@ -892,9 +892,9 @@
 <span class="kw">impl</span> <span class="ident">UnparkEvents</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">notify</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident">UnparkEvents</span>::<span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> {}
-            <span class="ident">UnparkEvents</span>::<span class="ident">One</span>(<span class="kw-2">ref</span> <span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">e</span>.<span class="ident">unpark</span>(),
-            <span class="ident">UnparkEvents</span>::<span class="ident">Many</span>(<span class="kw-2">ref</span> <span class="ident">list</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">UnparkEvents::None</span> <span class="op">=</span><span class="op">&gt;</span> {}
+            <span class="ident">UnparkEvents::One</span>(<span class="kw-2">ref</span> <span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">e</span>.<span class="ident">unpark</span>(),
+            <span class="ident">UnparkEvents::Many</span>(<span class="kw-2">ref</span> <span class="ident">list</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">for</span> <span class="ident">event</span> <span class="kw">in</span> <span class="ident">list</span>.<span class="ident">iter</span>() {
                     <span class="ident">event</span>.<span class="ident">unpark</span>();
                 }
@@ -906,12 +906,12 @@
         <span class="comment">// Pessimistically assume that any unpark events mean that we&#39;re not</span>
         <span class="comment">// equivalent to the current task.</span>
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident">UnparkEvents</span>::<span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> {}
+            <span class="ident">UnparkEvents::None</span> <span class="op">=</span><span class="op">&gt;</span> {}
             <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="bool-val">false</span>,
         }
 
         <span class="kw">match</span> <span class="kw-2">*</span><span class="ident">events</span> {
-            <span class="ident">BorrowedEvents</span>::<span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="bool-val">true</span>,
+            <span class="ident">BorrowedEvents::None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="bool-val">true</span>,
             <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {},
         }
 
@@ -923,17 +923,17 @@
 <span class="kw">impl</span> <span class="ident">TaskUnpark</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">notify</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident">TaskUnpark</span>::<span class="ident">Old</span>(<span class="kw-2">ref</span> <span class="ident">old</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">old</span>.<span class="ident">unpark</span>(),
-            <span class="ident">TaskUnpark</span>::<span class="ident">New</span>(<span class="kw-2">ref</span> <span class="ident">new</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">new</span>.<span class="ident">notify</span>(),
+            <span class="ident">TaskUnpark::Old</span>(<span class="kw-2">ref</span> <span class="ident">old</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">old</span>.<span class="ident">unpark</span>(),
+            <span class="ident">TaskUnpark::New</span>(<span class="kw-2">ref</span> <span class="ident">new</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">new</span>.<span class="ident">notify</span>(),
         }
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">will_notify</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">unpark</span>: <span class="kw-2">&amp;</span><span class="ident">BorrowedUnpark</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="kw">match</span> (<span class="ident">unpark</span>, <span class="self">self</span>) {
-            (<span class="kw-2">&amp;</span><span class="ident">BorrowedUnpark</span>::<span class="ident">Old</span>(<span class="ident">old1</span>), <span class="kw-2">&amp;</span><span class="ident">TaskUnpark</span>::<span class="ident">Old</span>(<span class="kw-2">ref</span> <span class="ident">old2</span>)) <span class="op">=</span><span class="op">&gt;</span> {
+            (<span class="kw-2">&amp;</span><span class="ident">BorrowedUnpark::Old</span>(<span class="ident">old1</span>), <span class="kw-2">&amp;</span><span class="ident">TaskUnpark::Old</span>(<span class="kw-2">ref</span> <span class="ident">old2</span>)) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw-2">*</span><span class="ident">old1</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">Unpark</span> <span class="op">=</span><span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw-2">*</span><span class="ident">old2</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">Unpark</span>
             }
-            (<span class="kw-2">&amp;</span><span class="ident">BorrowedUnpark</span>::<span class="ident">New</span>(<span class="kw-2">ref</span> <span class="ident">new1</span>), <span class="kw-2">&amp;</span><span class="ident">TaskUnpark</span>::<span class="ident">New</span>(<span class="kw-2">ref</span> <span class="ident">new2</span>)) <span class="op">=</span><span class="op">&gt;</span> {
+            (<span class="kw-2">&amp;</span><span class="ident">BorrowedUnpark::New</span>(<span class="kw-2">ref</span> <span class="ident">new1</span>), <span class="kw-2">&amp;</span><span class="ident">TaskUnpark::New</span>(<span class="kw-2">ref</span> <span class="ident">new2</span>)) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="ident">new2</span>.<span class="ident">will_notify</span>(<span class="ident">new1</span>)
             }
             <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
@@ -945,8 +945,8 @@
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
     <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;recommended to use `poll_future_notify` instead&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">poll_future</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">unpark</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Unpark</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="ident">F</span>::<span class="ident">Item</span>, <span class="ident">F</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">enter</span>(<span class="ident">BorrowedUnpark</span>::<span class="ident">Old</span>(<span class="kw-2">&amp;</span><span class="ident">unpark</span>), <span class="op">|</span><span class="ident">f</span><span class="op">|</span> <span class="ident">f</span>.<span class="ident">poll</span>())
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">poll_future</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">unpark</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Unpark</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="ident">F::Item</span>, <span class="ident">F::Error</span><span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">enter</span>(<span class="ident">BorrowedUnpark::Old</span>(<span class="kw-2">&amp;</span><span class="ident">unpark</span>), <span class="op">|</span><span class="ident">f</span><span class="op">|</span> <span class="ident">f</span>.<span class="ident">poll</span>())
     }
 
     <span class="doccomment">/// Waits for the internal future to complete, blocking this thread&#39;s</span>
@@ -955,13 +955,13 @@
     <span class="doccomment">/// This function will call `poll_future` in a loop, waiting for the future</span>
     <span class="doccomment">/// to complete. When a future cannot make progress it will use</span>
     <span class="doccomment">/// `thread::park` to block the current thread.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">wait_future</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">F</span>::<span class="ident">Item</span>, <span class="ident">F</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="ident">ThreadNotify</span>::<span class="ident">with_current</span>(<span class="op">|</span><span class="ident">notify</span><span class="op">|</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">wait_future</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">F::Item</span>, <span class="ident">F::Error</span><span class="op">&gt;</span> {
+        <span class="ident">ThreadNotify::with_current</span>(<span class="op">|</span><span class="ident">notify</span><span class="op">|</span> {
 
             <span class="kw">loop</span> {
                 <span class="kw">match</span> <span class="self">self</span>.<span class="ident">poll_future_notify</span>(<span class="ident">notify</span>, <span class="number">0</span>)<span class="question-mark">?</span> {
-                    <span class="ident">Async</span>::<span class="ident">NotReady</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">notify</span>.<span class="ident">park</span>(),
-                    <span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">e</span>),
+                    <span class="ident">Async::NotReady</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">notify</span>.<span class="ident">park</span>(),
+                    <span class="ident">Async::Ready</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">e</span>),
                 }
             }
         })
@@ -979,10 +979,10 @@
             <span class="comment">// `Spawn&lt;BoxFuture&lt;(), ()&gt;&gt;` so we wouldn&#39;t have to box here and</span>
             <span class="comment">// it&#39;d be more explicit, but unfortunately that currently has a</span>
             <span class="comment">// link error on nightly: rust-lang/rust#36155</span>
-            <span class="ident">spawn</span>: <span class="ident">spawn</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="self">self</span>.<span class="ident">into_inner</span>())),
-            <span class="ident">inner</span>: <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">RunInner</span> {
+            <span class="ident">spawn</span>: <span class="ident">spawn</span>(<span class="ident">Box::new</span>(<span class="self">self</span>.<span class="ident">into_inner</span>())),
+            <span class="ident">inner</span>: <span class="ident">Arc::new</span>(<span class="ident">RunInner</span> {
                 <span class="ident">exec</span>: <span class="ident">exec</span>,
-                <span class="ident">mutex</span>: <span class="ident">UnparkMutex</span>::<span class="ident">new</span>()
+                <span class="ident">mutex</span>: <span class="ident">UnparkMutex::new</span>()
             }),
         })
     }
@@ -993,20 +993,20 @@
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">poll_stream</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">unpark</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Unpark</span><span class="op">&gt;</span>)
-                       <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">S</span>::<span class="ident">Item</span><span class="op">&gt;</span>, <span class="ident">S</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">enter</span>(<span class="ident">BorrowedUnpark</span>::<span class="ident">Old</span>(<span class="kw-2">&amp;</span><span class="ident">unpark</span>), <span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">poll</span>())
+                       <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">S::Item</span><span class="op">&gt;</span>, <span class="ident">S::Error</span><span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">enter</span>(<span class="ident">BorrowedUnpark::Old</span>(<span class="kw-2">&amp;</span><span class="ident">unpark</span>), <span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">poll</span>())
     }
 
     <span class="doccomment">/// Like `wait_future`, except only waits for the next element to arrive on</span>
     <span class="doccomment">/// the underlying stream.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">wait_stream</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">S</span>::<span class="ident">Item</span>, <span class="ident">S</span>::<span class="ident">Error</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="ident">ThreadNotify</span>::<span class="ident">with_current</span>(<span class="op">|</span><span class="ident">notify</span><span class="op">|</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">wait_stream</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">S::Item</span>, <span class="ident">S::Error</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+        <span class="ident">ThreadNotify::with_current</span>(<span class="op">|</span><span class="ident">notify</span><span class="op">|</span> {
 
             <span class="kw">loop</span> {
                 <span class="kw">match</span> <span class="self">self</span>.<span class="ident">poll_stream_notify</span>(<span class="ident">notify</span>, <span class="number">0</span>) {
-                    <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">NotReady</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">notify</span>.<span class="ident">park</span>(),
-                    <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="prelude-val">Some</span>(<span class="ident">e</span>))) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(<span class="ident">e</span>)),
-                    <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="prelude-val">None</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
+                    <span class="prelude-val">Ok</span>(<span class="ident">Async::NotReady</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">notify</span>.<span class="ident">park</span>(),
+                    <span class="prelude-val">Ok</span>(<span class="ident">Async::Ready</span>(<span class="prelude-val">Some</span>(<span class="ident">e</span>))) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(<span class="ident">e</span>)),
+                    <span class="prelude-val">Ok</span>(<span class="ident">Async::Ready</span>(<span class="prelude-val">None</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
                     <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(<span class="ident">e</span>)),
                 }
             }
@@ -1018,17 +1018,17 @@
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
     <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;recommended to use `start_send_notify` instead&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">start_send</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="ident">S</span>::<span class="ident">SinkItem</span>, <span class="ident">unpark</span>: <span class="kw-2">&amp;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Unpark</span><span class="op">&gt;</span>)
-                       <span class="op">-</span><span class="op">&gt;</span> <span class="ident">StartSend</span><span class="op">&lt;</span><span class="ident">S</span>::<span class="ident">SinkItem</span>, <span class="ident">S</span>::<span class="ident">SinkError</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">enter</span>(<span class="ident">BorrowedUnpark</span>::<span class="ident">Old</span>(<span class="ident">unpark</span>), <span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">start_send</span>(<span class="ident">value</span>))
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">start_send</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="ident">S::SinkItem</span>, <span class="ident">unpark</span>: <span class="kw-2">&amp;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Unpark</span><span class="op">&gt;</span>)
+                       <span class="op">-</span><span class="op">&gt;</span> <span class="ident">StartSend</span><span class="op">&lt;</span><span class="ident">S::SinkItem</span>, <span class="ident">S::SinkError</span><span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">enter</span>(<span class="ident">BorrowedUnpark::Old</span>(<span class="ident">unpark</span>), <span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">start_send</span>(<span class="ident">value</span>))
     }
 
     <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;recommended to use `poll_flush_notify` instead&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">poll_flush</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">unpark</span>: <span class="kw-2">&amp;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Unpark</span><span class="op">&gt;</span>)
-                       <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span>(), <span class="ident">S</span>::<span class="ident">SinkError</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">enter</span>(<span class="ident">BorrowedUnpark</span>::<span class="ident">Old</span>(<span class="ident">unpark</span>), <span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">poll_complete</span>())
+                       <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span>(), <span class="ident">S::SinkError</span><span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">enter</span>(<span class="ident">BorrowedUnpark::Old</span>(<span class="ident">unpark</span>), <span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">poll_complete</span>())
     }
 
     <span class="doccomment">/// Blocks the current thread until it&#39;s able to send `value` on this sink.</span>
@@ -1036,14 +1036,14 @@
     <span class="doccomment">/// This function will send the `value` on the sink that this task wraps. If</span>
     <span class="doccomment">/// the sink is not ready to send the value yet then the current thread will</span>
     <span class="doccomment">/// be blocked until it&#39;s able to send the value.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">wait_send</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">value</span>: <span class="ident">S</span>::<span class="ident">SinkItem</span>)
-                     <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">S</span>::<span class="ident">SinkError</span><span class="op">&gt;</span> {
-        <span class="ident">ThreadNotify</span>::<span class="ident">with_current</span>(<span class="op">|</span><span class="ident">notify</span><span class="op">|</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">wait_send</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">value</span>: <span class="ident">S::SinkItem</span>)
+                     <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">S::SinkError</span><span class="op">&gt;</span> {
+        <span class="ident">ThreadNotify::with_current</span>(<span class="op">|</span><span class="ident">notify</span><span class="op">|</span> {
 
             <span class="kw">loop</span> {
                 <span class="ident">value</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">start_send_notify</span>(<span class="ident">value</span>, <span class="ident">notify</span>, <span class="number">0</span>)<span class="question-mark">?</span> {
-                    <span class="ident">AsyncSink</span>::<span class="ident">NotReady</span>(<span class="ident">v</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">v</span>,
-                    <span class="ident">AsyncSink</span>::<span class="ident">Ready</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Ok</span>(()),
+                    <span class="ident">AsyncSink::NotReady</span>(<span class="ident">v</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">v</span>,
+                    <span class="ident">AsyncSink::Ready</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Ok</span>(()),
                 };
                 <span class="ident">notify</span>.<span class="ident">park</span>();
             }
@@ -1058,8 +1058,8 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// The thread will be blocked until `poll_complete` returns that it&#39;s</span>
     <span class="doccomment">/// ready.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">wait_flush</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">S</span>::<span class="ident">SinkError</span><span class="op">&gt;</span> {
-        <span class="ident">ThreadNotify</span>::<span class="ident">with_current</span>(<span class="op">|</span><span class="ident">notify</span><span class="op">|</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">wait_flush</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">S::SinkError</span><span class="op">&gt;</span> {
+        <span class="ident">ThreadNotify::with_current</span>(<span class="op">|</span><span class="ident">notify</span><span class="op">|</span> {
 
             <span class="kw">loop</span> {
                 <span class="kw">if</span> <span class="self">self</span>.<span class="ident">poll_flush_notify</span>(<span class="ident">notify</span>, <span class="number">0</span>)<span class="question-mark">?</span>.<span class="ident">is_ready</span>() {
@@ -1075,8 +1075,8 @@
     <span class="doccomment">/// This function will close the sink that this task wraps. If the sink</span>
     <span class="doccomment">/// is not ready to be close yet, then the current thread will be blocked</span>
     <span class="doccomment">/// until it&#39;s closed.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">wait_close</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">S</span>::<span class="ident">SinkError</span><span class="op">&gt;</span> {
-        <span class="ident">ThreadNotify</span>::<span class="ident">with_current</span>(<span class="op">|</span><span class="ident">notify</span><span class="op">|</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">wait_close</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">S::SinkError</span><span class="op">&gt;</span> {
+        <span class="ident">ThreadNotify::with_current</span>(<span class="op">|</span><span class="ident">notify</span><span class="op">|</span> {
 
             <span class="kw">loop</span> {
                 <span class="kw">if</span> <span class="self">self</span>.<span class="ident">close_notify</span>(<span class="ident">notify</span>, <span class="number">0</span>)<span class="question-mark">?</span>.<span class="ident">is_ready</span>() {
@@ -1149,8 +1149,8 @@
 
             <span class="kw">loop</span> {
                 <span class="kw">match</span> <span class="ident">spawn</span>.<span class="ident">poll_future_notify</span>(<span class="kw-2">&amp;</span><span class="ident">inner</span>, <span class="number">0</span>) {
-                    <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">NotReady</span>) <span class="op">=</span><span class="op">&gt;</span> {}
-                    <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(())) <span class="op">|</span>
+                    <span class="prelude-val">Ok</span>(<span class="ident">Async::NotReady</span>) <span class="op">=</span><span class="op">&gt;</span> {}
+                    <span class="prelude-val">Ok</span>(<span class="ident">Async::Ready</span>(())) <span class="op">|</span>
                     <span class="prelude-val">Err</span>(()) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="ident">inner</span>.<span class="ident">mutex</span>.<span class="ident">complete</span>(),
                 }
                 <span class="kw">let</span> <span class="ident">run</span> <span class="op">=</span> <span class="ident">Run</span> { <span class="ident">spawn</span>: <span class="ident">spawn</span>, <span class="ident">inner</span>: <span class="ident">inner</span>.<span class="ident">clone</span>() };
@@ -1164,8 +1164,8 @@
 }
 
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
-<span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">Run</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+<span class="kw">impl</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">Run</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;Run&quot;</span>)
          .<span class="ident">field</span>(<span class="string">&quot;contents&quot;</span>, <span class="kw-2">&amp;</span><span class="string">&quot;...&quot;</span>)
          .<span class="ident">finish</span>()
@@ -1195,10 +1195,10 @@
 <span class="kw">const</span> <span class="ident">SLEEP</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">2</span>;
 
 <span class="macro">thread_local!</span> {
-    <span class="kw">static</span> <span class="ident">CURRENT_THREAD_NOTIFY</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">ThreadNotify</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">ThreadNotify</span> {
-        <span class="ident">state</span>: <span class="ident">AtomicUsize</span>::<span class="ident">new</span>(<span class="ident">IDLE</span>),
-        <span class="ident">mutex</span>: <span class="ident">Mutex</span>::<span class="ident">new</span>(()),
-        <span class="ident">condvar</span>: <span class="ident">Condvar</span>::<span class="ident">new</span>(),
+    <span class="kw">static</span> <span class="ident">CURRENT_THREAD_NOTIFY</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">ThreadNotify</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">ThreadNotify</span> {
+        <span class="ident">state</span>: <span class="ident">AtomicUsize::new</span>(<span class="ident">IDLE</span>),
+        <span class="ident">mutex</span>: <span class="ident">Mutex::new</span>(()),
+        <span class="ident">condvar</span>: <span class="ident">Condvar::new</span>(),
     });
 }
 
@@ -1212,7 +1212,7 @@
     <span class="kw">fn</span> <span class="ident">park</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="comment">// If currently notified, then we skip sleeping. This is checked outside</span>
         <span class="comment">// of the lock to avoid acquiring a mutex if not necessary.</span>
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">compare_and_swap</span>(<span class="ident">NOTIFY</span>, <span class="ident">IDLE</span>, <span class="ident">Ordering</span>::<span class="ident">SeqCst</span>) {
+        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">compare_and_swap</span>(<span class="ident">NOTIFY</span>, <span class="ident">IDLE</span>, <span class="ident">Ordering::SeqCst</span>) {
             <span class="ident">NOTIFY</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span>,
             <span class="ident">IDLE</span> <span class="op">=</span><span class="op">&gt;</span> {},
             <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(),
@@ -1223,11 +1223,11 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">mutex</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>();
 
         <span class="comment">// Transition to sleeping</span>
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">compare_and_swap</span>(<span class="ident">IDLE</span>, <span class="ident">SLEEP</span>, <span class="ident">Ordering</span>::<span class="ident">SeqCst</span>) {
+        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">compare_and_swap</span>(<span class="ident">IDLE</span>, <span class="ident">SLEEP</span>, <span class="ident">Ordering::SeqCst</span>) {
             <span class="ident">NOTIFY</span> <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="comment">// Notified before we could sleep, consume the notification and</span>
                 <span class="comment">// exit</span>
-                <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">store</span>(<span class="ident">IDLE</span>, <span class="ident">Ordering</span>::<span class="ident">SeqCst</span>);
+                <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">store</span>(<span class="ident">IDLE</span>, <span class="ident">Ordering::SeqCst</span>);
                 <span class="kw">return</span>;
             }
             <span class="ident">IDLE</span> <span class="op">=</span><span class="op">&gt;</span> {},
@@ -1239,7 +1239,7 @@
             <span class="ident">m</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">condvar</span>.<span class="ident">wait</span>(<span class="ident">m</span>).<span class="ident">unwrap</span>();
 
             <span class="comment">// Transition back to idle, loop otherwise</span>
-            <span class="kw">if</span> <span class="ident">NOTIFY</span> <span class="op">=</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">compare_and_swap</span>(<span class="ident">NOTIFY</span>, <span class="ident">IDLE</span>, <span class="ident">Ordering</span>::<span class="ident">SeqCst</span>) {
+            <span class="kw">if</span> <span class="ident">NOTIFY</span> <span class="op">=</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">compare_and_swap</span>(<span class="ident">NOTIFY</span>, <span class="ident">IDLE</span>, <span class="ident">Ordering::SeqCst</span>) {
                 <span class="kw">return</span>;
             }
         }
@@ -1250,7 +1250,7 @@
     <span class="kw">fn</span> <span class="ident">notify</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_unpark_id</span>: <span class="ident">usize</span>) {
         <span class="comment">// First, try transitioning from IDLE -&gt; NOTIFY, this does not require a</span>
         <span class="comment">// lock.</span>
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">compare_and_swap</span>(<span class="ident">IDLE</span>, <span class="ident">NOTIFY</span>, <span class="ident">Ordering</span>::<span class="ident">SeqCst</span>) {
+        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">compare_and_swap</span>(<span class="ident">IDLE</span>, <span class="ident">NOTIFY</span>, <span class="ident">Ordering::SeqCst</span>) {
             <span class="ident">IDLE</span> <span class="op">|</span> <span class="ident">NOTIFY</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span>,
             <span class="ident">SLEEP</span> <span class="op">=</span><span class="op">&gt;</span> {}
             <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(),
@@ -1260,7 +1260,7 @@
         <span class="kw">let</span> <span class="ident">_m</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">mutex</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>();
 
         <span class="comment">// Transition from SLEEP -&gt; NOTIFY</span>
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">compare_and_swap</span>(<span class="ident">SLEEP</span>, <span class="ident">NOTIFY</span>, <span class="ident">Ordering</span>::<span class="ident">SeqCst</span>) {
+        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">compare_and_swap</span>(<span class="ident">SLEEP</span>, <span class="ident">NOTIFY</span>, <span class="ident">Ordering::SeqCst</span>) {
             <span class="ident">SLEEP</span> <span class="op">=</span><span class="op">&gt;</span> {}
             <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span>,
         }
@@ -1299,15 +1299,15 @@
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_unpark_event</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">R</span><span class="op">&gt;</span>(<span class="ident">event</span>: <span class="ident">UnparkEvent</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">R</span>
     <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnOnce</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">R</span>
 {
-    <span class="kw">super</span>::<span class="ident">with</span>(<span class="op">|</span><span class="ident">task</span><span class="op">|</span> {
+    <span class="kw">super</span><span class="ident">::with</span>(<span class="op">|</span><span class="ident">task</span><span class="op">|</span> {
         <span class="kw">let</span> <span class="ident">new_task</span> <span class="op">=</span> <span class="ident">BorrowedTask</span> {
             <span class="ident">id</span>: <span class="ident">task</span>.<span class="ident">id</span>,
             <span class="ident">unpark</span>: <span class="ident">task</span>.<span class="ident">unpark</span>,
-            <span class="ident">events</span>: <span class="ident">BorrowedEvents</span>::<span class="ident">One</span>(<span class="kw-2">&amp;</span><span class="ident">event</span>, <span class="kw-2">&amp;</span><span class="ident">task</span>.<span class="ident">events</span>),
+            <span class="ident">events</span>: <span class="ident">BorrowedEvents::One</span>(<span class="kw-2">&amp;</span><span class="ident">event</span>, <span class="kw-2">&amp;</span><span class="ident">task</span>.<span class="ident">events</span>),
             <span class="ident">map</span>: <span class="ident">task</span>.<span class="ident">map</span>,
         };
 
-        <span class="kw">super</span>::<span class="ident">set</span>(<span class="kw-2">&amp;</span><span class="ident">new_task</span>, <span class="ident">f</span>)
+        <span class="kw">super</span><span class="ident">::set</span>(<span class="kw-2">&amp;</span><span class="ident">new_task</span>, <span class="ident">f</span>)
     })
 }
 
@@ -1343,8 +1343,8 @@
 }
 
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
-<span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">UnparkEvent</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+<span class="kw">impl</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">UnparkEvent</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;UnparkEvent&quot;</span>)
          .<span class="ident">field</span>(<span class="string">&quot;set&quot;</span>, <span class="kw-2">&amp;</span><span class="string">&quot;...&quot;</span>)
          .<span class="ident">field</span>(<span class="string">&quot;item&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">item</span>)
@@ -1385,7 +1385,7 @@
     <span class="kw">fn</span> <span class="ident">notify</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">id</span>: <span class="ident">usize</span>) {
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="ident">me</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">ArcWrapped</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span> <span class="self">self</span>;
-            <span class="ident">T</span>::<span class="ident">notify</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span>(<span class="kw-2">&amp;</span><span class="ident">me</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">ArcWrapped</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>),
+            <span class="ident">T::notify</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span>(<span class="kw-2">&amp;</span><span class="ident">me</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">ArcWrapped</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>),
                       <span class="ident">id</span>)
         }
     }
@@ -1393,7 +1393,7 @@
     <span class="kw">fn</span> <span class="ident">clone_id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">id</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="ident">me</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">ArcWrapped</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span> <span class="self">self</span>;
-            <span class="ident">T</span>::<span class="ident">clone_id</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span>(<span class="kw-2">&amp;</span><span class="ident">me</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">ArcWrapped</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>),
+            <span class="ident">T::clone_id</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span>(<span class="kw-2">&amp;</span><span class="ident">me</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">ArcWrapped</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>),
                         <span class="ident">id</span>)
         }
     }
@@ -1401,7 +1401,7 @@
     <span class="kw">fn</span> <span class="ident">drop_id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">id</span>: <span class="ident">usize</span>) {
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="ident">me</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">ArcWrapped</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span> <span class="self">self</span>;
-            <span class="ident">T</span>::<span class="ident">drop_id</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span>(<span class="kw-2">&amp;</span><span class="ident">me</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">ArcWrapped</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>),
+            <span class="ident">T::drop_id</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span>(<span class="kw-2">&amp;</span><span class="ident">me</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">ArcWrapped</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>),
                        <span class="ident">id</span>)
         }
     }
@@ -1411,13 +1411,13 @@
     <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">clone_raw</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">NotifyHandle</span> {
         <span class="kw">let</span> <span class="ident">me</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">ArcWrapped</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span> <span class="self">self</span>;
         <span class="kw">let</span> <span class="ident">arc</span> <span class="op">=</span> (<span class="kw-2">*</span>(<span class="kw-2">&amp;</span><span class="ident">me</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">ArcWrapped</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>)).<span class="ident">clone</span>();
-        <span class="ident">NotifyHandle</span>::<span class="ident">from</span>(<span class="ident">arc</span>)
+        <span class="ident">NotifyHandle::from</span>(<span class="ident">arc</span>)
     }
 
     <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">drop_raw</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">me</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">ArcWrapped</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span> <span class="self">self</span>;
         <span class="kw">let</span> <span class="ident">me</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">me</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">ArcWrapped</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>;
-        <span class="ident">ptr</span>::<span class="ident">drop_in_place</span>(<span class="ident">me</span>);
+        <span class="ident">ptr::drop_in_place</span>(<span class="ident">me</span>);
     }
 }
 
@@ -1426,8 +1426,8 @@
 {
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">rc</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">NotifyHandle</span> {
         <span class="kw">unsafe</span> {
-            <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="ident">mem</span>::<span class="ident">transmute</span>::<span class="op">&lt;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ArcWrapped</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">rc</span>);
-            <span class="ident">NotifyHandle</span>::<span class="ident">new</span>(<span class="ident">ptr</span>)
+            <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="ident">mem::transmute</span>::<span class="op">&lt;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ArcWrapped</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">rc</span>);
+            <span class="ident">NotifyHandle::new</span>(<span class="ident">ptr</span>)
         }
     }
 }
@@ -1435,7 +1435,7 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nightly&quot;</span>)]</span>
 <span class="kw">mod</span> <span class="ident">nightly</span> {
     <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">TaskUnpark</span>, <span class="ident">UnparkEvents</span>};
-    <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">marker</span>::<span class="ident">Unpin</span>;
+    <span class="kw">use</span> <span class="ident">core::marker::Unpin</span>;
 
     <span class="kw">impl</span> <span class="ident">Unpin</span> <span class="kw">for</span> <span class="ident">TaskUnpark</span> {}
     <span class="kw">impl</span> <span class="ident">Unpin</span> <span class="kw">for</span> <span class="ident">UnparkEvents</span> {}

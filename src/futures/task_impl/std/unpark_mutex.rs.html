@@ -146,9 +146,9 @@
 <span id="143">143</span>
 <span id="144">144</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cell</span>::<span class="ident">UnsafeCell</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">atomic</span>::<span class="ident">AtomicUsize</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">atomic</span>::<span class="ident">Ordering</span>::<span class="ident">SeqCst</span>;
+<span class="kw">use</span> <span class="ident">std::cell::UnsafeCell</span>;
+<span class="kw">use</span> <span class="ident">std::sync::atomic::AtomicUsize</span>;
+<span class="kw">use</span> <span class="ident">std::sync::atomic::Ordering::SeqCst</span>;
 
 <span class="doccomment">/// A &quot;lock&quot; around data `D`, which employs a *helping* strategy.</span>
 <span class="doccomment">///</span>
@@ -193,8 +193,8 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span> <span class="ident">UnparkMutex</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">UnparkMutex</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span> {
         <span class="ident">UnparkMutex</span> {
-            <span class="ident">status</span>: <span class="ident">AtomicUsize</span>::<span class="ident">new</span>(<span class="ident">WAITING</span>),
-            <span class="ident">inner</span>: <span class="ident">UnsafeCell</span>::<span class="ident">new</span>(<span class="prelude-val">None</span>),
+            <span class="ident">status</span>: <span class="ident">AtomicUsize::new</span>(<span class="ident">WAITING</span>),
+            <span class="ident">inner</span>: <span class="ident">UnsafeCell::new</span>(<span class="prelude-val">None</span>),
         }
     }
 

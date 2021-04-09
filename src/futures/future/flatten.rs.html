@@ -52,24 +52,24 @@
 <span id="49">49</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> {<span class="ident">Future</span>, <span class="ident">IntoFuture</span>, <span class="ident">Poll</span>};
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">fmt</span>;
-<span class="kw">use</span> <span class="kw">super</span>::<span class="ident">chain</span>::<span class="ident">Chain</span>;
+<span class="kw">use</span> <span class="ident">core::fmt</span>;
+<span class="kw">use</span> <span class="kw">super</span><span class="ident">::chain::Chain</span>;
 
 <span class="doccomment">/// Future for the `flatten` combinator, flattening a future-of-a-future to get just</span>
 <span class="doccomment">/// the result of the final future.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// This is created by the `Future::flatten` method.</span>
 <span class="attribute">#[<span class="ident">must_use</span> <span class="op">=</span> <span class="string">&quot;futures do nothing unless polled&quot;</span>]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Flatten</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">A</span>: <span class="ident">Future</span>, <span class="ident">A</span>::<span class="ident">Item</span>: <span class="ident">IntoFuture</span> {
-    <span class="ident">state</span>: <span class="ident">Chain</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="op">&lt;</span><span class="ident">A</span>::<span class="ident">Item</span> <span class="kw">as</span> <span class="ident">IntoFuture</span><span class="op">&gt;</span>::<span class="ident">Future</span>, ()<span class="op">&gt;</span>,
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Flatten</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">A</span>: <span class="ident">Future</span>, <span class="ident">A::Item</span>: <span class="ident">IntoFuture</span> {
+    <span class="ident">state</span>: <span class="ident">Chain</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="op">&lt;</span><span class="ident">A::Item</span> <span class="kw">as</span> <span class="ident">IntoFuture</span><span class="op">&gt;</span><span class="ident">::Future</span>, ()<span class="op">&gt;</span>,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">Flatten</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>
-    <span class="kw">where</span> <span class="ident">A</span>: <span class="ident">Future</span> <span class="op">+</span> <span class="ident">fmt</span>::<span class="ident">Debug</span>,
-          <span class="ident">A</span>::<span class="ident">Item</span>: <span class="ident">IntoFuture</span>,
-          <span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">IntoFuture</span><span class="op">&gt;</span>::<span class="ident">Item</span> <span class="kw">as</span> <span class="ident">IntoFuture</span><span class="op">&gt;</span>::<span class="ident">Future</span>: <span class="ident">fmt</span>::<span class="ident">Debug</span>,
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">Flatten</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>
+    <span class="kw">where</span> <span class="ident">A</span>: <span class="ident">Future</span> <span class="op">+</span> <span class="ident">fmt::Debug</span>,
+          <span class="ident">A::Item</span>: <span class="ident">IntoFuture</span>,
+          <span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">IntoFuture</span><span class="op">&gt;</span><span class="ident">::Item</span> <span class="kw">as</span> <span class="ident">IntoFuture</span><span class="op">&gt;</span><span class="ident">::Future</span>: <span class="ident">fmt::Debug</span>,
 {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="ident">fmt</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;Flatten&quot;</span>)
             .<span class="ident">field</span>(<span class="string">&quot;state&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>)
             .<span class="ident">finish</span>()
@@ -78,22 +78,22 @@
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>(<span class="ident">future</span>: <span class="ident">A</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Flatten</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>
     <span class="kw">where</span> <span class="ident">A</span>: <span class="ident">Future</span>,
-          <span class="ident">A</span>::<span class="ident">Item</span>: <span class="ident">IntoFuture</span>,
+          <span class="ident">A::Item</span>: <span class="ident">IntoFuture</span>,
 {
     <span class="ident">Flatten</span> {
-        <span class="ident">state</span>: <span class="ident">Chain</span>::<span class="ident">new</span>(<span class="ident">future</span>, ()),
+        <span class="ident">state</span>: <span class="ident">Chain::new</span>(<span class="ident">future</span>, ()),
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span> <span class="ident">Future</span> <span class="kw">for</span> <span class="ident">Flatten</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>
     <span class="kw">where</span> <span class="ident">A</span>: <span class="ident">Future</span>,
-          <span class="ident">A</span>::<span class="ident">Item</span>: <span class="ident">IntoFuture</span>,
-          <span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">Future</span><span class="op">&gt;</span>::<span class="ident">Item</span> <span class="kw">as</span> <span class="ident">IntoFuture</span><span class="op">&gt;</span>::<span class="ident">Error</span>: <span class="ident">From</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">Future</span><span class="op">&gt;</span>::<span class="ident">Error</span><span class="op">&gt;</span>
+          <span class="ident">A::Item</span>: <span class="ident">IntoFuture</span>,
+          <span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">Future</span><span class="op">&gt;</span><span class="ident">::Item</span> <span class="kw">as</span> <span class="ident">IntoFuture</span><span class="op">&gt;</span><span class="ident">::Error</span>: <span class="ident">From</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">Future</span><span class="op">&gt;</span><span class="ident">::Error</span><span class="op">&gt;</span>
 {
-    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">Future</span><span class="op">&gt;</span>::<span class="ident">Item</span> <span class="kw">as</span> <span class="ident">IntoFuture</span><span class="op">&gt;</span>::<span class="ident">Item</span>;
-    <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">Future</span><span class="op">&gt;</span>::<span class="ident">Item</span> <span class="kw">as</span> <span class="ident">IntoFuture</span><span class="op">&gt;</span>::<span class="ident">Error</span>;
+    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">Future</span><span class="op">&gt;</span><span class="ident">::Item</span> <span class="kw">as</span> <span class="ident">IntoFuture</span><span class="op">&gt;</span><span class="ident">::Item</span>;
+    <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">Future</span><span class="op">&gt;</span><span class="ident">::Item</span> <span class="kw">as</span> <span class="ident">IntoFuture</span><span class="op">&gt;</span><span class="ident">::Error</span>;
 
-    <span class="kw">fn</span> <span class="ident">poll</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Item</span>, <span class="self">Self</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">poll</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="self">Self</span><span class="ident">::Item</span>, <span class="self">Self</span><span class="ident">::Error</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">poll</span>(<span class="op">|</span><span class="ident">a</span>, ()<span class="op">|</span> {
             <span class="kw">let</span> <span class="ident">future</span> <span class="op">=</span> <span class="ident">a</span><span class="question-mark">?</span>.<span class="ident">into_future</span>();
             <span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(<span class="ident">future</span>))

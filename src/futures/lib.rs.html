@@ -449,10 +449,10 @@
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">future</span>::{<span class="ident">Future</span>, <span class="ident">IntoFuture</span>};
 
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">stream</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">stream</span>::<span class="ident">Stream</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">stream::Stream</span>;
 
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">sink</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sink</span>::<span class="ident">Sink</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sink::Sink</span>;
 
 <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;0.1.4&quot;</span>, <span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;import through the future module instead&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;with-deprecated&quot;</span>)]</span>
@@ -486,22 +486,22 @@
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
     <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;0.1.4&quot;</span>, <span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;use sync::oneshot::channel instead&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;with-deprecated&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sync</span>::<span class="ident">oneshot</span>::<span class="ident">channel</span> <span class="kw">as</span> <span class="ident">oneshot</span>;
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sync::oneshot::channel</span> <span class="kw">as</span> <span class="ident">oneshot</span>;
 
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
     <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;0.1.4&quot;</span>, <span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;use sync::oneshot::Receiver instead&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;with-deprecated&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sync</span>::<span class="ident">oneshot</span>::<span class="ident">Receiver</span> <span class="kw">as</span> <span class="ident">Oneshot</span>;
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sync::oneshot::Receiver</span> <span class="kw">as</span> <span class="ident">Oneshot</span>;
 
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
     <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;0.1.4&quot;</span>, <span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;use sync::oneshot::Sender instead&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;with-deprecated&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sync</span>::<span class="ident">oneshot</span>::<span class="ident">Sender</span> <span class="kw">as</span> <span class="ident">Complete</span>;
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sync::oneshot::Sender</span> <span class="kw">as</span> <span class="ident">Complete</span>;
 
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
     <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;0.1.4&quot;</span>, <span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;use sync::oneshot::Canceled instead&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;with-deprecated&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sync</span>::<span class="ident">oneshot</span>::<span class="ident">Canceled</span>;
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sync::oneshot::Canceled</span>;
 
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
     <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;0.1.4&quot;</span>, <span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;import through the future module instead&quot;</span>)]</span>

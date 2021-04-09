@@ -107,16 +107,16 @@
 <span class="kw">mod</span> <span class="ident">list</span>;
 <span class="kw">mod</span> <span class="ident">unbounded</span>;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">bounded</span>::{<span class="ident">channel</span>, <span class="ident">Receiver</span>, <span class="ident">Sender</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::bounded</span>::{<span class="ident">channel</span>, <span class="ident">Receiver</span>, <span class="ident">Sender</span>};
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">unbounded</span>::{<span class="ident">unbounded_channel</span>, <span class="ident">UnboundedReceiver</span>, <span class="ident">UnboundedSender</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::unbounded</span>::{<span class="ident">unbounded_channel</span>, <span class="ident">UnboundedReceiver</span>, <span class="ident">UnboundedSender</span>};
 
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">error</span> {
     <span class="doccomment">//! Channel error types</span>
 
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">bounded</span>::{<span class="ident">RecvError</span>, <span class="ident">SendError</span>, <span class="ident">TrySendError</span>};
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">super</span><span class="ident">::bounded</span>::{<span class="ident">RecvError</span>, <span class="ident">SendError</span>, <span class="ident">TrySendError</span>};
 
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">unbounded</span>::{<span class="ident">UnboundedRecvError</span>, <span class="ident">UnboundedSendError</span>, <span class="ident">UnboundedTrySendError</span>};
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">super</span><span class="ident">::unbounded</span>::{<span class="ident">UnboundedRecvError</span>, <span class="ident">UnboundedSendError</span>, <span class="ident">UnboundedTrySendError</span>};
 }
 
 <span class="doccomment">/// The number of values a block can contain.</span>

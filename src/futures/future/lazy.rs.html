@@ -89,7 +89,7 @@
 <span class="doccomment">//! Definition of the Lazy combinator, deferring execution of a function until</span>
 <span class="doccomment">//! the future is polled.</span>
 
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">mem</span>;
+<span class="kw">use</span> <span class="ident">core::mem</span>;
 
 <span class="kw">use</span> {<span class="ident">Future</span>, <span class="ident">IntoFuture</span>, <span class="ident">Poll</span>};
 
@@ -100,7 +100,7 @@
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
 <span class="attribute">#[<span class="ident">must_use</span> <span class="op">=</span> <span class="string">&quot;futures do nothing unless polled&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Lazy</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">R</span>: <span class="ident">IntoFuture</span><span class="op">&gt;</span> {
-    <span class="ident">inner</span>: <span class="ident">_Lazy</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">R</span>::<span class="ident">Future</span><span class="op">&gt;</span>,
+    <span class="ident">inner</span>: <span class="ident">_Lazy</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">R::Future</span><span class="op">&gt;</span>,
 }
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
@@ -134,7 +134,7 @@
           <span class="ident">R</span>: <span class="ident">IntoFuture</span>
 {
     <span class="ident">Lazy</span> {
-        <span class="ident">inner</span>: <span class="ident">_Lazy</span>::<span class="ident">First</span>(<span class="ident">f</span>),
+        <span class="ident">inner</span>: <span class="ident">_Lazy::First</span>(<span class="ident">f</span>),
     }
 }
 
@@ -142,18 +142,18 @@
     <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnOnce</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">R</span>,
           <span class="ident">R</span>: <span class="ident">IntoFuture</span>,
 {
-    <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>::<span class="ident">Future</span> {
+    <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R::Future</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">inner</span> {
-            <span class="ident">_Lazy</span>::<span class="ident">First</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> {}
-            <span class="ident">_Lazy</span>::<span class="ident">Second</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">f</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="ident">f</span>,
-            <span class="ident">_Lazy</span>::<span class="ident">Moved</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(), <span class="comment">// can only happen if `f()` panics</span>
+            <span class="ident">_Lazy::First</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> {}
+            <span class="ident">_Lazy::Second</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">f</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="ident">f</span>,
+            <span class="ident">_Lazy::Moved</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(), <span class="comment">// can only happen if `f()` panics</span>
         }
-        <span class="kw">match</span> <span class="ident">mem</span>::<span class="ident">replace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">inner</span>, <span class="ident">_Lazy</span>::<span class="ident">Moved</span>) {
-            <span class="ident">_Lazy</span>::<span class="ident">First</span>(<span class="ident">f</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">inner</span> <span class="op">=</span> <span class="ident">_Lazy</span>::<span class="ident">Second</span>(<span class="ident">f</span>().<span class="ident">into_future</span>()),
+        <span class="kw">match</span> <span class="ident">mem::replace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">inner</span>, <span class="ident">_Lazy::Moved</span>) {
+            <span class="ident">_Lazy::First</span>(<span class="ident">f</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">inner</span> <span class="op">=</span> <span class="ident">_Lazy::Second</span>(<span class="ident">f</span>().<span class="ident">into_future</span>()),
             <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(), <span class="comment">// we already found First</span>
         }
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">inner</span> {
-            <span class="ident">_Lazy</span>::<span class="ident">Second</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">f</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">f</span>,
+            <span class="ident">_Lazy::Second</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">f</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">f</span>,
             <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(), <span class="comment">// we just stored Second</span>
         }
     }
@@ -163,10 +163,10 @@
     <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnOnce</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">R</span>,
           <span class="ident">R</span>: <span class="ident">IntoFuture</span>,
 {
-    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">R</span>::<span class="ident">Item</span>;
-    <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">R</span>::<span class="ident">Error</span>;
+    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">R::Item</span>;
+    <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">R::Error</span>;
 
-    <span class="kw">fn</span> <span class="ident">poll</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="ident">R</span>::<span class="ident">Item</span>, <span class="ident">R</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">poll</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="ident">R::Item</span>, <span class="ident">R::Error</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">get</span>().<span class="ident">poll</span>()
     }
 }

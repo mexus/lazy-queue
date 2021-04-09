@@ -138,8 +138,8 @@
 <span id="135">135</span>
 <span id="136">136</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">mem</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">prelude</span>::<span class="ident">v1</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">std::mem</span>;
+<span class="kw">use</span> <span class="ident">std::prelude::v1</span>::<span class="kw-2">*</span>;
 
 <span class="kw">use</span> {<span class="ident">Async</span>, <span class="ident">Poll</span>};
 <span class="kw">use</span> <span class="ident">stream</span>::{<span class="ident">Stream</span>, <span class="ident">Fuse</span>};
@@ -154,8 +154,8 @@
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Chunks</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>
     <span class="kw">where</span> <span class="ident">S</span>: <span class="ident">Stream</span>
 {
-    <span class="ident">items</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">S</span>::<span class="ident">Item</span><span class="op">&gt;</span>,
-    <span class="ident">err</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">S</span>::<span class="ident">Error</span><span class="op">&gt;</span>,
+    <span class="ident">items</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">S::Item</span><span class="op">&gt;</span>,
+    <span class="ident">err</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">S::Error</span><span class="op">&gt;</span>,
     <span class="ident">stream</span>: <span class="ident">Fuse</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>,
     <span class="ident">cap</span>: <span class="ident">usize</span>, <span class="comment">// https://github.com/rust-lang-nursery/futures-rs/issues/1475</span>
 }
@@ -166,38 +166,38 @@
     <span class="macro">assert!</span>(<span class="ident">capacity</span> <span class="op">&gt;</span> <span class="number">0</span>);
 
     <span class="ident">Chunks</span> {
-        <span class="ident">items</span>: <span class="ident">Vec</span>::<span class="ident">with_capacity</span>(<span class="ident">capacity</span>),
+        <span class="ident">items</span>: <span class="ident">Vec::with_capacity</span>(<span class="ident">capacity</span>),
         <span class="ident">err</span>: <span class="prelude-val">None</span>,
-        <span class="ident">stream</span>: <span class="kw">super</span>::<span class="ident">fuse</span>::<span class="ident">new</span>(<span class="ident">s</span>),
+        <span class="ident">stream</span>: <span class="kw">super</span><span class="ident">::fuse::new</span>(<span class="ident">s</span>),
         <span class="ident">cap</span>: <span class="ident">capacity</span>,
     }
 }
 
 <span class="comment">// Forwarding impl of Sink from the underlying stream</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span> ::<span class="ident">sink</span>::<span class="ident">Sink</span> <span class="kw">for</span> <span class="ident">Chunks</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>
-    <span class="kw">where</span> <span class="ident">S</span>: ::<span class="ident">sink</span>::<span class="ident">Sink</span> <span class="op">+</span> <span class="ident">Stream</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span> <span class="ident">::sink::Sink</span> <span class="kw">for</span> <span class="ident">Chunks</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>
+    <span class="kw">where</span> <span class="ident">S</span>: <span class="ident">::sink::Sink</span> <span class="op">+</span> <span class="ident">Stream</span>
 {
-    <span class="kw">type</span> <span class="ident">SinkItem</span> <span class="op">=</span> <span class="ident">S</span>::<span class="ident">SinkItem</span>;
-    <span class="kw">type</span> <span class="ident">SinkError</span> <span class="op">=</span> <span class="ident">S</span>::<span class="ident">SinkError</span>;
+    <span class="kw">type</span> <span class="ident">SinkItem</span> <span class="op">=</span> <span class="ident">S::SinkItem</span>;
+    <span class="kw">type</span> <span class="ident">SinkError</span> <span class="op">=</span> <span class="ident">S::SinkError</span>;
 
-    <span class="kw">fn</span> <span class="ident">start_send</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">item</span>: <span class="ident">S</span>::<span class="ident">SinkItem</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">StartSend</span><span class="op">&lt;</span><span class="ident">S</span>::<span class="ident">SinkItem</span>, <span class="ident">S</span>::<span class="ident">SinkError</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">start_send</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">item</span>: <span class="ident">S::SinkItem</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">::StartSend</span><span class="op">&lt;</span><span class="ident">S::SinkItem</span>, <span class="ident">S::SinkError</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">stream</span>.<span class="ident">start_send</span>(<span class="ident">item</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">poll_complete</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span>(), <span class="ident">S</span>::<span class="ident">SinkError</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">poll_complete</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span>(), <span class="ident">S::SinkError</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">stream</span>.<span class="ident">poll_complete</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">close</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span>(), <span class="ident">S</span>::<span class="ident">SinkError</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">close</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span>(), <span class="ident">S::SinkError</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">stream</span>.<span class="ident">close</span>()
     }
 }
 
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span> <span class="ident">Chunks</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">S</span>: <span class="ident">Stream</span> {
-    <span class="kw">fn</span> <span class="ident">take</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">S</span>::<span class="ident">Item</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">take</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">S::Item</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">cap</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">cap</span>;
-        <span class="ident">mem</span>::<span class="ident">replace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">items</span>, <span class="ident">Vec</span>::<span class="ident">with_capacity</span>(<span class="ident">cap</span>))
+        <span class="ident">mem::replace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">items</span>, <span class="ident">Vec::with_capacity</span>(<span class="ident">cap</span>))
     }
 
     <span class="doccomment">/// Acquires a reference to the underlying stream that this combinator is</span>
@@ -227,22 +227,22 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span> <span class="ident">Stream</span> <span class="kw">for</span> <span class="ident">Chunks</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>
     <span class="kw">where</span> <span class="ident">S</span>: <span class="ident">Stream</span>
 {
-    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">S</span> <span class="kw">as</span> <span class="ident">Stream</span><span class="op">&gt;</span>::<span class="ident">Item</span><span class="op">&gt;</span>;
-    <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">S</span> <span class="kw">as</span> <span class="ident">Stream</span><span class="op">&gt;</span>::<span class="ident">Error</span>;
+    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">S</span> <span class="kw">as</span> <span class="ident">Stream</span><span class="op">&gt;</span><span class="ident">::Item</span><span class="op">&gt;</span>;
+    <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">S</span> <span class="kw">as</span> <span class="ident">Stream</span><span class="op">&gt;</span><span class="ident">::Error</span>;
 
-    <span class="kw">fn</span> <span class="ident">poll</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Item</span><span class="op">&gt;</span>, <span class="self">Self</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">poll</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="ident">::Item</span><span class="op">&gt;</span>, <span class="self">Self</span><span class="ident">::Error</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">err</span>.<span class="ident">take</span>() {
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>)
         }
 
         <span class="kw">loop</span> {
             <span class="kw">match</span> <span class="self">self</span>.<span class="ident">stream</span>.<span class="ident">poll</span>() {
-                <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">NotReady</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">NotReady</span>),
+                <span class="prelude-val">Ok</span>(<span class="ident">Async::NotReady</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">Async::NotReady</span>),
 
                 <span class="comment">// Push the item into the buffer and check whether it is full.</span>
                 <span class="comment">// If so, replace our buffer with a new and empty one and return</span>
                 <span class="comment">// the full one.</span>
-                <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="prelude-val">Some</span>(<span class="ident">item</span>))) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="prelude-val">Ok</span>(<span class="ident">Async::Ready</span>(<span class="prelude-val">Some</span>(<span class="ident">item</span>))) <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="self">self</span>.<span class="ident">items</span>.<span class="ident">push</span>(<span class="ident">item</span>);
                     <span class="kw">if</span> <span class="self">self</span>.<span class="ident">items</span>.<span class="ident">len</span>() <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">cap</span> {
                         <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="self">self</span>.<span class="ident">take</span>()).<span class="ident">into</span>())
@@ -251,12 +251,12 @@
 
                 <span class="comment">// Since the underlying stream ran out of values, return what we</span>
                 <span class="comment">// have buffered, if we have anything.</span>
-                <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="prelude-val">None</span>)) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="prelude-val">Ok</span>(<span class="ident">Async::Ready</span>(<span class="prelude-val">None</span>)) <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="kw">return</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">items</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="number">0</span> {
-                        <span class="kw">let</span> <span class="ident">full_buf</span> <span class="op">=</span> <span class="ident">mem</span>::<span class="ident">replace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">items</span>, <span class="ident">Vec</span>::<span class="ident">new</span>());
+                        <span class="kw">let</span> <span class="ident">full_buf</span> <span class="op">=</span> <span class="ident">mem::replace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">items</span>, <span class="ident">Vec::new</span>());
                         <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">full_buf</span>).<span class="ident">into</span>())
                     } <span class="kw">else</span> {
-                        <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="prelude-val">None</span>))
+                        <span class="prelude-val">Ok</span>(<span class="ident">Async::Ready</span>(<span class="prelude-val">None</span>))
                     }
                 }
 

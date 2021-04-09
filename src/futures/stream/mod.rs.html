@@ -1169,17 +1169,17 @@
 
 <span class="kw">mod</span> <span class="ident">iter</span>;
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">iter</span>::{<span class="ident">iter</span>, <span class="ident">Iter</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::iter</span>::{<span class="ident">iter</span>, <span class="ident">Iter</span>};
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;with-deprecated&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">Iter</span> <span class="kw">as</span> <span class="ident">IterStream</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::Iter</span> <span class="kw">as</span> <span class="ident">IterStream</span>;
 <span class="kw">mod</span> <span class="ident">iter_ok</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">iter_ok</span>::{<span class="ident">iter_ok</span>, <span class="ident">IterOk</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::iter_ok</span>::{<span class="ident">iter_ok</span>, <span class="ident">IterOk</span>};
 <span class="kw">mod</span> <span class="ident">iter_result</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">iter_result</span>::{<span class="ident">iter_result</span>, <span class="ident">IterResult</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::iter_result</span>::{<span class="ident">iter_result</span>, <span class="ident">IterResult</span>};
 
 <span class="kw">mod</span> <span class="ident">repeat</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">repeat</span>::{<span class="ident">repeat</span>, <span class="ident">Repeat</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::repeat</span>::{<span class="ident">repeat</span>, <span class="ident">Repeat</span>};
 
 <span class="kw">mod</span> <span class="ident">and_then</span>;
 <span class="kw">mod</span> <span class="ident">chain</span>;
@@ -1211,39 +1211,39 @@
 <span class="kw">mod</span> <span class="ident">unfold</span>;
 <span class="kw">mod</span> <span class="ident">zip</span>;
 <span class="kw">mod</span> <span class="ident">forward</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">and_then</span>::<span class="ident">AndThen</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">chain</span>::<span class="ident">Chain</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::and_then::AndThen</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::chain::Chain</span>;
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">concat</span>::<span class="ident">Concat</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">concat</span>::<span class="ident">Concat2</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">empty</span>::{<span class="ident">Empty</span>, <span class="ident">empty</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">filter</span>::<span class="ident">Filter</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">filter_map</span>::<span class="ident">FilterMap</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">flatten</span>::<span class="ident">Flatten</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">fold</span>::<span class="ident">Fold</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">for_each</span>::<span class="ident">ForEach</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">from_err</span>::<span class="ident">FromErr</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">fuse</span>::<span class="ident">Fuse</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">future</span>::<span class="ident">StreamFuture</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">inspect</span>::<span class="ident">Inspect</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">inspect_err</span>::<span class="ident">InspectErr</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">map</span>::<span class="ident">Map</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">map_err</span>::<span class="ident">MapErr</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::concat::Concat</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::concat::Concat2</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::empty</span>::{<span class="ident">Empty</span>, <span class="ident">empty</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::filter::Filter</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::filter_map::FilterMap</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::flatten::Flatten</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::fold::Fold</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::for_each::ForEach</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::from_err::FromErr</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::fuse::Fuse</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::future::StreamFuture</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::inspect::Inspect</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::inspect_err::InspectErr</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::map::Map</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::map_err::MapErr</span>;
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">merge</span>::{<span class="ident">Merge</span>, <span class="ident">MergedItem</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">once</span>::{<span class="ident">Once</span>, <span class="ident">once</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">or_else</span>::<span class="ident">OrElse</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">peek</span>::<span class="ident">Peekable</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">poll_fn</span>::{<span class="ident">poll_fn</span>, <span class="ident">PollFn</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">select</span>::<span class="ident">Select</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">skip</span>::<span class="ident">Skip</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">skip_while</span>::<span class="ident">SkipWhile</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">take</span>::<span class="ident">Take</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">take_while</span>::<span class="ident">TakeWhile</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">then</span>::<span class="ident">Then</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">unfold</span>::{<span class="ident">Unfold</span>, <span class="ident">unfold</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">zip</span>::<span class="ident">Zip</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">forward</span>::<span class="ident">Forward</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::merge</span>::{<span class="ident">Merge</span>, <span class="ident">MergedItem</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::once</span>::{<span class="ident">Once</span>, <span class="ident">once</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::or_else::OrElse</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::peek::Peekable</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::poll_fn</span>::{<span class="ident">poll_fn</span>, <span class="ident">PollFn</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::select::Select</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::skip::Skip</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::skip_while::SkipWhile</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::take::Take</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::take_while::TakeWhile</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::then::Then</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::unfold</span>::{<span class="ident">Unfold</span>, <span class="ident">unfold</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::zip::Zip</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::forward::Forward</span>;
 <span class="kw">use</span> <span class="ident">sink</span>::{<span class="ident">Sink</span>};
 
 <span class="macro">if_std!</span> {
@@ -1259,33 +1259,33 @@
     <span class="kw">mod</span> <span class="ident">split</span>;
     <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">futures_unordered</span>;
     <span class="kw">mod</span> <span class="ident">futures_ordered</span>;
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">buffered</span>::<span class="ident">Buffered</span>;
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">buffer_unordered</span>::<span class="ident">BufferUnordered</span>;
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">catch_unwind</span>::<span class="ident">CatchUnwind</span>;
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">chunks</span>::<span class="ident">Chunks</span>;
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">collect</span>::<span class="ident">Collect</span>;
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">wait</span>::<span class="ident">Wait</span>;
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">split</span>::{<span class="ident">SplitStream</span>, <span class="ident">SplitSink</span>, <span class="ident">ReuniteError</span>};
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">futures_unordered</span>::<span class="ident">FuturesUnordered</span>;
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">futures_ordered</span>::{<span class="ident">futures_ordered</span>, <span class="ident">FuturesOrdered</span>};
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::buffered::Buffered</span>;
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::buffer_unordered::BufferUnordered</span>;
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::catch_unwind::CatchUnwind</span>;
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::chunks::Chunks</span>;
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::collect::Collect</span>;
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::wait::Wait</span>;
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::split</span>::{<span class="ident">SplitStream</span>, <span class="ident">SplitSink</span>, <span class="ident">ReuniteError</span>};
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::futures_unordered::FuturesUnordered</span>;
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::futures_ordered</span>::{<span class="ident">futures_ordered</span>, <span class="ident">FuturesOrdered</span>};
 
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;with-deprecated&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">channel</span>::{<span class="ident">channel</span>, <span class="ident">Sender</span>, <span class="ident">Receiver</span>, <span class="ident">FutureSender</span>, <span class="ident">SendError</span>};
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::channel</span>::{<span class="ident">channel</span>, <span class="ident">Sender</span>, <span class="ident">Receiver</span>, <span class="ident">FutureSender</span>, <span class="ident">SendError</span>};
 
     <span class="doccomment">/// A type alias for `Box&lt;Stream + Send&gt;`</span>
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
     <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;removed without replacement, recommended to use a \
                          local extension trait or function if needed, more \
                          details in https://github.com/rust-lang-nursery/futures-rs/issues/228&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">BoxStream</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">E</span><span class="op">&gt;</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">boxed</span>::<span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">T</span>, <span class="ident">Error</span> <span class="op">=</span> <span class="ident">E</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span><span class="op">&gt;</span>;
+    <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">BoxStream</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">E</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">::std::boxed::Box</span><span class="op">&lt;</span><span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">T</span>, <span class="ident">Error</span> <span class="op">=</span> <span class="ident">E</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span><span class="op">&gt;</span>;
 
-    <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="question-mark">?</span><span class="ident">Sized</span> <span class="op">+</span> <span class="ident">Stream</span><span class="op">&gt;</span> <span class="ident">Stream</span> <span class="kw">for</span> ::<span class="ident">std</span>::<span class="ident">boxed</span>::<span class="ident">Box</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span> {
-        <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">S</span>::<span class="ident">Item</span>;
-        <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">S</span>::<span class="ident">Error</span>;
+    <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="question-mark">?</span><span class="ident">Sized</span> <span class="op">+</span> <span class="ident">Stream</span><span class="op">&gt;</span> <span class="ident">Stream</span> <span class="kw">for</span> <span class="ident">::std::boxed::Box</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span> {
+        <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">S::Item</span>;
+        <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">S::Error</span>;
 
-        <span class="kw">fn</span> <span class="ident">poll</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Item</span><span class="op">&gt;</span>, <span class="self">Self</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">poll</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="ident">::Item</span><span class="op">&gt;</span>, <span class="self">Self</span><span class="ident">::Error</span><span class="op">&gt;</span> {
             (<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">poll</span>()
         }
     }
@@ -1363,7 +1363,7 @@
     <span class="doccomment">/// If this is difficult to guard against then the `fuse` adapter can be</span>
     <span class="doccomment">/// used to ensure that `poll` always has well-defined semantics.</span>
     <span class="comment">// TODO: more here</span>
-    <span class="kw">fn</span> <span class="ident">poll</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Item</span><span class="op">&gt;</span>, <span class="self">Self</span>::<span class="ident">Error</span><span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">poll</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="ident">::Item</span><span class="op">&gt;</span>, <span class="self">Self</span><span class="ident">::Error</span><span class="op">&gt;</span>;
 
     <span class="comment">// TODO: should there also be a method like `poll` but doesn&#39;t return an</span>
     <span class="comment">//       item? basically just says &quot;please make more progress internally&quot;</span>
@@ -1395,7 +1395,7 @@
     <span class="kw">fn</span> <span class="ident">wait</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Wait</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="self">Self</span>: <span class="ident">Sized</span>
     {
-        <span class="ident">wait</span>::<span class="ident">new</span>(<span class="self">self</span>)
+        <span class="ident">wait::new</span>(<span class="self">self</span>)
     }
 
     <span class="doccomment">/// Convenience function for turning this stream into a trait object.</span>
@@ -1424,10 +1424,10 @@
                          local extension trait or function if needed, more \
                          details in https://github.com/rust-lang-nursery/futures-rs/issues/228&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">boxed</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">BoxStream</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Item</span>, <span class="self">Self</span>::<span class="ident">Error</span><span class="op">&gt;</span>
+    <span class="kw">fn</span> <span class="ident">boxed</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">BoxStream</span><span class="op">&lt;</span><span class="self">Self</span><span class="ident">::Item</span>, <span class="self">Self</span><span class="ident">::Error</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="self">Self</span>: <span class="ident">Sized</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
     {
-        ::<span class="ident">std</span>::<span class="ident">boxed</span>::<span class="ident">Box</span>::<span class="ident">new</span>(<span class="self">self</span>)
+        <span class="ident">::std::boxed::Box::new</span>(<span class="self">self</span>)
     }
 
     <span class="doccomment">/// Converts this stream into a `Future`.</span>
@@ -1442,7 +1442,7 @@
     <span class="kw">fn</span> <span class="ident">into_future</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">StreamFuture</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="self">Self</span>: <span class="ident">Sized</span>
     {
-        <span class="ident">future</span>::<span class="ident">new</span>(<span class="self">self</span>)
+        <span class="ident">future::new</span>(<span class="self">self</span>)
     }
 
     <span class="doccomment">/// Converts a stream of type `T` to a stream of type `U`.</span>
@@ -1465,10 +1465,10 @@
     <span class="doccomment">/// let rx = rx.map(|x| x + 3);</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">fn</span> <span class="ident">map</span><span class="op">&lt;</span><span class="ident">U</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Map</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">F</span><span class="op">&gt;</span>
-        <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="self">Self</span>::<span class="ident">Item</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">U</span>,
+        <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="self">Self</span><span class="ident">::Item</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">U</span>,
               <span class="self">Self</span>: <span class="ident">Sized</span>
     {
-        <span class="ident">map</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">f</span>)
+        <span class="ident">map::new</span>(<span class="self">self</span>, <span class="ident">f</span>)
     }
 
     <span class="doccomment">/// Converts a stream of error type `T` to a stream of error type `U`.</span>
@@ -1491,10 +1491,10 @@
     <span class="doccomment">/// let rx = rx.map_err(|()| 3);</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">fn</span> <span class="ident">map_err</span><span class="op">&lt;</span><span class="ident">U</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MapErr</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">F</span><span class="op">&gt;</span>
-        <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="self">Self</span>::<span class="ident">Error</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">U</span>,
+        <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="self">Self</span><span class="ident">::Error</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">U</span>,
               <span class="self">Self</span>: <span class="ident">Sized</span>
     {
-        <span class="ident">map_err</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">f</span>)
+        <span class="ident">map_err::new</span>(<span class="self">self</span>, <span class="ident">f</span>)
     }
 
     <span class="doccomment">/// Filters the values produced by this stream according to the provided</span>
@@ -1521,10 +1521,10 @@
     <span class="doccomment">/// let evens = rx.filter(|x| x % 2 == 0);</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">fn</span> <span class="ident">filter</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Filter</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">F</span><span class="op">&gt;</span>
-        <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>::<span class="ident">Item</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>,
+        <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="self">Self</span><span class="ident">::Item</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>,
               <span class="self">Self</span>: <span class="ident">Sized</span>
     {
-        <span class="ident">filter</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">f</span>)
+        <span class="ident">filter::new</span>(<span class="self">self</span>, <span class="ident">f</span>)
     }
 
     <span class="doccomment">/// Filters the values produced by this stream while simultaneously mapping</span>
@@ -1557,10 +1557,10 @@
     <span class="doccomment">/// });</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">fn</span> <span class="ident">filter_map</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">B</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">FilterMap</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">F</span><span class="op">&gt;</span>
-        <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="self">Self</span>::<span class="ident">Item</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>,
+        <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="self">Self</span><span class="ident">::Item</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>,
               <span class="self">Self</span>: <span class="ident">Sized</span>
     {
-        <span class="ident">filter_map</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">f</span>)
+        <span class="ident">filter_map::new</span>(<span class="self">self</span>, <span class="ident">f</span>)
     }
 
     <span class="doccomment">/// Chain on a computation for when a value is ready, passing the resulting</span>
@@ -1596,11 +1596,11 @@
     <span class="doccomment">/// });</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">fn</span> <span class="ident">then</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">U</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Then</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">F</span>, <span class="ident">U</span><span class="op">&gt;</span>
-        <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Item</span>, <span class="self">Self</span>::<span class="ident">Error</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">U</span>,
+        <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="ident">::Item</span>, <span class="self">Self</span><span class="ident">::Error</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">U</span>,
               <span class="ident">U</span>: <span class="ident">IntoFuture</span>,
               <span class="self">Self</span>: <span class="ident">Sized</span>
     {
-        <span class="ident">then</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">f</span>)
+        <span class="ident">then::new</span>(<span class="self">self</span>, <span class="ident">f</span>)
     }
 
     <span class="doccomment">/// Chain on a computation for when a value is ready, passing the successful</span>
@@ -1643,11 +1643,11 @@
     <span class="doccomment">/// });</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">fn</span> <span class="ident">and_then</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">U</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">AndThen</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">F</span>, <span class="ident">U</span><span class="op">&gt;</span>
-        <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="self">Self</span>::<span class="ident">Item</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">U</span>,
-              <span class="ident">U</span>: <span class="ident">IntoFuture</span><span class="op">&lt;</span><span class="ident">Error</span> <span class="op">=</span> <span class="self">Self</span>::<span class="ident">Error</span><span class="op">&gt;</span>,
+        <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="self">Self</span><span class="ident">::Item</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">U</span>,
+              <span class="ident">U</span>: <span class="ident">IntoFuture</span><span class="op">&lt;</span><span class="ident">Error</span> <span class="op">=</span> <span class="self">Self</span><span class="ident">::Error</span><span class="op">&gt;</span>,
               <span class="self">Self</span>: <span class="ident">Sized</span>
     {
-        <span class="ident">and_then</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">f</span>)
+        <span class="ident">and_then::new</span>(<span class="self">self</span>, <span class="ident">f</span>)
     }
 
     <span class="doccomment">/// Chain on a computation for when an error happens, passing the</span>
@@ -1670,11 +1670,11 @@
     <span class="doccomment">/// Note that this function consumes the receiving stream and returns a</span>
     <span class="doccomment">/// wrapped version of it.</span>
     <span class="kw">fn</span> <span class="ident">or_else</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">U</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">OrElse</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">F</span>, <span class="ident">U</span><span class="op">&gt;</span>
-        <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="self">Self</span>::<span class="ident">Error</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">U</span>,
-              <span class="ident">U</span>: <span class="ident">IntoFuture</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="self">Self</span>::<span class="ident">Item</span><span class="op">&gt;</span>,
+        <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="self">Self</span><span class="ident">::Error</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">U</span>,
+              <span class="ident">U</span>: <span class="ident">IntoFuture</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="self">Self</span><span class="ident">::Item</span><span class="op">&gt;</span>,
               <span class="self">Self</span>: <span class="ident">Sized</span>
     {
-        <span class="ident">or_else</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">f</span>)
+        <span class="ident">or_else::new</span>(<span class="self">self</span>, <span class="ident">f</span>)
     }
 
     <span class="doccomment">/// Collect all of the values of this stream into a vector, returning a</span>
@@ -1713,7 +1713,7 @@
     <span class="kw">fn</span> <span class="ident">collect</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Collect</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="self">Self</span>: <span class="ident">Sized</span>
     {
-        <span class="ident">collect</span>::<span class="ident">new</span>(<span class="self">self</span>)
+        <span class="ident">collect::new</span>(<span class="self">self</span>)
     }
 
     <span class="doccomment">/// Concatenate all results of a stream into a single extendable</span>
@@ -1748,9 +1748,9 @@
     <span class="doccomment">/// ```</span>
     <span class="kw">fn</span> <span class="ident">concat2</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Concat2</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="self">Self</span>: <span class="ident">Sized</span>,
-              <span class="self">Self</span>::<span class="ident">Item</span>: <span class="ident">Extend</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="self">Self</span> <span class="kw">as</span> <span class="ident">Stream</span><span class="op">&gt;</span>::<span class="ident">Item</span> <span class="kw">as</span> <span class="ident">IntoIterator</span><span class="op">&gt;</span>::<span class="ident">Item</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">IntoIterator</span> <span class="op">+</span> <span class="ident">Default</span>,
+              <span class="self">Self</span><span class="ident">::Item</span>: <span class="ident">Extend</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="self">Self</span> <span class="kw">as</span> <span class="ident">Stream</span><span class="op">&gt;</span><span class="ident">::Item</span> <span class="kw">as</span> <span class="ident">IntoIterator</span><span class="op">&gt;</span><span class="ident">::Item</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">IntoIterator</span> <span class="op">+</span> <span class="ident">Default</span>,
     {
-        <span class="ident">concat</span>::<span class="ident">new2</span>(<span class="self">self</span>)
+        <span class="ident">concat::new2</span>(<span class="self">self</span>)
     }
 
     <span class="doccomment">/// Concatenate all results of a stream into a single extendable</span>
@@ -1788,9 +1788,9 @@
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
     <span class="kw">fn</span> <span class="ident">concat</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Concat</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="self">Self</span>: <span class="ident">Sized</span>,
-              <span class="self">Self</span>::<span class="ident">Item</span>: <span class="ident">Extend</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="self">Self</span> <span class="kw">as</span> <span class="ident">Stream</span><span class="op">&gt;</span>::<span class="ident">Item</span> <span class="kw">as</span> <span class="ident">IntoIterator</span><span class="op">&gt;</span>::<span class="ident">Item</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">IntoIterator</span>,
+              <span class="self">Self</span><span class="ident">::Item</span>: <span class="ident">Extend</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="self">Self</span> <span class="kw">as</span> <span class="ident">Stream</span><span class="op">&gt;</span><span class="ident">::Item</span> <span class="kw">as</span> <span class="ident">IntoIterator</span><span class="op">&gt;</span><span class="ident">::Item</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">IntoIterator</span>,
     {
-        <span class="ident">concat</span>::<span class="ident">new</span>(<span class="self">self</span>)
+        <span class="ident">concat::new</span>(<span class="self">self</span>)
     }
 
     <span class="doccomment">/// Execute an accumulating computation over a stream, collecting all the</span>
@@ -1817,12 +1817,12 @@
     <span class="doccomment">/// assert_eq!(sum.wait(), Ok(15));</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">fn</span> <span class="ident">fold</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span>, <span class="ident">Fut</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">init</span>: <span class="ident">T</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Fold</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">F</span>, <span class="ident">Fut</span>, <span class="ident">T</span><span class="op">&gt;</span>
-        <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">T</span>, <span class="self">Self</span>::<span class="ident">Item</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Fut</span>,
+        <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">T</span>, <span class="self">Self</span><span class="ident">::Item</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Fut</span>,
               <span class="ident">Fut</span>: <span class="ident">IntoFuture</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
-              <span class="self">Self</span>::<span class="ident">Error</span>: <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Fut</span>::<span class="ident">Error</span><span class="op">&gt;</span>,
+              <span class="self">Self</span><span class="ident">::Error</span>: <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Fut::Error</span><span class="op">&gt;</span>,
               <span class="self">Self</span>: <span class="ident">Sized</span>
     {
-        <span class="ident">fold</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">f</span>, <span class="ident">init</span>)
+        <span class="ident">fold::new</span>(<span class="self">self</span>, <span class="ident">f</span>, <span class="ident">init</span>)
     }
 
     <span class="doccomment">/// Flattens a stream of streams into just one continuous stream.</span>
@@ -1859,11 +1859,11 @@
     <span class="doccomment">/// assert_eq!(result.wait(), Ok(vec![1, 2, 3, 4]));</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">fn</span> <span class="ident">flatten</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Flatten</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>
-        <span class="kw">where</span> <span class="self">Self</span>::<span class="ident">Item</span>: <span class="ident">Stream</span>,
-              <span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Item</span> <span class="kw">as</span> <span class="ident">Stream</span><span class="op">&gt;</span>::<span class="ident">Error</span>: <span class="ident">From</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Error</span><span class="op">&gt;</span>,
+        <span class="kw">where</span> <span class="self">Self</span><span class="ident">::Item</span>: <span class="ident">Stream</span>,
+              <span class="op">&lt;</span><span class="self">Self</span><span class="ident">::Item</span> <span class="kw">as</span> <span class="ident">Stream</span><span class="op">&gt;</span><span class="ident">::Error</span>: <span class="ident">From</span><span class="op">&lt;</span><span class="self">Self</span><span class="ident">::Error</span><span class="op">&gt;</span>,
               <span class="self">Self</span>: <span class="ident">Sized</span>
     {
-        <span class="ident">flatten</span>::<span class="ident">new</span>(<span class="self">self</span>)
+        <span class="ident">flatten::new</span>(<span class="self">self</span>)
     }
 
     <span class="doccomment">/// Skip elements on this stream while the predicate provided resolves to</span>
@@ -1874,11 +1874,11 @@
     <span class="doccomment">/// returns false all future elements will be returned from the underlying</span>
     <span class="doccomment">/// stream.</span>
     <span class="kw">fn</span> <span class="ident">skip_while</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">R</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">pred</span>: <span class="ident">P</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">SkipWhile</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">P</span>, <span class="ident">R</span><span class="op">&gt;</span>
-        <span class="kw">where</span> <span class="ident">P</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>::<span class="ident">Item</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">R</span>,
-              <span class="ident">R</span>: <span class="ident">IntoFuture</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">=</span><span class="ident">bool</span>, <span class="ident">Error</span><span class="op">=</span><span class="self">Self</span>::<span class="ident">Error</span><span class="op">&gt;</span>,
+        <span class="kw">where</span> <span class="ident">P</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="self">Self</span><span class="ident">::Item</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">R</span>,
+              <span class="ident">R</span>: <span class="ident">IntoFuture</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">=</span><span class="ident">bool</span>, <span class="ident">Error</span><span class="op">=</span><span class="self">Self</span><span class="ident">::Error</span><span class="op">&gt;</span>,
               <span class="self">Self</span>: <span class="ident">Sized</span>
     {
-        <span class="ident">skip_while</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">pred</span>)
+        <span class="ident">skip_while::new</span>(<span class="self">self</span>, <span class="ident">pred</span>)
     }
 
     <span class="doccomment">/// Take elements from this stream while the predicate provided resolves to</span>
@@ -1888,11 +1888,11 @@
     <span class="doccomment">/// stream until the `predicate` resolves to `false`. Once one element</span>
     <span class="doccomment">/// returns false it will always return that the stream is done.</span>
     <span class="kw">fn</span> <span class="ident">take_while</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">R</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">pred</span>: <span class="ident">P</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TakeWhile</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">P</span>, <span class="ident">R</span><span class="op">&gt;</span>
-        <span class="kw">where</span> <span class="ident">P</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>::<span class="ident">Item</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">R</span>,
-              <span class="ident">R</span>: <span class="ident">IntoFuture</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">=</span><span class="ident">bool</span>, <span class="ident">Error</span><span class="op">=</span><span class="self">Self</span>::<span class="ident">Error</span><span class="op">&gt;</span>,
+        <span class="kw">where</span> <span class="ident">P</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="self">Self</span><span class="ident">::Item</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">R</span>,
+              <span class="ident">R</span>: <span class="ident">IntoFuture</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">=</span><span class="ident">bool</span>, <span class="ident">Error</span><span class="op">=</span><span class="self">Self</span><span class="ident">::Error</span><span class="op">&gt;</span>,
               <span class="self">Self</span>: <span class="ident">Sized</span>
     {
-        <span class="ident">take_while</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">pred</span>)
+        <span class="ident">take_while::new</span>(<span class="self">self</span>, <span class="ident">pred</span>)
     }
 
     <span class="doccomment">/// Runs this stream to completion, executing the provided closure for each</span>
@@ -1910,11 +1910,11 @@
     <span class="doccomment">/// To process each item in the stream and produce another stream instead</span>
     <span class="doccomment">/// of a single future, use `and_then` instead.</span>
     <span class="kw">fn</span> <span class="ident">for_each</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">U</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ForEach</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">F</span>, <span class="ident">U</span><span class="op">&gt;</span>
-        <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="self">Self</span>::<span class="ident">Item</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">U</span>,
-              <span class="ident">U</span>: <span class="ident">IntoFuture</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">=</span>(), <span class="ident">Error</span> <span class="op">=</span> <span class="self">Self</span>::<span class="ident">Error</span><span class="op">&gt;</span>,
+        <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="self">Self</span><span class="ident">::Item</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">U</span>,
+              <span class="ident">U</span>: <span class="ident">IntoFuture</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">=</span>(), <span class="ident">Error</span> <span class="op">=</span> <span class="self">Self</span><span class="ident">::Error</span><span class="op">&gt;</span>,
               <span class="self">Self</span>: <span class="ident">Sized</span>
     {
-        <span class="ident">for_each</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">f</span>)
+        <span class="ident">for_each::new</span>(<span class="self">self</span>, <span class="ident">f</span>)
     }
 
     <span class="doccomment">/// Map this stream&#39;s error to any error implementing `From` for</span>
@@ -1928,10 +1928,10 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Note that this function consumes the receiving stream and returns a</span>
     <span class="doccomment">/// wrapped version of it.</span>
-    <span class="kw">fn</span> <span class="ident">from_err</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">From</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Error</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">FromErr</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">E</span><span class="op">&gt;</span>
+    <span class="kw">fn</span> <span class="ident">from_err</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">From</span><span class="op">&lt;</span><span class="self">Self</span><span class="ident">::Error</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">FromErr</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">E</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="self">Self</span>: <span class="ident">Sized</span>,
     {
-        <span class="ident">from_err</span>::<span class="ident">new</span>(<span class="self">self</span>)
+        <span class="ident">from_err::new</span>(<span class="self">self</span>)
     }
 
     <span class="doccomment">/// Creates a new stream of at most `amt` items of the underlying stream.</span>
@@ -1947,7 +1947,7 @@
     <span class="kw">fn</span> <span class="ident">take</span>(<span class="self">self</span>, <span class="ident">amt</span>: <span class="ident">u64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Take</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="self">Self</span>: <span class="ident">Sized</span>
     {
-        <span class="ident">take</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">amt</span>)
+        <span class="ident">take::new</span>(<span class="self">self</span>, <span class="ident">amt</span>)
     }
 
     <span class="doccomment">/// Creates a new stream which skips `amt` items of the underlying stream.</span>
@@ -1962,7 +1962,7 @@
     <span class="kw">fn</span> <span class="ident">skip</span>(<span class="self">self</span>, <span class="ident">amt</span>: <span class="ident">u64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Skip</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="self">Self</span>: <span class="ident">Sized</span>
     {
-        <span class="ident">skip</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">amt</span>)
+        <span class="ident">skip::new</span>(<span class="self">self</span>, <span class="ident">amt</span>)
     }
 
     <span class="doccomment">/// Fuse a stream such that `poll` will never again be called once it has</span>
@@ -1983,7 +1983,7 @@
     <span class="kw">fn</span> <span class="ident">fuse</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Fuse</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="self">Self</span>: <span class="ident">Sized</span>
     {
-        <span class="ident">fuse</span>::<span class="ident">new</span>(<span class="self">self</span>)
+        <span class="ident">fuse::new</span>(<span class="self">self</span>)
     }
 
     <span class="doccomment">/// Borrows a stream, rather than consuming it.</span>
@@ -2046,9 +2046,9 @@
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;use_std&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">catch_unwind</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">CatchUnwind</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>
-        <span class="kw">where</span> <span class="self">Self</span>: <span class="ident">Sized</span> <span class="op">+</span> <span class="ident">std</span>::<span class="ident">panic</span>::<span class="ident">UnwindSafe</span>
+        <span class="kw">where</span> <span class="self">Self</span>: <span class="ident">Sized</span> <span class="op">+</span> <span class="ident">std::panic::UnwindSafe</span>
     {
-        <span class="ident">catch_unwind</span>::<span class="ident">new</span>(<span class="self">self</span>)
+        <span class="ident">catch_unwind::new</span>(<span class="self">self</span>)
     }
 
     <span class="doccomment">/// An adaptor for creating a buffered list of pending futures.</span>
@@ -2066,10 +2066,10 @@
     <span class="doccomment">/// library is activated, and it is activated by default.</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;use_std&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">buffered</span>(<span class="self">self</span>, <span class="ident">amt</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Buffered</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>
-        <span class="kw">where</span> <span class="self">Self</span>::<span class="ident">Item</span>: <span class="ident">IntoFuture</span><span class="op">&lt;</span><span class="ident">Error</span> <span class="op">=</span> <span class="op">&lt;</span><span class="self">Self</span> <span class="kw">as</span> <span class="ident">Stream</span><span class="op">&gt;</span>::<span class="ident">Error</span><span class="op">&gt;</span>,
+        <span class="kw">where</span> <span class="self">Self</span><span class="ident">::Item</span>: <span class="ident">IntoFuture</span><span class="op">&lt;</span><span class="ident">Error</span> <span class="op">=</span> <span class="op">&lt;</span><span class="self">Self</span> <span class="kw">as</span> <span class="ident">Stream</span><span class="op">&gt;</span><span class="ident">::Error</span><span class="op">&gt;</span>,
               <span class="self">Self</span>: <span class="ident">Sized</span>
     {
-        <span class="ident">buffered</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">amt</span>)
+        <span class="ident">buffered::new</span>(<span class="self">self</span>, <span class="ident">amt</span>)
     }
 
     <span class="doccomment">/// An adaptor for creating a buffered list of pending futures (unordered).</span>
@@ -2087,10 +2087,10 @@
     <span class="doccomment">/// library is activated, and it is activated by default.</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;use_std&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">buffer_unordered</span>(<span class="self">self</span>, <span class="ident">amt</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">BufferUnordered</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>
-        <span class="kw">where</span> <span class="self">Self</span>::<span class="ident">Item</span>: <span class="ident">IntoFuture</span><span class="op">&lt;</span><span class="ident">Error</span> <span class="op">=</span> <span class="op">&lt;</span><span class="self">Self</span> <span class="kw">as</span> <span class="ident">Stream</span><span class="op">&gt;</span>::<span class="ident">Error</span><span class="op">&gt;</span>,
+        <span class="kw">where</span> <span class="self">Self</span><span class="ident">::Item</span>: <span class="ident">IntoFuture</span><span class="op">&lt;</span><span class="ident">Error</span> <span class="op">=</span> <span class="op">&lt;</span><span class="self">Self</span> <span class="kw">as</span> <span class="ident">Stream</span><span class="op">&gt;</span><span class="ident">::Error</span><span class="op">&gt;</span>,
               <span class="self">Self</span>: <span class="ident">Sized</span>
     {
-        <span class="ident">buffer_unordered</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">amt</span>)
+        <span class="ident">buffer_unordered::new</span>(<span class="self">self</span>, <span class="ident">amt</span>)
     }
 
     <span class="doccomment">/// An adapter for merging the output of two streams.</span>
@@ -2101,10 +2101,10 @@
     <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;functionality provided by `select` now&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
     <span class="kw">fn</span> <span class="ident">merge</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="ident">S</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Merge</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">S</span><span class="op">&gt;</span>
-        <span class="kw">where</span> <span class="ident">S</span>: <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Error</span> <span class="op">=</span> <span class="self">Self</span>::<span class="ident">Error</span><span class="op">&gt;</span>,
+        <span class="kw">where</span> <span class="ident">S</span>: <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Error</span> <span class="op">=</span> <span class="self">Self</span><span class="ident">::Error</span><span class="op">&gt;</span>,
               <span class="self">Self</span>: <span class="ident">Sized</span>,
     {
-        <span class="ident">merge</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">other</span>)
+        <span class="ident">merge::new</span>(<span class="self">self</span>, <span class="ident">other</span>)
     }
 
     <span class="doccomment">/// An adapter for zipping two streams together.</span>
@@ -2113,10 +2113,10 @@
     <span class="doccomment">/// returns that pair. If an error happens, then that error will be returned</span>
     <span class="doccomment">/// immediately. If either stream ends then the zipped stream will also end.</span>
     <span class="kw">fn</span> <span class="ident">zip</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="ident">S</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Zip</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">S</span><span class="op">&gt;</span>
-        <span class="kw">where</span> <span class="ident">S</span>: <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Error</span> <span class="op">=</span> <span class="self">Self</span>::<span class="ident">Error</span><span class="op">&gt;</span>,
+        <span class="kw">where</span> <span class="ident">S</span>: <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Error</span> <span class="op">=</span> <span class="self">Self</span><span class="ident">::Error</span><span class="op">&gt;</span>,
               <span class="self">Self</span>: <span class="ident">Sized</span>,
     {
-        <span class="ident">zip</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">other</span>)
+        <span class="ident">zip::new</span>(<span class="self">self</span>, <span class="ident">other</span>)
     }
 
     <span class="doccomment">/// Adapter for chaining two stream.</span>
@@ -2139,10 +2139,10 @@
     <span class="doccomment">/// assert_eq!(None, chain.next());</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">fn</span> <span class="ident">chain</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="ident">S</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Chain</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">S</span><span class="op">&gt;</span>
-        <span class="kw">where</span> <span class="ident">S</span>: <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="self">Self</span>::<span class="ident">Item</span>, <span class="ident">Error</span> <span class="op">=</span> <span class="self">Self</span>::<span class="ident">Error</span><span class="op">&gt;</span>,
+        <span class="kw">where</span> <span class="ident">S</span>: <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="self">Self</span><span class="ident">::Item</span>, <span class="ident">Error</span> <span class="op">=</span> <span class="self">Self</span><span class="ident">::Error</span><span class="op">&gt;</span>,
               <span class="self">Self</span>: <span class="ident">Sized</span>
     {
-        <span class="ident">chain</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">other</span>)
+        <span class="ident">chain::new</span>(<span class="self">self</span>, <span class="ident">other</span>)
     }
 
     <span class="doccomment">/// Creates a new stream which exposes a `peek` method.</span>
@@ -2151,7 +2151,7 @@
     <span class="kw">fn</span> <span class="ident">peekable</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Peekable</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="self">Self</span>: <span class="ident">Sized</span>
     {
-        <span class="ident">peek</span>::<span class="ident">new</span>(<span class="self">self</span>)
+        <span class="ident">peek::new</span>(<span class="self">self</span>)
     }
 
     <span class="doccomment">/// An adaptor for chunking up items of the stream inside a vector.</span>
@@ -2178,7 +2178,7 @@
     <span class="kw">fn</span> <span class="ident">chunks</span>(<span class="self">self</span>, <span class="ident">capacity</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Chunks</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="self">Self</span>: <span class="ident">Sized</span>
     {
-        <span class="ident">chunks</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">capacity</span>)
+        <span class="ident">chunks::new</span>(<span class="self">self</span>, <span class="ident">capacity</span>)
     }
 
     <span class="doccomment">/// Creates a stream that selects the next element from either this stream</span>
@@ -2193,10 +2193,10 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Error are passed through from either stream.</span>
     <span class="kw">fn</span> <span class="ident">select</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="ident">S</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Select</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">S</span><span class="op">&gt;</span>
-        <span class="kw">where</span> <span class="ident">S</span>: <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="self">Self</span>::<span class="ident">Item</span>, <span class="ident">Error</span> <span class="op">=</span> <span class="self">Self</span>::<span class="ident">Error</span><span class="op">&gt;</span>,
+        <span class="kw">where</span> <span class="ident">S</span>: <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="self">Self</span><span class="ident">::Item</span>, <span class="ident">Error</span> <span class="op">=</span> <span class="self">Self</span><span class="ident">::Error</span><span class="op">&gt;</span>,
               <span class="self">Self</span>: <span class="ident">Sized</span>,
     {
-        <span class="ident">select</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">other</span>)
+        <span class="ident">select::new</span>(<span class="self">self</span>, <span class="ident">other</span>)
     }
 
     <span class="doccomment">/// A future that completes after the given stream has been fully processed</span>
@@ -2214,11 +2214,11 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// On completion, the pair `(stream, sink)` is returned.</span>
     <span class="kw">fn</span> <span class="ident">forward</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">sink</span>: <span class="ident">S</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Forward</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">S</span><span class="op">&gt;</span>
-        <span class="kw">where</span> <span class="ident">S</span>: <span class="ident">Sink</span><span class="op">&lt;</span><span class="ident">SinkItem</span> <span class="op">=</span> <span class="self">Self</span>::<span class="ident">Item</span><span class="op">&gt;</span>,
-              <span class="self">Self</span>::<span class="ident">Error</span>: <span class="ident">From</span><span class="op">&lt;</span><span class="ident">S</span>::<span class="ident">SinkError</span><span class="op">&gt;</span>,
+        <span class="kw">where</span> <span class="ident">S</span>: <span class="ident">Sink</span><span class="op">&lt;</span><span class="ident">SinkItem</span> <span class="op">=</span> <span class="self">Self</span><span class="ident">::Item</span><span class="op">&gt;</span>,
+              <span class="self">Self</span><span class="ident">::Error</span>: <span class="ident">From</span><span class="op">&lt;</span><span class="ident">S::SinkError</span><span class="op">&gt;</span>,
               <span class="self">Self</span>: <span class="ident">Sized</span>
     {
-        <span class="ident">forward</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">sink</span>)
+        <span class="ident">forward::new</span>(<span class="self">self</span>, <span class="ident">sink</span>)
     }
 
     <span class="doccomment">/// Splits this `Stream + Sink` object into separate `Stream` and `Sink`</span>
@@ -2232,9 +2232,9 @@
     <span class="doccomment">/// library is activated, and it is activated by default.</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;use_std&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">split</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">SplitSink</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>, <span class="ident">SplitStream</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>)
-        <span class="kw">where</span> <span class="self">Self</span>: <span class="kw">super</span>::<span class="ident">sink</span>::<span class="ident">Sink</span> <span class="op">+</span> <span class="ident">Sized</span>
+        <span class="kw">where</span> <span class="self">Self</span>: <span class="kw">super</span><span class="ident">::sink::Sink</span> <span class="op">+</span> <span class="ident">Sized</span>
     {
-        <span class="ident">split</span>::<span class="ident">split</span>(<span class="self">self</span>)
+        <span class="ident">split::split</span>(<span class="self">self</span>)
     }
 
     <span class="doccomment">/// Do something with each item of this stream, afterwards passing it on.</span>
@@ -2243,10 +2243,10 @@
     <span class="doccomment">/// library where it allows easily inspecting each value as it passes</span>
     <span class="doccomment">/// through the stream, for example to debug what&#39;s going on.</span>
     <span class="kw">fn</span> <span class="ident">inspect</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Inspect</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">F</span><span class="op">&gt;</span>
-        <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>::<span class="ident">Item</span>),
+        <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="self">Self</span><span class="ident">::Item</span>),
               <span class="self">Self</span>: <span class="ident">Sized</span>,
     {
-        <span class="ident">inspect</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">f</span>)
+        <span class="ident">inspect::new</span>(<span class="self">self</span>, <span class="ident">f</span>)
     }
 
     <span class="doccomment">/// Do something with the error of this stream, afterwards passing it on.</span>
@@ -2255,18 +2255,18 @@
     <span class="doccomment">/// easily inspecting the error as it passes through the stream, for</span>
     <span class="doccomment">/// example to debug what&#39;s going on.</span>
     <span class="kw">fn</span> <span class="ident">inspect_err</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">InspectErr</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">F</span><span class="op">&gt;</span>
-        <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>::<span class="ident">Error</span>),
+        <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="self">Self</span><span class="ident">::Error</span>),
               <span class="self">Self</span>: <span class="ident">Sized</span>,
     {
-        <span class="ident">inspect_err</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">f</span>)
+        <span class="ident">inspect_err::new</span>(<span class="self">self</span>, <span class="ident">f</span>)
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">S</span>: <span class="question-mark">?</span><span class="ident">Sized</span> <span class="op">+</span> <span class="ident">Stream</span><span class="op">&gt;</span> <span class="ident">Stream</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">S</span> {
-    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">S</span>::<span class="ident">Item</span>;
-    <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">S</span>::<span class="ident">Error</span>;
+    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">S::Item</span>;
+    <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">S::Error</span>;
 
-    <span class="kw">fn</span> <span class="ident">poll</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Item</span><span class="op">&gt;</span>, <span class="self">Self</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">poll</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="ident">::Item</span><span class="op">&gt;</span>, <span class="self">Self</span><span class="ident">::Error</span><span class="op">&gt;</span> {
         (<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">poll</span>()
     }
 }
@@ -2282,11 +2282,11 @@
 <span class="doccomment">/// Note that the returned set can also be used to dynamically push more</span>
 <span class="doccomment">/// futures into the set as they become available.</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;use_std&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">futures_unordered</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">futures</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">FuturesUnordered</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">I</span>::<span class="ident">Item</span> <span class="kw">as</span> <span class="ident">IntoFuture</span><span class="op">&gt;</span>::<span class="ident">Future</span><span class="op">&gt;</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">futures_unordered</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">futures</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">FuturesUnordered</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">I::Item</span> <span class="kw">as</span> <span class="ident">IntoFuture</span><span class="op">&gt;</span><span class="ident">::Future</span><span class="op">&gt;</span>
     <span class="kw">where</span> <span class="ident">I</span>: <span class="ident">IntoIterator</span>,
-        <span class="ident">I</span>::<span class="ident">Item</span>: <span class="ident">IntoFuture</span>
+        <span class="ident">I::Item</span>: <span class="ident">IntoFuture</span>
 {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">set</span> <span class="op">=</span> <span class="ident">FuturesUnordered</span>::<span class="ident">new</span>();
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">set</span> <span class="op">=</span> <span class="ident">FuturesUnordered::new</span>();
 
     <span class="kw">for</span> <span class="ident">future</span> <span class="kw">in</span> <span class="ident">futures</span> {
         <span class="ident">set</span>.<span class="ident">push</span>(<span class="ident">future</span>.<span class="ident">into_future</span>());

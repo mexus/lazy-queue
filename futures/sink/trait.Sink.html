@@ -200,14 +200,14 @@ version, much like <code>Iterator::flat_map</code>.</p>
 function</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
-<span class="kw">use</span> <span class="ident">futures</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">futures</span>::<span class="ident">stream</span>;
-<span class="kw">use</span> <span class="ident">futures</span>::<span class="ident">sync</span>::<span class="ident">mpsc</span>;
+<span class="kw">use</span> <span class="ident">futures::prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">futures::stream</span>;
+<span class="kw">use</span> <span class="ident">futures::sync::mpsc</span>;
 
-<span class="kw">let</span> (<span class="ident">tx</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">mpsc</span>::<span class="ident">channel</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>(<span class="number">5</span>);
+<span class="kw">let</span> (<span class="ident">tx</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">mpsc::channel</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>(<span class="number">5</span>);
 
 <span class="kw">let</span> <span class="ident">tx</span> <span class="op">=</span> <span class="ident">tx</span>.<span class="ident">with_flat_map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> {
-    <span class="ident">stream</span>::<span class="ident">iter_ok</span>(<span class="macro">vec!</span>[<span class="number">42</span>; <span class="ident">x</span>].<span class="ident">into_iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">y</span><span class="op">|</span> <span class="ident">y</span>))
+    <span class="ident">stream::iter_ok</span>(<span class="macro">vec!</span>[<span class="number">42</span>; <span class="ident">x</span>].<span class="ident">into_iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">y</span><span class="op">|</span> <span class="ident">y</span>))
 });
 <span class="ident">tx</span>.<span class="ident">send</span>(<span class="number">5</span>).<span class="ident">wait</span>().<span class="ident">unwrap</span>();
 <span class="macro">assert_eq!</span>(<span class="ident">rx</span>.<span class="ident">collect</span>().<span class="ident">wait</span>(), <span class="prelude-val">Ok</span>(<span class="macro">vec!</span>[<span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>]))</pre></div>

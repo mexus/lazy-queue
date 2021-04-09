@@ -137,9 +137,9 @@
               <span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;replaced with `BiLock` in many cases, otherwise slated \
                       for removal due to confusion&quot;</span>)]</span>
 
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">prelude</span>::<span class="ident">v1</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">Arc</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cell</span>::<span class="ident">UnsafeCell</span>;
+<span class="kw">use</span> <span class="ident">std::prelude::v1</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
+<span class="kw">use</span> <span class="ident">std::cell::UnsafeCell</span>;
 <span class="kw">use</span> <span class="ident">task_impl</span>;
 
 <span class="comment">// One critical piece of this module&#39;s contents are the `TaskRc&lt;A&gt;` handles.</span>
@@ -197,7 +197,7 @@
 <span class="doccomment">/// change over time, if the task migrates, so `A` must be `Send`.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TaskRc</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span> {
-    <span class="ident">task</span>: <span class="ident">task_impl</span>::<span class="ident">Task</span>,
+    <span class="ident">task</span>: <span class="ident">task_impl::Task</span>,
     <span class="ident">ptr</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">UnsafeCell</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span><span class="op">&gt;</span>,
 }
 
@@ -224,8 +224,8 @@
     <span class="doccomment">/// This function will panic if a task is not currently running.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">a</span>: <span class="ident">A</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TaskRc</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span> {
         <span class="ident">TaskRc</span> {
-            <span class="ident">task</span>: <span class="ident">task_impl</span>::<span class="ident">park</span>(),
-            <span class="ident">ptr</span>: <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">UnsafeCell</span>::<span class="ident">new</span>(<span class="ident">a</span>)),
+            <span class="ident">task</span>: <span class="ident">task_impl::park</span>(),
+            <span class="ident">ptr</span>: <span class="ident">Arc::new</span>(<span class="ident">UnsafeCell::new</span>(<span class="ident">a</span>)),
         }
     }
 

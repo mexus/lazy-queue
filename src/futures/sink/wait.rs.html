@@ -61,7 +61,7 @@
 <span id="58">58</span>
 <span id="59">59</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="ident">sink</span>::<span class="ident">Sink</span>;
+<span class="kw">use</span> <span class="ident">sink::Sink</span>;
 <span class="kw">use</span> <span class="ident">executor</span>;
 
 <span class="doccomment">/// A sink combinator which converts an asynchronous sink to a **blocking</span>
@@ -73,12 +73,12 @@
 <span class="attribute">#[<span class="ident">must_use</span> <span class="op">=</span> <span class="string">&quot;sinks do nothing unless used&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Wait</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span> {
-    <span class="ident">sink</span>: <span class="ident">executor</span>::<span class="ident">Spawn</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>,
+    <span class="ident">sink</span>: <span class="ident">executor::Spawn</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>,
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">Sink</span><span class="op">&gt;</span>(<span class="ident">s</span>: <span class="ident">S</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Wait</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span> {
     <span class="ident">Wait</span> {
-        <span class="ident">sink</span>: <span class="ident">executor</span>::<span class="ident">spawn</span>(<span class="ident">s</span>),
+        <span class="ident">sink</span>: <span class="ident">executor::spawn</span>(<span class="ident">s</span>),
     }
 }
 
@@ -96,7 +96,7 @@
     <span class="doccomment">/// If `Ok(())` is returned then the `value` provided was successfully sent</span>
     <span class="doccomment">/// along the sink, and if `Err(e)` is returned then an error occurred</span>
     <span class="doccomment">/// which prevented the value from being sent.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">send</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="ident">S</span>::<span class="ident">SinkItem</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">S</span>::<span class="ident">SinkError</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">send</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="ident">S::SinkItem</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">S::SinkError</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">sink</span>.<span class="ident">wait_send</span>(<span class="ident">value</span>)
     }
 
@@ -107,7 +107,7 @@
     <span class="doccomment">/// until it returns that it&#39;s ready to proceed. If the method returns</span>
     <span class="doccomment">/// `NotReady` the current thread will be blocked until it&#39;s otherwise</span>
     <span class="doccomment">/// ready to proceed.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">flush</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">S</span>::<span class="ident">SinkError</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">flush</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">S::SinkError</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">sink</span>.<span class="ident">wait_flush</span>()
     }
 
@@ -116,7 +116,7 @@
     <span class="doccomment">/// This function will call the underlying sink&#39;s `close` method</span>
     <span class="doccomment">/// until it returns that it&#39;s closed. If the method returns</span>
     <span class="doccomment">/// `NotReady` the current thread will be blocked until it&#39;s otherwise closed.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">close</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">S</span>::<span class="ident">SinkError</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">close</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">S::SinkError</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">sink</span>.<span class="ident">wait_close</span>()
     }
 }

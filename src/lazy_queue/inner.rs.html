@@ -66,9 +66,9 @@
 <span id="63">63</span>
 <span id="64">64</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">ProcessingError</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::ProcessingError</span>;
 <span class="kw">use</span> <span class="ident">futures</span>::{<span class="ident">try_ready</span>, <span class="ident">Async</span>, <span class="ident">Future</span>, <span class="ident">IntoFuture</span>, <span class="ident">Poll</span>, <span class="ident">Stream</span>};
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">mem</span>;
+<span class="kw">use</span> <span class="ident">std::mem</span>;
 
 <span class="doccomment">/// A `ForEach`-like future.</span>
 <span class="attribute">#[<span class="ident">must_use</span> <span class="op">=</span> <span class="string">&quot;futures do nothing unless polled&quot;</span>]</span>
@@ -89,44 +89,44 @@
         <span class="ident">StreamProcessor</span> {
             <span class="ident">receiver</span>,
             <span class="ident">processor</span>,
-            <span class="ident">state</span>: <span class="ident">State</span>::<span class="ident">WaitingForItem</span>,
+            <span class="ident">state</span>: <span class="ident">State::WaitingForItem</span>,
         }
     }
 }
 
 <span class="kw">enum</span> <span class="ident">State</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">IntoFuture</span><span class="op">&gt;</span> {
     <span class="ident">WaitingForItem</span>,
-    <span class="ident">RunningProcessor</span>(<span class="ident">I</span>::<span class="ident">Future</span>),
+    <span class="ident">RunningProcessor</span>(<span class="ident">I::Future</span>),
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">P</span>, <span class="ident">I</span><span class="op">&gt;</span> <span class="ident">Future</span> <span class="kw">for</span> <span class="ident">StreamProcessor</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">P</span>, <span class="ident">I</span><span class="op">&gt;</span>
 <span class="kw">where</span>
     <span class="ident">S</span>: <span class="ident">Stream</span>,
-    <span class="ident">P</span>: <span class="ident">FnMut</span>(<span class="ident">S</span>::<span class="ident">Item</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">I</span>,
+    <span class="ident">P</span>: <span class="ident">FnMut</span>(<span class="ident">S::Item</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">I</span>,
     <span class="ident">I</span>: <span class="ident">IntoFuture</span>,
 {
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> ();
-    <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">ProcessingError</span><span class="op">&lt;</span><span class="ident">S</span>::<span class="ident">Error</span>, <span class="ident">I</span>::<span class="ident">Error</span><span class="op">&gt;</span>;
+    <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">ProcessingError</span><span class="op">&lt;</span><span class="ident">S::Error</span>, <span class="ident">I::Error</span><span class="op">&gt;</span>;
 
-    <span class="kw">fn</span> <span class="ident">poll</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Item</span>, <span class="self">Self</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">poll</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="self">Self</span><span class="ident">::Item</span>, <span class="self">Self</span><span class="ident">::Error</span><span class="op">&gt;</span> {
         <span class="kw">loop</span> {
             <span class="kw">let</span> <span class="ident">next</span> <span class="op">=</span> <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">state</span> {
-                <span class="ident">State</span>::<span class="ident">WaitingForItem</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">State::WaitingForItem</span> <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">item</span>) <span class="op">=</span>
-                        <span class="macro">try_ready!</span>(<span class="self">self</span>.<span class="ident">receiver</span>.<span class="ident">poll</span>().<span class="ident">map_err</span>(<span class="ident">ProcessingError</span>::<span class="ident">ReceiverError</span>))
+                        <span class="macro">try_ready!</span>(<span class="self">self</span>.<span class="ident">receiver</span>.<span class="ident">poll</span>().<span class="ident">map_err</span>(<span class="ident">ProcessingError::ReceiverError</span>))
                     {
                         <span class="kw">let</span> <span class="ident">fut</span> <span class="op">=</span> (<span class="self">self</span>.<span class="ident">processor</span>)(<span class="ident">item</span>);
-                        <span class="ident">State</span>::<span class="ident">RunningProcessor</span>(<span class="ident">fut</span>.<span class="ident">into_future</span>())
+                        <span class="ident">State::RunningProcessor</span>(<span class="ident">fut</span>.<span class="ident">into_future</span>())
                     } <span class="kw">else</span> {
-                        <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(()));
+                        <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">Async::Ready</span>(()));
                     }
                 }
-                <span class="ident">State</span>::<span class="ident">RunningProcessor</span>(<span class="ident">fut</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="macro">try_ready!</span>(<span class="ident">fut</span>.<span class="ident">poll</span>().<span class="ident">map_err</span>(<span class="ident">ProcessingError</span>::<span class="ident">FutureError</span>));
-                    <span class="ident">State</span>::<span class="ident">WaitingForItem</span>
+                <span class="ident">State::RunningProcessor</span>(<span class="ident">fut</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="macro">try_ready!</span>(<span class="ident">fut</span>.<span class="ident">poll</span>().<span class="ident">map_err</span>(<span class="ident">ProcessingError::FutureError</span>));
+                    <span class="ident">State::WaitingForItem</span>
                 }
             };
-            <span class="ident">mem</span>::<span class="ident">replace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">state</span>, <span class="ident">next</span>);
+            <span class="ident">mem::replace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">state</span>, <span class="ident">next</span>);
         }
     }
 }

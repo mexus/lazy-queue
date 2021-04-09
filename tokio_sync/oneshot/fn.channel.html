@@ -12,13 +12,13 @@ used by the consumer to receive the value.</p>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">futures</span>;
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">tokio</span>;
 
-<span class="kw">use</span> <span class="ident">tokio</span>::<span class="ident">sync</span>::<span class="ident">oneshot</span>;
-<span class="kw">use</span> <span class="ident">futures</span>::<span class="ident">Future</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">thread</span>;
+<span class="kw">use</span> <span class="ident">tokio::sync::oneshot</span>;
+<span class="kw">use</span> <span class="ident">futures::Future</span>;
+<span class="kw">use</span> <span class="ident">std::thread</span>;
 
-<span class="kw">let</span> (<span class="ident">sender</span>, <span class="ident">receiver</span>) <span class="op">=</span> <span class="ident">oneshot</span>::<span class="ident">channel</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>();
+<span class="kw">let</span> (<span class="ident">sender</span>, <span class="ident">receiver</span>) <span class="op">=</span> <span class="ident">oneshot::channel</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>();
 
-<span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="op">|</span><span class="op">|</span> {
+<span class="ident">thread::spawn</span>(<span class="op">|</span><span class="op">|</span> {
     <span class="kw">let</span> <span class="ident">future</span> <span class="op">=</span> <span class="ident">receiver</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">i</span><span class="op">|</span> {
         <span class="macro">println!</span>(<span class="string">&quot;got: {:?}&quot;</span>, <span class="ident">i</span>);
     });

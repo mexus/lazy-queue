@@ -49,7 +49,7 @@
 <span id="46">46</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> {<span class="ident">Poll</span>, <span class="ident">Async</span>, <span class="ident">Future</span>};
-<span class="kw">use</span> <span class="ident">sink</span>::<span class="ident">Sink</span>;
+<span class="kw">use</span> <span class="ident">sink::Sink</span>;
 
 <span class="doccomment">/// Future for the `Sink::flush` combinator, which polls the sink until all data</span>
 <span class="doccomment">/// has been flushed.</span>
@@ -82,15 +82,15 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">Sink</span><span class="op">&gt;</span> <span class="ident">Future</span> <span class="kw">for</span> <span class="ident">Flush</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">S</span>;
-    <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">S</span>::<span class="ident">SinkError</span>;
+    <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">S::SinkError</span>;
 
-    <span class="kw">fn</span> <span class="ident">poll</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">S</span>::<span class="ident">SinkError</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">poll</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">S::SinkError</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">sink</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">sink</span>.<span class="ident">take</span>().<span class="ident">expect</span>(<span class="string">&quot;Attempted to poll Flush after it completed&quot;</span>);
         <span class="kw">if</span> <span class="ident">sink</span>.<span class="ident">poll_complete</span>()<span class="question-mark">?</span>.<span class="ident">is_ready</span>() {
-            <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="ident">sink</span>))
+            <span class="prelude-val">Ok</span>(<span class="ident">Async::Ready</span>(<span class="ident">sink</span>))
         } <span class="kw">else</span> {
             <span class="self">self</span>.<span class="ident">sink</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">sink</span>);
-            <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">NotReady</span>)
+            <span class="prelude-val">Ok</span>(<span class="ident">Async::NotReady</span>)
         }
     }
 }

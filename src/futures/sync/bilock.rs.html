@@ -300,16 +300,16 @@
 <span id="297">297</span>
 <span id="298">298</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">any</span>::<span class="ident">Any</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">boxed</span>::<span class="ident">Box</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cell</span>::<span class="ident">UnsafeCell</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">error</span>::<span class="ident">Error</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">mem</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::{<span class="ident">Deref</span>, <span class="ident">DerefMut</span>};
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">Arc</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">atomic</span>::<span class="ident">AtomicUsize</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">atomic</span>::<span class="ident">Ordering</span>::<span class="ident">SeqCst</span>;
+<span class="kw">use</span> <span class="ident">std::any::Any</span>;
+<span class="kw">use</span> <span class="ident">std::boxed::Box</span>;
+<span class="kw">use</span> <span class="ident">std::cell::UnsafeCell</span>;
+<span class="kw">use</span> <span class="ident">std::error::Error</span>;
+<span class="kw">use</span> <span class="ident">std::fmt</span>;
+<span class="kw">use</span> <span class="ident">std::mem</span>;
+<span class="kw">use</span> <span class="ident">std::ops</span>::{<span class="ident">Deref</span>, <span class="ident">DerefMut</span>};
+<span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
+<span class="kw">use</span> <span class="ident">std::sync::atomic::AtomicUsize</span>;
+<span class="kw">use</span> <span class="ident">std::sync::atomic::Ordering::SeqCst</span>;
 
 <span class="kw">use</span> {<span class="ident">Async</span>, <span class="ident">Future</span>, <span class="ident">Poll</span>};
 <span class="kw">use</span> <span class="ident">task</span>::{<span class="self">self</span>, <span class="ident">Task</span>};
@@ -353,9 +353,9 @@
     <span class="doccomment">/// that will ever be available to the lock. These can then be sent to separate</span>
     <span class="doccomment">/// tasks to be managed there.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">t</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">BiLock</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">BiLock</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) {
-        <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">Inner</span> {
-            <span class="ident">state</span>: <span class="ident">AtomicUsize</span>::<span class="ident">new</span>(<span class="number">0</span>),
-            <span class="ident">inner</span>: <span class="prelude-val">Some</span>(<span class="ident">UnsafeCell</span>::<span class="ident">new</span>(<span class="ident">t</span>)),
+        <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">Inner</span> {
+            <span class="ident">state</span>: <span class="ident">AtomicUsize::new</span>(<span class="number">0</span>),
+            <span class="ident">inner</span>: <span class="prelude-val">Some</span>(<span class="ident">UnsafeCell::new</span>(<span class="ident">t</span>)),
         });
 
         (<span class="ident">BiLock</span> { <span class="ident">inner</span>: <span class="ident">inner</span>.<span class="ident">clone</span>() }, <span class="ident">BiLock</span> { <span class="ident">inner</span>: <span class="ident">inner</span> })
@@ -383,7 +383,7 @@
         <span class="kw">loop</span> {
             <span class="kw">match</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">state</span>.<span class="ident">swap</span>(<span class="number">1</span>, <span class="ident">SeqCst</span>) {
                 <span class="comment">// Woohoo, we grabbed the lock!</span>
-                <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="ident">BiLockGuard</span> { <span class="ident">inner</span>: <span class="self">self</span> }),
+                <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="ident">Async::Ready</span>(<span class="ident">BiLockGuard</span> { <span class="ident">inner</span>: <span class="self">self</span> }),
 
                 <span class="comment">// Oops, someone else has locked the lock</span>
                 <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> {}
@@ -391,23 +391,23 @@
                 <span class="comment">// A task was previously blocked on this lock, likely our task,</span>
                 <span class="comment">// so we need to update that task.</span>
                 <span class="ident">n</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> {
-                    <span class="ident">drop</span>(<span class="ident">Box</span>::<span class="ident">from_raw</span>(<span class="ident">n</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Task</span>));
+                    <span class="ident">drop</span>(<span class="ident">Box::from_raw</span>(<span class="ident">n</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Task</span>));
                 }
             }
 
-            <span class="kw">let</span> <span class="ident">me</span> <span class="op">=</span> <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">task</span>::<span class="ident">current</span>());
-            <span class="kw">let</span> <span class="ident">me</span> <span class="op">=</span> <span class="ident">Box</span>::<span class="ident">into_raw</span>(<span class="ident">me</span>) <span class="kw">as</span> <span class="ident">usize</span>;
+            <span class="kw">let</span> <span class="ident">me</span> <span class="op">=</span> <span class="ident">Box::new</span>(<span class="ident">task::current</span>());
+            <span class="kw">let</span> <span class="ident">me</span> <span class="op">=</span> <span class="ident">Box::into_raw</span>(<span class="ident">me</span>) <span class="kw">as</span> <span class="ident">usize</span>;
 
             <span class="kw">match</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">state</span>.<span class="ident">compare_exchange</span>(<span class="number">1</span>, <span class="ident">me</span>, <span class="ident">SeqCst</span>, <span class="ident">SeqCst</span>) {
                 <span class="comment">// The lock is still locked, but we&#39;ve now parked ourselves, so</span>
                 <span class="comment">// just report that we&#39;re scheduled to receive a notification.</span>
-                <span class="prelude-val">Ok</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="ident">Async</span>::<span class="ident">NotReady</span>,
+                <span class="prelude-val">Ok</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="ident">Async::NotReady</span>,
 
                 <span class="comment">// Oops, looks like the lock was unlocked after our swap above</span>
                 <span class="comment">// and before the compare_exchange. Deallocate what we just</span>
                 <span class="comment">// allocated and go through the loop again.</span>
                 <span class="prelude-val">Err</span>(<span class="number">0</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> {
-                    <span class="ident">drop</span>(<span class="ident">Box</span>::<span class="ident">from_raw</span>(<span class="ident">me</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Task</span>));
+                    <span class="ident">drop</span>(<span class="ident">Box::from_raw</span>(<span class="ident">me</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Task</span>));
                 },
 
                 <span class="comment">// The top of this loop set the previous state to 1, so if we</span>
@@ -442,7 +442,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reunite</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">ReuniteError</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">self</span>.<span class="ident">inner</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="op">=</span><span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">other</span>.<span class="ident">inner</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> {
             <span class="ident">drop</span>(<span class="ident">other</span>);
-            <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="ident">Arc</span>::<span class="ident">try_unwrap</span>(<span class="self">self</span>.<span class="ident">inner</span>)
+            <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="ident">Arc::try_unwrap</span>(<span class="self">self</span>.<span class="ident">inner</span>)
                 .<span class="ident">ok</span>()
                 .<span class="ident">expect</span>(<span class="string">&quot;futures: try_unwrap failed in BiLock&lt;T&gt;::reunite&quot;</span>);
             <span class="prelude-val">Ok</span>(<span class="kw">unsafe</span> { <span class="ident">inner</span>.<span class="ident">into_inner</span>() })
@@ -463,7 +463,7 @@
             <span class="comment">// Another task has parked themselves on this lock, let&#39;s wake them</span>
             <span class="comment">// up as its now their turn.</span>
             <span class="ident">n</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> {
-                <span class="ident">Box</span>::<span class="ident">from_raw</span>(<span class="ident">n</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Task</span>).<span class="ident">notify</span>();
+                <span class="ident">Box::from_raw</span>(<span class="ident">n</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Task</span>).<span class="ident">notify</span>();
             }
         }
     }
@@ -471,7 +471,7 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Inner</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">into_inner</span>(<span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span> {
-        <span class="ident">mem</span>::<span class="ident">replace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">inner</span>, <span class="prelude-val">None</span>).<span class="ident">unwrap</span>().<span class="ident">into_inner</span>()
+        <span class="ident">mem::replace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">inner</span>, <span class="prelude-val">None</span>).<span class="ident">unwrap</span>().<span class="ident">into_inner</span>()
     }
 }
 
@@ -485,16 +485,16 @@
 <span class="doccomment">/// thus could not be `reunite`d.</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ReuniteError</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw">pub</span> <span class="ident">BiLock</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="kw">pub</span> <span class="ident">BiLock</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>);
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">ReuniteError</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">ReuniteError</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="ident">fmt</span>.<span class="ident">debug_tuple</span>(<span class="string">&quot;ReuniteError&quot;</span>)
             .<span class="ident">field</span>(<span class="kw-2">&amp;</span><span class="string">&quot;...&quot;</span>)
             .<span class="ident">finish</span>()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="ident">Display</span> <span class="kw">for</span> <span class="ident">ReuniteError</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">ReuniteError</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="macro">write!</span>(<span class="ident">fmt</span>, <span class="string">&quot;tried to reunite two BiLocks that don&#39;t form a pair&quot;</span>)
     }
 }
@@ -547,12 +547,12 @@
 
     <span class="kw">fn</span> <span class="ident">poll</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Poll</span><span class="op">&lt;</span><span class="ident">BiLockAcquired</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, ()<span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">as_ref</span>().<span class="ident">expect</span>(<span class="string">&quot;cannot poll after Ready&quot;</span>).<span class="ident">poll_lock</span>() {
-            <span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="ident">r</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="ident">mem</span>::<span class="ident">forget</span>(<span class="ident">r</span>);
+            <span class="ident">Async::Ready</span>(<span class="ident">r</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">mem::forget</span>(<span class="ident">r</span>);
             }
-            <span class="ident">Async</span>::<span class="ident">NotReady</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">NotReady</span>),
+            <span class="ident">Async::NotReady</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">Async::NotReady</span>),
         }
-        <span class="prelude-val">Ok</span>(<span class="ident">Async</span>::<span class="ident">Ready</span>(<span class="ident">BiLockAcquired</span> { <span class="ident">inner</span>: <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">take</span>() }))
+        <span class="prelude-val">Ok</span>(<span class="ident">Async::Ready</span>(<span class="ident">BiLockAcquired</span> { <span class="ident">inner</span>: <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">take</span>() }))
     }
 }
 
