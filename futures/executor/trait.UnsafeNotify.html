@@ -43,7 +43,7 @@ invalidating the <code>self</code> pointer, so extreme care needs to be taken.</
 <p>In general it’s recommended to review the trait documentation as well as
 the implementation for <code>Arc</code> in this crate. When in doubt ping the
 <code>futures</code> authors to clarify an unsafety question here.</p>
-</div></details><h2 id="required-methods" class="small-section-header">Required methods<a href="#required-methods" class="anchor"></a></h2><div class="methods"><h3 id="tymethod.clone_raw" class="method"><code>unsafe fn <a href="#tymethod.clone_raw" class="fnname">clone_raw</a>(&amp;self) -&gt; <a class="struct" href="struct.NotifyHandle.html" title="struct futures::executor::NotifyHandle">NotifyHandle</a></code><a class="srclink" href="../../src/futures/task_impl/mod.rs.html#582" title="goto source code">[src]</a></h3><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Creates a new <code>NotifyHandle</code> from this instance of <code>UnsafeNotify</code>.</p>
+</div></details><h2 id="required-methods" class="small-section-header">Required methods<a href="#required-methods" class="anchor"></a></h2><div class="methods"><details class="rustdoc-toggle" open><summary><h3 id="tymethod.clone_raw" class="method"><code>unsafe fn <a href="#tymethod.clone_raw" class="fnname">clone_raw</a>(&amp;self) -&gt; <a class="struct" href="struct.NotifyHandle.html" title="struct futures::executor::NotifyHandle">NotifyHandle</a></code><a class="srclink" href="../../src/futures/task_impl/mod.rs.html#582" title="goto source code">[src]</a></h3></summary><div class="docblock"><p>Creates a new <code>NotifyHandle</code> from this instance of <code>UnsafeNotify</code>.</p>
 <p>This function will create a new uniquely owned handle that under the
 hood references the same notification instance. In other words calls
 to <code>notify</code> on the returned handle should be equivalent to calls to
@@ -55,7 +55,7 @@ value is in a consistent state. In general it’s recommended to
 review the trait documentation as well as the implementation for <code>Arc</code>
 in this crate. When in doubt ping the <code>futures</code> authors to clarify
 an unsafety question here.</p>
-</div></details><h3 id="tymethod.drop_raw" class="method"><code>unsafe fn <a href="#tymethod.drop_raw" class="fnname">drop_raw</a>(&amp;self)</code><a class="srclink" href="../../src/futures/task_impl/mod.rs.html#607" title="goto source code">[src]</a></h3><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Drops this instance of <code>UnsafeNotify</code>, deallocating resources
+</div><details class="rustdoc-toggle" open><summary><h3 id="tymethod.drop_raw" class="method"><code>unsafe fn <a href="#tymethod.drop_raw" class="fnname">drop_raw</a>(&amp;self)</code><a class="srclink" href="../../src/futures/task_impl/mod.rs.html#607" title="goto source code">[src]</a></h3></summary><div class="docblock"><p>Drops this instance of <code>UnsafeNotify</code>, deallocating resources
 associated with it.</p>
 <p>This method is intended to have a signature such as:</p>
 
@@ -73,5 +73,5 @@ value is in a consistent state. In general it’s recommended to
 review the trait documentation as well as the implementation for <code>Arc</code>
 in this crate. When in doubt ping the <code>futures</code> authors to clarify
 an unsafety question here.</p>
-</div></details></div><h2 id="implementors" class="small-section-header">Implementors<a href="#implementors" class="anchor"></a></h2><div class="item-list" id="implementors-list"></div><script type="text/javascript" src="../../implementors/futures/executor/trait.UnsafeNotify.js" async></script></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="futures" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
+</div></div><h2 id="implementors" class="small-section-header">Implementors<a href="#implementors" class="anchor"></a></h2><div class="item-list" id="implementors-list"></div><script type="text/javascript" src="../../implementors/futures/executor/trait.UnsafeNotify.js" async></script></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="futures" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script></body></html>
